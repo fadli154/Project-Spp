@@ -1,3 +1,19 @@
+/* foto user */
+.foto-user {
+    max-width: 300px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 50, 0.418);
+}
+/* Akhir Foto user */
+.capitalize {
+    text-transform: capitalize;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+/* Button */
 .btn-logout {
     border: none;
     background-color: white;
@@ -6,3 +22,13 @@
 .btn-tambah-data {
     font-size: 12px;
 }
+
+.bi {
+    font-size: 16px;
+}
+
+.bi-text {
+    font-size: 12.5px;
+}
+
+/* Akhir Button */

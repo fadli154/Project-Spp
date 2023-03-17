@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('level', ['wali', 'petugas', 'administrator']);
             $table->string('email', 50)->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('no_telp', 13)->unique();
+            $table->string('no_telp', 19)->unique();
             $table->timestamp('no_telp_verified_at')->nullable();
             $table->string('password', 225);
             $table->string('foto')->nullable();

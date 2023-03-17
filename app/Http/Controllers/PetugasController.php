@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Petugas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PetugasController extends Controller
 {
@@ -21,12 +24,13 @@ class PetugasController extends Controller
                 ->orWhere('name', 'like', "%$katakunci%")
                 ->orWhere('level', 'like', "%$katakunci%")
                 ->orWhere('no_telp', 'like', "%$katakunci%")
-                ->paginate(3);
+                ->having('level', '=', 'petugas')
+                ->paginate(6);
         } else {
-            $usersList = User::where('level', 'petugas')->paginate(3);
+            $usersList = User::where('level', 'petugas')->paginate(6);
         }
 
-        return view('/admin.petugas.manajemenPetugas', [
+        return view('/admin.petugas.manajemen_petugas', [
             'title' => 'Petugas',
             'active' => 'Petugas',
             'users' => $usersList,
@@ -40,7 +44,10 @@ class PetugasController extends Controller
      */
     public function create()
     {
-        //
+        return view('/admin.petugas.petugas_create', [
+            'title' => 'Tambah Data',
+            'active' => 'Tambah Data'
+        ]);
     }
 
     /**
@@ -51,7 +58,26 @@ class PetugasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'name' => 'required|max:60|min:1',
+            'username' => 'required|max:40|min:4|unique:users',
+            'level' => 'required',
+            'email' => 'required|email:dns|unique:users',
+            'no_telp' => 'required|max:13|min:10',
+            'password' => 'required|max:20|min:5',
+            'foto' => 'image|file|max:1024',
+        ]);
+
+        if ($request->file('foto')) {
+            $validateData['foto'] = $request->file('foto')->store('foto-petugas');
+        }
+
+        $validateData['password'] = Hash::make($validateData['password']);
+
+        User::create($validateData);
+
+        Alert::success('Success', 'Berhasil Menambah Data Petugas !!');
+        return redirect('/petugas')->with('success', 'Berhasil Menambah Data Petugas !!');
     }
 
     /**
@@ -60,9 +86,15 @@ class PetugasController extends Controller
      * @param  \App\Models\Petugas  $petugas
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        //
+        $detailData = User::where('id', $id)->get();
+
+        return view('admin.petugas.petugas_detail', [
+            'title' => 'Detail',
+            'active' => 'Detail',
+            'detailData' => $detailData,
+        ]);
     }
 
     /**
@@ -94,8 +126,15 @@ class PetugasController extends Controller
      * @param  \App\Models\Petugas  $petugas
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy(Request $request, $id)
     {
-        //
+        if ($request->oldImage) {
+            Storage::delete($request->oldImage);
+        }
+        // $deleteStudent = DB::table('users')->where('id', $id)->delete();
+        // User::destroy($user->id);
+        User::where('id', $id)->delete();
+        Alert::success('Success', 'Berhasil Menghapus Data Petugas !!');
+        return redirect('/petugas')->with('success', 'Berhasil Menghapus Data Petugas !!');
     }
 }
