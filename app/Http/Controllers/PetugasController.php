@@ -30,7 +30,7 @@ class PetugasController extends Controller
             $usersList = User::where('level', 'petugas')->paginate(6);
         }
 
-        return view('/admin.petugas.manajemen_petugas', [
+        return view('/admin.petugas.petugas_data', [
             'title' => 'Petugas',
             'active' => 'Petugas',
             'users' => $usersList,
@@ -103,9 +103,15 @@ class PetugasController extends Controller
      * @param  \App\Models\Petugas  $petugas
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        //
+        $editData = User::where('id', $id)->get();
+
+        return view('admin.petugas.petugas_edit', [
+            'title' => 'edit',
+            'active' => 'edit',
+            'editData' => $editData,
+        ]);
     }
 
     /**
@@ -115,9 +121,27 @@ class PetugasController extends Controller
      * @param  \App\Models\Petugas  $petugas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,)
+    public function update(Request $request, $id)
     {
-        //
+        $validateData = $request->validate([
+            'name' => 'required|max:60|min:1',
+            'username' => 'required|max:40|min:4',
+            'level' => 'required',
+            'email' => 'required|email:dns',
+            'no_telp' => 'required|max:13|min:10',
+            'foto' => 'image|file|max:1024',
+        ]);
+
+        if ($request->file('foto')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validateData['foto'] = $request->file('foto')->store('foto-petugas');
+        }
+
+        User::where('id', $id)->update($validateData);
+        Alert::success('Success', 'Berhasil Edit Data Petugas !!');
+        return redirect('/petugas')->with('success', 'Berhasil Edit Data Petugas !!');
     }
 
     /**

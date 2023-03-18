@@ -12,8 +12,8 @@
                     {{-- Akhir judul Page --}}
                     {{-- Breadcrumb --}}
                     <div class="col-md-4 col-sm-4 text-center items-center mt-2 ">
-                        <div class="breadcrumb-item d-inline active"><a href="#">Dashboard</a></div>
-                        <div class="breadcrumb-item d-inline">Petugas</div>
+                        <div class="breadcrumb-item d-inline active"><a href="/dashboard">Dashboard</a></div>
+                        <div class="breadcrumb-item d-inline active"><a href="/petugas">Petugas</a></div>
                         <div class="breadcrumb-item d-inline">Tambah Data</div>
                     </div>
                     {{-- Akhir Breadcrumb --}}
@@ -163,7 +163,7 @@
                                         <label class="custom-file-label" for="foto">Pilih Foto</label>
                                     </div>
                                     <input type="file" class="custom-file-input ">
-                                    <img class="img-preview img-fluid mt-2 col-sm-2">
+                                    <img class="img-preview img-preview-create img-fluid mt-2 col-sm-2">
                                 </div>
                                 @error('foto')
                                     {{ $message }}
