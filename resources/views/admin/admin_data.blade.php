@@ -12,48 +12,24 @@
                     {{-- Akhir judul Page --}}
                     {{-- Breadcrumb --}}
                     <div class="col-md-3 col-sm-4 text-center items-center mt-2 ">
-                        <div class="breadcrumb-item d-inline active"><a href="#">Dashboard</a></div>
-                        <div class="breadcrumb-item d-inline">Petugas</div>
+                        <div class="breadcrumb-item d-inline active"><a href="/dashboard">Dashboard</a></div>
+                        <div class="breadcrumb-item d-inline">Administrator</div>
                     </div>
                     {{-- Akhir Breadcrumb --}}
                 </div>
             </div>
         </div>
 
-        {{-- Filter --}}
-        {{-- <div class="card">
-            <div class="card-header">
-                <div class="col-lg-11 col-sm">
-                    <h5 class="text-dark">Filter</h5>
-                </div>
-                <div class="col-lg-1 col-sm d-flex justify-content-end"> --}}
-        {{-- Button Triger Filter --}}
-        {{-- <button class="btn btn-info collapsed" type="button" data-toggle="collapse"
-                        data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                        <i class="bi bi-funnel-fill btn-tambah-data"></i>
-                    </button> --}}
-        {{-- Akhir Button Triger Filter --}}
-        {{-- </div>
-            </div>
-            <div class="collapse" id="collapseExample" style="">
-                <div class="p-3">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque quae aliquam consectetur magnam nam,
-                    culpa natus rem ad est nemo fuga quaerat id deleniti eius, rerum veniam temporibus at voluptas?
-                </div>
-            </div>
-        </div> --}}
-        {{-- Filter --}}
-
         <div class="section-body">
             <div class="">
                 <div class="card">
                     <div class="card-header">
                         <div class="col-lg-11 col-sm">
-                            <h4 class="text-primary">List Petugas</h4>
+                            <h4 class="text-primary">List Administrator</h4>
                         </div>
                         <div class="col-lg-1 col-sm d-flex justify-content-end">
                             {{-- Button Tambah Data --}}
-                            <a href="/petugas/create" class="text-white">
+                            <a href="/administrator/create" class="text-white">
                                 <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
                                     title="Tambah Data" data-original-title="Tambah Data">
                                     <i class="bi bi-patch-plus btn-tambah-data"></i>
@@ -66,7 +42,7 @@
                     <div class="card-body">
                         <!-- FORM PENCARIAN -->
                         <div class="">
-                            <form class="" action="/petugas" method="get">
+                            <form class="" action="/administrator" method="get">
                                 <div class="input-group input-group mb-3 float-right" style="width: 350px;">
                                     <input type="search" name="katakunci" class="form-control float-right"
                                         placeholder="Masukkan Kata Kunci" value="{{ Request::get('katakunci') }}"
@@ -98,30 +74,32 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td class="capitalize">{{ $data->name }}</td>
                                             <td>{{ $data->email }}</td>
-                                            <td>{{ $data->level }}</td>
+                                            <td class="capitalize">{{ $data->level }}</td>
                                             <td>
                                                 {{-- Tombol Action --}}
                                                 <div class="dropdown d-inline">
                                                     <button class="btn btn-primary dropdown-toggle" type="button"
                                                         id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
+                                                        aria-expanded="false" title="Tombol Aksi">
                                                         <i class="bi bi-three-dots-vertical btn-tambah-data"></i>
                                                     </button>
                                                     <div class="dropdown-menu ">
                                                         <a class="dropdown-item has-icon text-info"
-                                                            href="/petugas/{{ $data->id }}"><i class="far bi-eye"></i>
+                                                            href="/administrator/{{ $data->id }}"><i
+                                                                class="far bi-eye"></i>
                                                             Detail</a>
-                                                        <a class="dropdown-item has-icon text-warning" href="#"><i
+                                                        <a class="dropdown-item has-icon text-warning"
+                                                            href="/administrator/{{ $data->id }}/edit"><i
                                                                 class="far bi-pencil-square"></i>
                                                             Edit</a>
-                                                        <form action="/petugas/{{ $data->id }}" method="post">
+                                                        <form action="/administrator/{{ $data->id }}" method="post">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"
                                                                 class="confirm dropdown-item has-icon text-danger">
                                                                 <input type="hidden" name="oldImage"
                                                                     value="{{ $data->foto }}"><i
-                                                                    class="far bi-trash-fill mt-1"></i><small>Hapus</small></button>
+                                                                    class="far bi-trash-fill mt-2"></i><small>Hapus</small></button>
                                                         </form>
                                                     </div>
                                                 </div>
