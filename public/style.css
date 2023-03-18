@@ -4,6 +4,12 @@
     border-radius: 50%;
     border: 3px solid rgba(255, 255, 50, 0.418);
 }
+
+.img-preview-create {
+    max-width: 250px;
+    max-height: 200px;
+    border-radius: 50%;
+}
 /* Akhir Foto user */
 .capitalize {
     text-transform: capitalize;
