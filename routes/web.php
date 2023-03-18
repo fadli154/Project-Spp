@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\PetugasController;
@@ -28,4 +29,5 @@ Route::post('/login', [loginController::class, 'authenticated']);
 Route::post('/logout', [loginController::class, 'logout']);
 
 Route::get('/dashboard', [dashboardController::class, 'index'])->middleware('petugas');
-Route::resource('/petugas', PetugasController::class)->middleware('admin');
+Route::resource('/administrator', AdminController::class)->middleware('petugas');
+Route::resource('/petugas', PetugasController::class)->middleware('petugas');
