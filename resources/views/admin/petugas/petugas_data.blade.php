@@ -96,7 +96,8 @@
                                     @foreach ($users as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td class="capitalize">{{ $data->name }}</td>
+                                            <td class="capitalize"><a class="text-dark" href="/petugas/{{ $data->id }}">
+                                                    {{ $data->name }}</a></td>
                                             <td>{{ $data->email }}</td>
                                             <td class="capitalize">{{ $data->level }}</td>
                                             <td>

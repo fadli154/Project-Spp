@@ -9,7 +9,7 @@
                         <h4 class="text-dark">Dashboard</h4>
                     </div>
                     <div class="col-md-2 col-sm-4  text-center items-center align-content-center mt-2 ">
-                        <div class="breadcrumb-item d-inline"><a href="#">Dashboard</a></div>
+                        <div class="breadcrumb-item d-inline"><a href="/dashboard">Dashboard</a></div>
                         {{-- <div class="breadcrumb-item d-inline"><a href="#">Layout</a></div> --}}
                     </div>
                 </div>
