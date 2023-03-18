@@ -12,9 +12,9 @@
                     {{-- Akhir judul Page --}}
                     {{-- Breadcrumb --}}
                     <div class="col-md-4 col-sm-4 text-center items-center mt-2 ">
-                        <div class="breadcrumb-item d-inline active"><a href="/dashboard">Dashboard</a></div>
-                        <div class="breadcrumb-item d-inline active"><a href="/petugas">Petugas</a></div>
-                        <div class="breadcrumb-item d-inline">Edit Data</div>
+                        <div class="breadcrumb-item d-inline active capitalize"><a href="/dashboard">Dashboard</a></div>
+                        <div class="breadcrumb-item d-inline active capitalize"><a href="/wali-murid">Wali Murid</a></div>
+                        <div class="breadcrumb-item d-inline capitalize">Edit Data</div>
                     </div>
                     {{-- Akhir Breadcrumb --}}
                 </div>
@@ -29,18 +29,18 @@
                             <div class="col-8">
                                 <div class="row">
                                     <div class="col-1 mr-1">
-                                        <a href="/petugas">
+                                        <a href="/wali-murid">
                                             <i class="bi bi-arrow-left"></i>
                                         </a>
                                     </div>
                                     <div class="col-">
-                                        <h4 class="text-primary">Edit Data Petugas</h4>
+                                        <h4 class="text-primary capitalize">Edit Data Wali Murid</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body ">
-                            <form action="/petugas/{{ $data->id }}" method="post" enctype="multipart/form-data">
+                            <form action="/wali-murid/{{ $data->id }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="name">Nama : </label>
+                                            <label class="capitalize" for="name">Nama : </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
@@ -76,7 +76,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="username">Username : </label>
+                                            <label class="capitalize" for="username">Username : </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
@@ -93,7 +93,26 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="level">Pilih Level : </label>
+                                            <label class="capitalize" for="wali_id">ID Wali Murid : </label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text bg-secondary">
+                                                        <i class="bi bi-key-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <input type="text"
+                                                    class="form-control @error('wali_id') is-invalid @enderror"
+                                                    placeholder="Contoh : WALI001" value="{{ $data->wali_id }}"
+                                                    id="wali_id" name="wali_id">
+                                            </div>
+                                            @error('wali_id')
+                                                {{ $message }}
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="capitalize" for="level">Pilih Level : </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text  bg-secondary">
@@ -103,18 +122,16 @@
                                                 <select class="form-control" id="level" name="level">
                                                     <option selected disabled>Pilih Level</option>
                                                     <option value="administrator">Administrator</option>
-                                                    <option value="petugas" selected>Petugas</option>
-                                                    <option value="wali">wali</option>
+                                                    <option value="petugas">Petugas</option>
+                                                    <option value="wali" selected>Wali Murid</option>
                                                 </select>
                                             </div>
                                             @error('level')
                                                 {{ $message }}
                                             @enderror
                                         </div>
-                                    </div>
-                                    <div class="col">
                                         <div class="form-group">
-                                            <label for="email">Email : </label>
+                                            <label class="capitalize" for="email">Email : </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
@@ -131,7 +148,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="no_telp">Nomor Telepon : </label>
+                                            <label class="capitalize" for="no_telp">Nomor Telepon : </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
@@ -150,7 +167,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="foto">Ubah Foto : </label>
+                                    <label class="capitalize" for="foto">Ubah Foto : </label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text bg-secondary">
@@ -161,7 +178,8 @@
                                             <input type="file"
                                                 class="custom-file-input @error('foto') is-invalid @enderror"
                                                 id="foto" name="foto" onchange="previewImage()">
-                                            <label class="custom-file-label" for="foto">Pilih Foto Baru</label>
+                                            <label class="custom-file-label" class="capitalize" for="foto">Pilih Foto
+                                                Baru</label>
                                             <input type="hidden" name="oldImage" value="{{ $data->foto }}">
                                         </div>
                                         <input type="file" class="custom-file-input ">
@@ -173,7 +191,7 @@
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">
                                     <div class="mr-2">
-                                        <a href="/petugas" class="btn btn-warning pe-2 mb-1"><i
+                                        <a href="/wali-murid" class="btn btn-warning pe-2 mb-1"><i
                                                 class="bi bi-arrow-90deg-left fs-6 mr-1"></i> <span
                                                 class="bi-text">Kembali</span>
                                         </a>

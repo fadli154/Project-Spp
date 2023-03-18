@@ -26,5 +26,15 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin154@gmail.com',
             'no_telp' => '08782730666',
         ]);
+
+        User::create([
+            'name' => 'wali Murid',
+            'username' => 'wali',
+            'wali_id' => 'WALI001',
+            'level' => 'wali',
+            'password' => bcrypt('password'),
+            'email' => 'wali154@gmail.com',
+            'no_telp' => '08782730656',
+        ]);
     }
 }

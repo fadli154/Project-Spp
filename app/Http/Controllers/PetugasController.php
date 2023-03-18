@@ -77,7 +77,7 @@ class PetugasController extends Controller
         User::create($validateData);
 
         Alert::success('Success', 'Berhasil Menambah Data Petugas !!');
-        return redirect('/petugas')->with('success', 'Berhasil Menambah Data Petugas !!');
+        return redirect('/petugas');
     }
 
     /**
@@ -141,7 +141,7 @@ class PetugasController extends Controller
 
         User::where('id', $id)->update($validateData);
         Alert::success('Success', 'Berhasil Edit Data Petugas !!');
-        return redirect('/petugas')->with('success', 'Berhasil Edit Data Petugas !!');
+        return redirect('/petugas');
     }
 
     /**
@@ -159,6 +159,6 @@ class PetugasController extends Controller
         // User::destroy($user->id);
         User::where('id', $id)->delete();
         Alert::success('Success', 'Berhasil Menghapus Data Petugas !!');
-        return redirect('/petugas')->with('success', 'Berhasil Menghapus Data Petugas !!');
+        return redirect('/petugas');
     }
 }

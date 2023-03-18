@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class AdminController extends Controller
+class WaliMuridController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,15 +23,15 @@ class AdminController extends Controller
                 ->orWhere('name', 'like', "%$katakunci%")
                 ->orWhere('level', 'like', "%$katakunci%")
                 ->orWhere('no_telp', 'like', "%$katakunci%")
-                ->having('level', '=', 'administrator')
+                ->having('level', '=', 'wali')
                 ->paginate(6);
         } else {
-            $usersList = User::where('level', 'administrator')->paginate(6);
+            $usersList = User::where('level', 'wali')->paginate(6);
         }
 
-        return view('/admin.admin_data', [
-            'title' => 'Admin',
-            'active' => 'administrator',
+        return view('/admin.wali_murid.wali_murid_data', [
+            'title' => 'Wali-Murid',
+            'active' => 'wali-murid',
             'users' => $usersList,
         ]);
     }
@@ -43,7 +43,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('/admin.admin_create', [
+        return view('/admin.wali_murid.wali_murid_create', [
             'title' => 'Tambah Data',
             'active' => 'Tambah Data'
         ]);
@@ -60,6 +60,7 @@ class AdminController extends Controller
         $validateData = $request->validate([
             'name' => 'required|max:60|min:1',
             'username' => 'required|max:40|min:4|unique:users',
+            'wali_id' => 'required|unique:users',
             'level' => 'required',
             'email' => 'required|email:dns|unique:users',
             'no_telp' => 'required|max:13|min:10',
@@ -68,16 +69,17 @@ class AdminController extends Controller
         ]);
 
         if ($request->file('foto')) {
-            $validateData['foto'] = $request->file('foto')->store('foto-administrator');
+            $validateData['foto'] = $request->file('foto')->store('foto-wali-murid');
         }
 
         $validateData['password'] = Hash::make($validateData['password']);
 
         User::create($validateData);
 
-        Alert::success('Success', 'Berhasil Menambah Data Administrator !!');
-        return redirect('/administrator');
+        Alert::success('Success', 'Berhasil Menambah Data Wali Murid!!');
+        return redirect('/wali-murid');
     }
+
 
     /**
      * Display the specified resource.
@@ -89,7 +91,7 @@ class AdminController extends Controller
     {
         $detailData = User::where('id', $id)->get();
 
-        return view('admin.admin_detail', [
+        return view('admin.wali_murid.wali_murid_detail', [
             'title' => 'Detail',
             'active' => 'Detail',
             'detailData' => $detailData,
@@ -106,9 +108,9 @@ class AdminController extends Controller
     {
         $editData = User::where('id', $id)->get();
 
-        return view('admin.admin_edit', [
-            'title' => 'edit',
-            'active' => 'edit',
+        return view('admin.wali_murid.wali_murid_edit', [
+            'title' => 'Edit',
+            'active' => 'Edit',
             'editData' => $editData,
         ]);
     }
@@ -125,6 +127,7 @@ class AdminController extends Controller
         $validateData = $request->validate([
             'name' => 'required|max:60|min:1',
             'username' => 'required|max:40|min:4',
+            'wali_id' => 'required|max:10|min:6|unique:users,wali_id,' . $id . ',id',
             'level' => 'required',
             'email' => 'required|email:dns',
             'no_telp' => 'required|max:13|min:10',
@@ -135,21 +138,23 @@ class AdminController extends Controller
             if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
-            $validateData['foto'] = $request->file('foto')->store('foto-administrator');
+            $validateData['foto'] = $request->file('foto')->store('foto-wali-murid');
         }
 
         User::where('id', $id)->update($validateData);
-        Alert::success('Success', 'Berhasil Edit Data Administrator !!');
-        return redirect('/administrator');
+        Alert::success('Success', 'Berhasil Edit Data Wali Murid !!');
+        return redirect('/wali-murid');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
      */
-    public function destroy($id, Request $request)
+    public function destroy(Request $request, $id, User $user)
     {
         if ($request->oldImage) {
             Storage::delete($request->oldImage);
@@ -157,7 +162,8 @@ class AdminController extends Controller
         // $deleteStudent = DB::table('users')->where('id', $id)->delete();
         // User::destroy($user->id);
         User::where('id', $id)->delete();
-        Alert::success('Success', 'Berhasil Menghapus Data administrator !!');
-        return redirect('/administrator');
+
+        Alert::success('Success', 'Berhasil Menghapus Data Wali Murid!!');
+        return redirect('/wali-murid');
     }
 }

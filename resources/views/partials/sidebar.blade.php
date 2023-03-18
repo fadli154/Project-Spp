@@ -12,7 +12,7 @@
                         class="icon bi bi-speedometer2 ml-1"></i><span>Dashboard</span></a>
             </li>
             <li
-                class="dropdown {{ $active === 'Petugas' ? 'active' : '' }} {{ $active === 'administrator' ? 'active' : '' }}">
+                class="dropdown {{ $active === 'Petugas' ? 'active' : '' }} {{ $active === 'administrator' ? 'active' : '' }} {{ $active === 'wali-murid' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="icon bi bi-people ml-1"></i><span>Manajemen
                         Users</span></a>
                 <ul class="dropdown-menu">
@@ -20,6 +20,9 @@
                             href="/administrator"> Administrator</a></li>
                     <li class="{{ $active === 'Petugas' ? 'active' : '' }}"><a class="nav-link ml-2" href="/petugas">
                             Petugas</a></li>
+                    <li class="{{ $active === 'wali-murid' ? 'active' : '' }}"><a class="nav-link ml-2"
+                            href="/wali-murid">
+                            Wali Murid</a></li>
                 </ul>
             </li>
             <li class="dropdown {{ $active === 'siswa' ? 'active' : '' }}">

@@ -26,14 +26,16 @@
                 <div class="">
                     <div class="card">
                         <div class="card-header">
-                            <div class="row">
-                                <div class="col-1 mr-3">
-                                    <a href="/administrator">
-                                        <i class="bi bi-arrow-left"></i>
-                                    </a>
-                                </div>
-                                <div class="col-">
-                                    <h4 class="text-primary">Edit Data Administrator</h4>
+                            <div class="col-8">
+                                <div class="row">
+                                    <div class="col-1 mr-1">
+                                        <a href="/administrator">
+                                            <i class="bi bi-arrow-left"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-">
+                                        <h4 class="text-primary">Edit Data Administrator</h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -47,10 +49,10 @@
                                             <input type="hidden" name="oldImage" value="{{ $data->foto }}">
                                             @if ($data->foto)
                                                 <img src="{{ asset('storage/' . $data->foto) }}"
-                                                    class="img-preview foto-user img-fluid mt-2 d-block ml-4">
+                                                    class="img-preview foto-user img-fluid mt-3 d-block ml-4">
                                             @else
                                                 <img src="{{ asset('img/avatar/avatar-1.png') }}"
-                                                    class="img-preview foto-user img-fluid mt-2 d-block ml-4">
+                                                    class="img-preview foto-user img-fluid mt-3 d-block ml-4">
                                             @endif
                                         </div>
 
@@ -66,7 +68,8 @@
                                                 </div>
                                                 <input type="text"
                                                     class="form-control capitalize @error('name') is-invalid @enderror"
-                                                    value="{{ $data->name }}" id="name" name="name">
+                                                    placeholder="Masukkan Nama Lengkap" value="{{ $data->name }}"
+                                                    id="name" name="name">
                                             </div>
                                             @error('name')
                                                 {{ $message }}
@@ -81,8 +84,9 @@
                                                     </div>
                                                 </div>
                                                 <input type="text"
-                                                    class="form-control capitalize @error('username') is-invalid @enderror"
-                                                    value="{{ $data->username }}" id="username" name="username">
+                                                    class="form-control @error('username') is-invalid @enderror"
+                                                    placeholder="Masukkan Username" value="{{ $data->username }}"
+                                                    id="username" name="username">
                                             </div>
                                             @error('username')
                                                 {{ $message }}
@@ -119,7 +123,8 @@
                                                 </div>
                                                 <input type="text"
                                                     class="form-control @error('email') is-invalid @enderror"
-                                                    value="{{ $data->email }}" id="email" name="email">
+                                                    placeholder="contoh154@gmail.com" value="{{ $data->email }}"
+                                                    id="email" name="email">
                                             </div>
                                             @error('email')
                                                 {{ $message }}
@@ -135,7 +140,8 @@
                                                 </div>
                                                 <input type="text"
                                                     class="form-control @error('no_telp') is-invalid @enderror"
-                                                    value="{{ $data->no_telp }}" id="no_telp" name="no_telp">
+                                                    placeholder="Masukkan Nomor Telepon" value="{{ $data->no_telp }}"
+                                                    id="no_telp" name="no_telp">
                                             </div>
                                             @error('no_telp')
                                                 {{ $message }}
@@ -167,7 +173,7 @@
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">
                                     <div class="mr-2">
-                                        <a href="/petugas" class="btn btn-warning pe-2 mb-1"><i
+                                        <a href="/administrator" class="btn btn-warning pe-2 mb-1"><i
                                                 class="bi bi-arrow-90deg-left fs-6 mr-1"></i> <span
                                                 class="bi-text">Kembali</span>
                                         </a>

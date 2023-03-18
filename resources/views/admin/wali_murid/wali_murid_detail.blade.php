@@ -6,15 +6,15 @@
             <div class="card-body">
                 <div class="row d-flex">
                     {{-- judul Page --}}
-                    <div class="col-md-8 col-sm-8">
-                        <h4 class="text-dark">Manajemen Users</h4>
+                    <div class="col-md-7 col-sm-8">
+                        <h4 class="text-dark capitalize">Manajemen Users</h4>
                     </div>
                     {{-- Akhir judul Page --}}
                     {{-- Breadcrumb --}}
-                    <div class="col-md-4 col-sm-4 text-center items-center mt-2 ">
-                        <div class="breadcrumb-item d-inline active"><a href="/dashboard">Dashboard</a></div>
-                        <div class="breadcrumb-item d-inline active"><a href="/petugas">Petugas</a></div>
-                        <div class="breadcrumb-item d-inline">Profile Petugas</div>
+                    <div class="col-md-5 col-sm-4 text-center items-center mt-2 ">
+                        <div class="breadcrumb-item d-inline active capitalize"><a href="/dashboard">Dashboard</a></div>
+                        <div class="breadcrumb-item d-inline active capitalize"><a href="/wali-murid">Wali Murid</a></div>
+                        <div class="breadcrumb-item d-inline capitalize">Profile Wali Murid</div>
                     </div>
                     {{-- Akhir Breadcrumb --}}
                 </div>
@@ -28,28 +28,28 @@
                         <div class="card-header">
                             <div class="col-8">
                                 <div class="row">
-                                    <div class="col-1 ">
-                                        <a href="/petugas" title="Kembali">
+                                    <div class="col-1">
+                                        <a href="/wali-murid" title="Kembali">
                                             <i class="bi bi-arrow-left"></i>
                                         </a>
                                     </div>
                                     <div class="col">
-                                        <h4 class="text-primary">Profile Petugas</h4>
+                                        <h4 class="text-primary capitalize">Profile Wali Murid</h4>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4 d-flex justify-content-end">
-                                <a href="/petugas/{{ $data->id }}/edit" class="text-white">
+                                <a href="/wali-murid/{{ $data->id }}/edit" class="text-white">
                                     <button type="button" class="btn btn-primary" data-toggle="tooltip"
-                                        data-placement="top" title="Edit Data Petugas"
-                                        data-original-title="Edit Data Petugas">
+                                        data-placement="top" title="Edit Data Wali Murid"
+                                        data-original-title="Edit Data Wali Murid">
                                         <i class="bi bi-pencil btn-tambah-data"></i>
                                     </button>
                                 </a>
                             </div>
                         </div>
                         <div class="card-body ">
-                            <form action="/petugas" method="post" enctype="multipart/form-data">
+                            <div action="/wali-murid" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-4">
@@ -68,7 +68,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="name">Nama : </label>
+                                            <label for="name" class="capitalize">Nama : </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
@@ -84,7 +84,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="username">Username : </label>
+                                            <label class="capitalize" for="username">Username : </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
@@ -100,7 +100,25 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="level">Akses : </label>
+                                            <label class="capitalize" for="wali_id">ID Wali Murid : </label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text bg-secondary">
+                                                        <i class="bi bi-key-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <input type="text"
+                                                    class="form-control @error('wali_id') is-invalid @enderror"
+                                                    value="{{ $data->wali_id }}" id="wali_id" name="wali_id" readonly>
+                                            </div>
+                                            @error('wali_id')
+                                                {{ $message }}
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="capitalize" for="level">Akses : </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
@@ -109,16 +127,15 @@
                                                 </div>
                                                 <input type="text"
                                                     class="form-control capitalize @error('level') is-invalid @enderror"
-                                                    value="{{ $data->level }}" id="level" name="level" readonly>
+                                                    @if ($data->level == 'wali') value="Wali Murid" @else value="{{ $data->level }}" @endif
+                                                    id="level" name="level" readonly>
                                             </div>
                                             @error('level')
                                                 {{ $message }}
                                             @enderror
                                         </div>
-                                    </div>
-                                    <div class="col">
                                         <div class="form-group">
-                                            <label for="email">Email : </label>
+                                            <label class="capitalize" for="email">Email : </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
@@ -134,7 +151,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="no_telp">Nomor Telepon : </label>
+                                            <label class="capitalize" for="no_telp">Nomor Telepon : </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
@@ -151,11 +168,11 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            </form>
                         </div>
-                        </form>
                     </div>
                 </div>
-            </div>
             </div>
     </section>
     @endforeach

@@ -28,12 +28,12 @@
                         <div class="card-header">
                             <div class="col-8">
                                 <div class="row">
-                                    <div class="col-1 mr-3">
+                                    <div class="col-1">
                                         <a href="/administrator" title="Kembali">
                                             <i class="bi bi-arrow-left"></i>
                                         </a>
                                     </div>
-                                    <div class="col-">
+                                    <div class="col">
                                         <h4 class="text-primary">Profile Administrator</h4>
                                     </div>
                                 </div>
@@ -54,12 +54,12 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         @if ($data->foto)
-                                            <div class="justify-content-center mt-4 ml-4">
+                                            <div class="justify-content-center mt-3 ml-4">
                                                 <img src="{{ asset('storage/' . $data->foto) }}"
                                                     alt="foto {{ $data->username }}" class="foto-user">
                                             </div>
                                         @else
-                                            <div class="justify-content-center mt-4 ml-4">
+                                            <div class="justify-content-center mt-3 ml-4">
                                                 <img src="{{ asset('img/avatar/avatar-1.png') }}"
                                                     alt="foto {{ $data->username }}" class="foto-user">
                                             </div>
@@ -92,7 +92,7 @@
                                                     </div>
                                                 </div>
                                                 <input type="text"
-                                                    class="form-control capitalize @error('username') is-invalid @enderror"
+                                                    class="form-control @error('username') is-invalid @enderror"
                                                     value="{{ $data->username }}" id="username" name="username" readonly>
                                             </div>
                                             @error('username')
