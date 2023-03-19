@@ -55,42 +55,81 @@
                                                     class="img-preview foto-user img-fluid mt-3 d-block ml-4">
                                             @endif
                                         </div>
-
                                     </div>
                                     <div class="col">
-                                        <div class="form-group">
-                                            <label for="name">Nama : </label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text bg-secondary">
-                                                        <i class="bi bi-person-fill"></i>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="name">Nama : </label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text bg-secondary">
+                                                                <i class="bi bi-person-fill"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text"
+                                                            class="form-control capitalize @error('name') is-invalid @enderror"
+                                                            placeholder="Masukkan Nama Lengkap" value="{{ $data->name }}"
+                                                            id="name" name="name">
                                                     </div>
+                                                    @error('name')
+                                                        {{ $message }}
+                                                    @enderror
                                                 </div>
-                                                <input type="text"
-                                                    class="form-control capitalize @error('name') is-invalid @enderror"
-                                                    placeholder="Masukkan Nama Lengkap" value="{{ $data->name }}"
-                                                    id="name" name="name">
-                                            </div>
-                                            @error('name')
-                                                {{ $message }}
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="username">Username : </label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text bg-secondary">
-                                                        <i class="bi bi-person-badge-fill"></i>
+                                                <div class="form-group">
+                                                    <label for="username">Username : </label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text bg-secondary">
+                                                                <i class="bi bi-person-badge-fill"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text"
+                                                            class="form-control @error('username') is-invalid @enderror"
+                                                            placeholder="Masukkan Username" value="{{ $data->username }}"
+                                                            id="username" name="username">
                                                     </div>
+                                                    @error('username')
+                                                        {{ $message }}
+                                                    @enderror
                                                 </div>
-                                                <input type="text"
-                                                    class="form-control @error('username') is-invalid @enderror"
-                                                    placeholder="Masukkan Username" value="{{ $data->username }}"
-                                                    id="username" name="username">
                                             </div>
-                                            @error('username')
-                                                {{ $message }}
-                                            @enderror
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="email">Email : </label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text bg-secondary">
+                                                                <i class="bi bi-envelope-fill"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text"
+                                                            class="form-control @error('email') is-invalid @enderror"
+                                                            placeholder="contoh154@gmail.com" value="{{ $data->email }}"
+                                                            id="email" name="email">
+                                                    </div>
+                                                    @error('email')
+                                                        {{ $message }}
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="no_telp">Nomor Telepon : </label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text bg-secondary">
+                                                                <i class="bi bi-telephone-fill"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text"
+                                                            class="form-control @error('no_telp') is-invalid @enderror"
+                                                            placeholder="Masukkan Nomor Telepon"
+                                                            value="{{ $data->no_telp }}" id="no_telp" name="no_telp">
+                                                    </div>
+                                                    @error('no_telp')
+                                                        {{ $message }}
+                                                    @enderror
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="level">Pilih Level : </label>
@@ -108,42 +147,6 @@
                                                 </select>
                                             </div>
                                             @error('level')
-                                                {{ $message }}
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="email">Email : </label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text bg-secondary">
-                                                        <i class="bi bi-envelope-fill"></i>
-                                                    </div>
-                                                </div>
-                                                <input type="text"
-                                                    class="form-control @error('email') is-invalid @enderror"
-                                                    placeholder="contoh154@gmail.com" value="{{ $data->email }}"
-                                                    id="email" name="email">
-                                            </div>
-                                            @error('email')
-                                                {{ $message }}
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="no_telp">Nomor Telepon : </label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text bg-secondary">
-                                                        <i class="bi bi-telephone-fill"></i>
-                                                    </div>
-                                                </div>
-                                                <input type="text"
-                                                    class="form-control @error('no_telp') is-invalid @enderror"
-                                                    placeholder="Masukkan Nomor Telepon" value="{{ $data->no_telp }}"
-                                                    id="no_telp" name="no_telp">
-                                            </div>
-                                            @error('no_telp')
                                                 {{ $message }}
                                             @enderror
                                         </div>

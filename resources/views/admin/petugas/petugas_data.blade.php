@@ -20,30 +20,6 @@
             </div>
         </div>
 
-        {{-- Filter --}}
-        {{-- <div class="card">
-            <div class="card-header">
-                <div class="col-lg-11 col-sm">
-                    <h5 class="text-dark">Filter</h5>
-                </div>
-                <div class="col-lg-1 col-sm d-flex justify-content-end"> --}}
-        {{-- Button Triger Filter --}}
-        {{-- <button class="btn btn-info collapsed" type="button" data-toggle="collapse"
-                        data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                        <i class="bi bi-funnel-fill btn-tambah-data"></i>
-                    </button> --}}
-        {{-- Akhir Button Triger Filter --}}
-        {{-- </div>
-            </div>
-            <div class="collapse" id="collapseExample" style="">
-                <div class="p-3">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque quae aliquam consectetur magnam nam,
-                    culpa natus rem ad est nemo fuga quaerat id deleniti eius, rerum veniam temporibus at voluptas?
-                </div>
-            </div>
-        </div> --}}
-        {{-- Filter --}}
-
         <div class="section-body">
             <div class="">
                 <div class="card">
@@ -96,7 +72,8 @@
                                     @foreach ($users as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td class="capitalize"><a class="text-dark" href="/petugas/{{ $data->id }}">
+                                            <td class="capitalize"><a class="text-dark" href="/petugas/{{ $data->id }}"
+                                                    title="klik Untuk Detailnya">
                                                     {{ $data->name }}</a></td>
                                             <td>{{ $data->email }}</td>
                                             <td class="capitalize">{{ $data->level }}</td>

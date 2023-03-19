@@ -64,7 +64,6 @@
                                                     alt="foto {{ $data->username }}" class="foto-user">
                                             </div>
                                         @endif
-
                                     </div>
                                     <div class="col">
                                         <div class="form-group">

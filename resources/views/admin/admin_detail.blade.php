@@ -67,37 +67,79 @@
 
                                     </div>
                                     <div class="col">
-                                        <div class="form-group">
-                                            <label for="name">Nama : </label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text bg-secondary">
-                                                        <i class="bi bi-person-fill"></i>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="name">Nama : </label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text bg-secondary">
+                                                                <i class="bi bi-person-fill"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text"
+                                                            class="form-control capitalize @error('name') is-invalid @enderror"
+                                                            value="{{ $data->name }}" id="name" name="name"
+                                                            readonly>
                                                     </div>
+                                                    @error('name')
+                                                        {{ $message }}
+                                                    @enderror
                                                 </div>
-                                                <input type="text"
-                                                    class="form-control capitalize @error('name') is-invalid @enderror"
-                                                    value="{{ $data->name }}" id="name" name="name" readonly>
-                                            </div>
-                                            @error('name')
-                                                {{ $message }}
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="username">Username : </label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text bg-secondary">
-                                                        <i class="bi bi-person-badge-fill"></i>
+                                                <div class="form-group">
+                                                    <label for="username">Username : </label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text bg-secondary">
+                                                                <i class="bi bi-person-badge-fill"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text"
+                                                            class="form-control @error('username') is-invalid @enderror"
+                                                            value="{{ $data->username }}" id="username" name="username"
+                                                            readonly>
                                                     </div>
+                                                    @error('username')
+                                                        {{ $message }}
+                                                    @enderror
                                                 </div>
-                                                <input type="text"
-                                                    class="form-control @error('username') is-invalid @enderror"
-                                                    value="{{ $data->username }}" id="username" name="username" readonly>
                                             </div>
-                                            @error('username')
-                                                {{ $message }}
-                                            @enderror
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="email">Email : </label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text bg-secondary">
+                                                                <i class="bi bi-envelope-fill"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text"
+                                                            class="form-control @error('email') is-invalid @enderror"
+                                                            value="{{ $data->email }}" id="email" name="email"
+                                                            readonly>
+                                                    </div>
+                                                    @error('email')
+                                                        {{ $message }}
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="no_telp">Nomor Telepon : </label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text bg-secondary">
+                                                                <i class="bi bi-telephone-fill"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text"
+                                                            class="form-control @error('no_telp') is-invalid @enderror"
+                                                            value="{{ $data->no_telp }}" id="no_telp" name="no_telp"
+                                                            readonly>
+                                                    </div>
+                                                    @error('no_telp')
+                                                        {{ $message }}
+                                                    @enderror
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="level">Akses : </label>
@@ -112,40 +154,6 @@
                                                     value="{{ $data->level }}" id="level" name="level" readonly>
                                             </div>
                                             @error('level')
-                                                {{ $message }}
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="email">Email : </label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text bg-secondary">
-                                                        <i class="bi bi-envelope-fill"></i>
-                                                    </div>
-                                                </div>
-                                                <input type="text"
-                                                    class="form-control @error('email') is-invalid @enderror"
-                                                    value="{{ $data->email }}" id="email" name="email" readonly>
-                                            </div>
-                                            @error('email')
-                                                {{ $message }}
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="no_telp">Nomor Telepon : </label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text bg-secondary">
-                                                        <i class="bi bi-telephone-fill"></i>
-                                                    </div>
-                                                </div>
-                                                <input type="text"
-                                                    class="form-control @error('no_telp') is-invalid @enderror"
-                                                    value="{{ $data->no_telp }}" id="no_telp" name="no_telp" readonly>
-                                            </div>
-                                            @error('no_telp')
                                                 {{ $message }}
                                             @enderror
                                         </div>

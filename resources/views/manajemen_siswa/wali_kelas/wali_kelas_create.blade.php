@@ -91,8 +91,28 @@
                                             {{ $message }}
                                         @enderror
                                     </div>
+                                    <div class="form-group">
+                                        <label class="capitalize" for="level">Pilih Level : </label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="bi bi-layers-fill"></i>
+                                                </div>
+                                            </div>
+                                            <select class="form-control" id="level" name="level">
+                                                <option selected disabled>Pilih Level</option>
+                                                <option value="administrator" disabled>Administrator</option>
+                                                <option value="petugas" disabled>Petugas</option>
+                                                <option value="wali" selected>Wali Murid</option>
+                                            </select>
+                                        </div>
+                                        @error('level')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
                                 </div>
                                 <div class="col">
+
                                     <div class="form-group">
                                         <label class="capitalize" for="email">Masukkan Email : </label>
                                         <div class="input-group">
@@ -144,25 +164,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="capitalize" for="level">Pilih Level : </label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="bi bi-layers-fill"></i>
-                                        </div>
-                                    </div>
-                                    <select class="form-control" id="level" name="level">
-                                        <option selected disabled>Pilih Level</option>
-                                        <option value="administrator" disabled>Administrator</option>
-                                        <option value="petugas" disabled>Petugas</option>
-                                        <option value="wali" selected>Wali Murid</option>
-                                    </select>
-                                </div>
-                                @error('level')
-                                    {{ $message }}
-                                @enderror
                             </div>
                             <div class="form-group">
                                 <label class="capitalize" for="foto">Masukkan Foto : </label>

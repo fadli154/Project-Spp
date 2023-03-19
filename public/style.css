@@ -1,3 +1,10 @@
+/* Foto Siswa */
+.foto-siswa {
+    max-width: 150px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 50, 0.418);
+}
+
 /* foto user */
 .foto-user {
     max-width: 250px;

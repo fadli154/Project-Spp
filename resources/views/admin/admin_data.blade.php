@@ -73,7 +73,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td class="capitalize"><a class="text-dark"
-                                                    href="/administrator/{{ $data->id }}">
+                                                    href="/administrator/{{ $data->id }}" title="klik Untuk Detailnya">
                                                     {{ $data->name }}</a></td>
                                             <td>{{ $data->email }}</td>
                                             <td class="capitalize">{{ $data->level }}</td>

@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\KonsentrasiKeahlian;
 use App\Models\User;
+use App\Models\WaliKelas;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -36,5 +38,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'wali154@gmail.com',
             'no_telp' => '08782730656',
         ]);
+
+        // Seeder Konsentrasi Keahlian Tabel
+        KonsentrasiKeahlian::factory(10)->create();
+
+        // seeder Wali Kelas Table
+        WaliKelas::factory(6)->create();
     }
 }
