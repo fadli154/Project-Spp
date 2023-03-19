@@ -7,13 +7,13 @@
                 <div class="row d-flex">
                     {{-- judul Page --}}
                     <div class="col-md-8 col-sm-8">
-                        <h4 class="text-dark capitalize">Manajemen Users</h4>
+                        <h4 class="text-dark capitalize">Manajemen Siswa</h4>
                     </div>
                     {{-- Akhir judul Page --}}
                     {{-- Breadcrumb --}}
                     <div class="col-md-4 col-sm-4 text-center items-center mt-2 ">
                         <div class="breadcrumb-item d-inline active capitalize"><a href="/dashboard">Dashboard</a></div>
-                        <div class="breadcrumb-item d-inline active capitalize"><a href="/wali-murid">Wali Murid</a></div>
+                        <div class="breadcrumb-item d-inline active capitalize"><a href="/wali-kelas">Wali Kelas</a></div>
                         <div class="breadcrumb-item d-inline capitalize">Tambah Data</div>
                     </div>
                     {{-- Akhir Breadcrumb --}}
@@ -27,55 +27,39 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-1 mr-3">
-                                <a href="/wali-murid">
+                                <a href="/wali-kelas">
                                     <i class="bi bi-arrow-left"></i>
                                 </a>
                             </div>
                             <div class="col-">
-                                <h4 class="text-primary capitalize">Tambah Data Wali Murid</h4>
+                                <h4 class="text-primary capitalize">Tambah Data Wali Kelas</h4>
                             </div>
                         </div>
                     </div>
                     <div class="card-body ">
-                        <form action="/wali-murid" method="post" enctype="multipart/form-data">
+                        <form action="/wali-kelas" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label class="capitalize" for="name">Masukkan Nama : </label>
+                                        <label class="capitalize" for="nama_wali_kelas">Masukkan Nama Wali Kelas : </label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     <i class="bi bi-person-fill"></i>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                                placeholder="Masukkan Nama Lengkap" value="{{ old('name') }}"
-                                                id="name" name="name">
-                                        </div>
-                                        @error('name')
-                                            {{ $message }}
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="capitalize" for="username">Masukkan Username : </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <i class="bi bi-person-badge-fill"></i>
-                                                </div>
-                                            </div>
                                             <input type="text"
-                                                class="form-control @error('username') is-invalid @enderror"
-                                                placeholder="Masukkan Username" value="{{ old('username') }}" id="username"
-                                                name="username">
+                                                class="form-control @error('nama_wali_kelas') is-invalid @enderror"
+                                                placeholder="Masukkan Nama Wali Kelas" value="{{ old('nama_wali_kelas') }}"
+                                                id="nama_wali_kelas" name="nama_wali_kelas">
                                         </div>
-                                        @error('username')
+                                        @error('nama_wali_kelas')
                                             {{ $message }}
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label class="capitalize" for="wali_id">Masukkan ID Wali Murid : </label>
+                                        <label class="capitalize" for="nip_wali_kelas">Masukkan NIP Wali Kelas : </label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
@@ -83,87 +67,71 @@
                                                 </div>
                                             </div>
                                             <input type="text"
-                                                class="form-control @error('wali_id') is-invalid @enderror"
-                                                placeholder="Contoh : WALI001" value="{{ old('wali_id') }}" id="wali_id"
-                                                name="wali_id">
+                                                class="form-control @error('nip_wali_kelas') is-invalid @enderror"
+                                                placeholder="Masukkan NIP Wali Kelas" value="{{ old('nip_wali_kelas') }}"
+                                                id="nip_wali_kelas" name="nip_wali_kelas">
                                         </div>
-                                        @error('wali_id')
-                                            {{ $message }}
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="capitalize" for="level">Pilih Level : </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <i class="bi bi-layers-fill"></i>
-                                                </div>
-                                            </div>
-                                            <select class="form-control" id="level" name="level">
-                                                <option selected disabled>Pilih Level</option>
-                                                <option value="administrator" disabled>Administrator</option>
-                                                <option value="petugas" disabled>Petugas</option>
-                                                <option value="wali" selected>Wali Murid</option>
-                                            </select>
-                                        </div>
-                                        @error('level')
+                                        @error('nip_wali_kelas')
                                             {{ $message }}
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col">
-
                                     <div class="form-group">
-                                        <label class="capitalize" for="email">Masukkan Email : </label>
+                                        <label class="capitalize" for="jabatan">Pilih Jabatan : </label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
-                                                    <i class="bi bi-envelope-fill"></i>
+                                                    <i class="fa-solid fa-user-plus"></i>
                                                 </div>
                                             </div>
-                                            <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                                placeholder="contoh154@gmail.com" value="{{ old('email') }}" id="email"
-                                                name="email">
+                                            <select class="form-control" id="jabatan" name="jabatan">
+                                                <option selected disabled>Pilih Jabatan</option>
+                                                <option value="TP">Tenaga Pendidik</option>
+                                                <option value="TK">Tenaga Kependidikan</option>
+                                            </select>
                                         </div>
-                                        @error('email')
+                                        @error('jabatan')
                                             {{ $message }}
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label class="capitalize" for="no_telp">Masukkan Nomor Telepon : </label>
+                                        <label class="capitalize" for="status_pegawai">Pilih Status Pegawai : </label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
-                                                    <i class="bi bi-telephone-fill"></i>
+                                                    <i class="fa-solid fa-list"></i>
                                                 </div>
                                             </div>
-                                            <input type="number"
-                                                class="form-control @error('no_telp') is-invalid @enderror"
-                                                placeholder="Masukkan Nomor Telepon" value="{{ old('no_telp') }}"
-                                                id="no_telp" name="no_telp">
+                                            <select class="form-control" id="status_pegawai" name="status_pegawai">
+                                                <option selected disabled>Pilih Status Pegawai</option>
+                                                <option value="0">Aktif</option>
+                                                <option value="1">Tidak Aktif</option>
+                                            </select>
                                         </div>
-                                        @error('no_telp')
-                                            {{ $message }}
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="capitalize" for="password">Masukkan Password : </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <i class="bi bi-lock-fill"></i>
-                                                </div>
-                                            </div>
-                                            <input type="password"
-                                                class="form-control @error('password') is-invalid @enderror"
-                                                placeholder="Masukkan Password" value="{{ old('password') }}"
-                                                id="password" name="password">
-                                        </div>
-                                        @error('password')
+                                        @error('status_pegawai')
                                             {{ $message }}
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="capitalize" for="jk">Pilih Jenis Kelamin : </label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa-solid fa-venus-mars"></i>
+                                        </div>
+                                    </div>
+                                    <select class="form-control" id="jk" name="jk">
+                                        <option selected>Pilih Jenis Kelamin</option>
+                                        <option value="L">Laki Laki</option>
+                                        <option value="P">Perempuan</option>
+                                    </select>
+                                </div>
+                                @error('jk')
+                                    {{ $message }}
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label class="capitalize" for="foto">Masukkan Foto : </label>
@@ -174,9 +142,8 @@
                                         </div>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file"
-                                            class="custom-file-input @error('foto') is-invalid @enderror" id="foto"
-                                            name="foto" onchange="previewImage()">
+                                        <input type="file" class="custom-file-input @error('foto') is-invalid @enderror"
+                                            id="foto" name="foto" onchange="previewImage()">
                                         <label class="custom-file-label" class="capitalize" for="foto">Pilih
                                             Foto</label>
                                     </div>
@@ -189,7 +156,7 @@
                             </div>
                             <div class="col-12 d-flex justify-content-end">
                                 <div class="mr-2">
-                                    <a href="/wali-murid" class="btn btn-warning pe-2 mb-1"><i
+                                    <a href="/wali-kelas" class="btn btn-warning pe-2 mb-1"><i
                                             class="bi bi-arrow-90deg-left fs-6 mr-1"></i> <span
                                             class="bi-text">Kembali</span>
                                     </a>

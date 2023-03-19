@@ -177,37 +177,37 @@
                                                     class="btn btn-icon btn-info" href="#"><i
                                                         class="fas fa-plus"></i></a>
                                             </div>
-                                            <div class="dropdown d-inline">
-                                                <button class="btn btn-primary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false" title="Tombol Aksi">
-                                                    <i class="bi bi-three-dots-vertical btn-tambah-data"></i>
-                                                </button>
-                                                <div class="dropdown-menu ">
-                                                    <a class="dropdown-item has-icon text-info"
-                                                        href="/wali-kelas/{{ $data->nip_wali_kelas }}"><i
-                                                            class="far bi-eye"></i>
-                                                        Detail</a>
-                                                    <a class="dropdown-item has-icon text-warning"
-                                                        href="/wali-kelas/{{ $data->nip_wali_kelas }}/edit"><i
-                                                            class="far bi-pencil-square"></i>
-                                                        Edit</a>
-                                                    <form action="/wali-kelas/{{ $data->nip_wali_kelas }}"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit"
-                                                            class="confirm dropdown-item has-icon text-danger">
-                                                            <input type="hidden" name="oldImage"
-                                                                value="{{ $data->foto }}"><i
-                                                                class="far bi-trash-fill mt-2"></i><small>Hapus</small></button>
-                                                    </form>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="collapse" id="mycard-collapse-{{ $data->nip_wali_kelas }}"
                                             style="background-color : @if ($data->jk == 'L') aliceblue @else rgb(252, 239, 252) @endif ;">
                                             <div class="card-body">
+                                                <div class="dropdown d-flex justify-content-start">
+                                                    <a class="btn btn-secondary rounded-pill" type="button"
+                                                        id="dropdownMenuButton2" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false" title="Tombol Aksi">
+                                                        <i class="bi bi-three-dots-vertical btn-tambah-data"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu ">
+                                                        <a class="dropdown-item has-icon text-info"
+                                                            href="/wali-kelas/{{ $data->nip_wali_kelas }}"><i
+                                                                class="far bi-eye"></i>
+                                                            Detail</a>
+                                                        <a class="dropdown-item has-icon text-warning"
+                                                            href="/wali-kelas/{{ $data->nip_wali_kelas }}/edit"><i
+                                                                class="far bi-pencil-square"></i>
+                                                            Edit</a>
+                                                        <form action="/wali-kelas/{{ $data->nip_wali_kelas }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="confirm dropdown-item has-icon text-danger">
+                                                                <input type="hidden" name="oldImage"
+                                                                    value="{{ $data->foto }}"><i
+                                                                    class="far bi-trash-fill mt-2"></i><small>Hapus</small></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                                 <div class="row d-flex justify-content-center">
                                                     {{-- fotoCard --}}
                                                     <div class="col-md-4 mr-4">
@@ -234,9 +234,7 @@
                                                         @endif
                                                     </div>
                                                     {{-- Akhird Foto card --}}
-                                                    <div
-                                                        class="col-md-6
-                                            profile-data">
+                                                    <div class="col-md-6 profile-data">
                                                         <p class="capitalize"><strong> Nama :</strong>
                                                             {{ $data->nama_wali_kelas }}</p>
                                                         <p><strong> NIP : </strong><a class="text-dark"

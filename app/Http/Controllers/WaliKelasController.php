@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\WaliKelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class WaliKelasController extends Controller
 {
@@ -74,7 +76,21 @@ class WaliKelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'nip_wali_kelas' => 'required|max:18|min:18|unique:pegawai',
+            'nama_wali_kelas' => 'required|max:60|min:2',
+            'jk' => 'required',
+            'foto' => 'image|file|max:1024',
+        ]);
+
+        if ($request->file('foto')) {
+            $validateData['foto'] = $request->file('foto')->store('foto-wali-kelas');
+        }
+
+        WaliKelas::create($validateData);
+
+        Alert::success('Success', 'Berhasil Menambah Data Wali Kelas !!');
+        return redirect('/wali-kelas');
     }
 
     /**
@@ -85,7 +101,15 @@ class WaliKelasController extends Controller
      */
     public function show($id)
     {
-        //
+        $detailData = WaliKelas::where('nip_wali_kelas', $id)->get();
+        $kelasList = DB::table('pegawai')->join('kelas', 'pegawai.nip_wali_kelas', '=', 'kelas.nip_wali_kelas')->select('kelas.*', 'kelas.kelas_id', 'kelas.kelas', 'kelas.angkatan')->where('kelas.nip_wali_kelas', '=', $id)->get();
+
+        return view('/manajemen_siswa.wali_kelas.wali_kelas_detail', [
+            'title' => 'Detail',
+            'active' => 'Detail',
+            'detailData' => $detailData,
+            'kelasList' => $kelasList,
+        ]);
     }
 
     /**
@@ -96,7 +120,13 @@ class WaliKelasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $waliKelasList = WaliKelas::where('nip_wali_kelas', $id)->get();
+
+        return view('manajemen_siswa.wali_kelas.wali_kelas_edit', [
+            'title' => 'Edit',
+            'active' => 'Edit',
+            'editData' => $waliKelasList,
+        ]);
     }
 
     /**
@@ -108,7 +138,23 @@ class WaliKelasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validateData = $request->validate([
+            'nip_wali_kelas' => 'required|max:18|min:18|unique:pegawai,nip_wali_kelas,' . $id . ',nip_wali_kelas',
+            'nama_wali_kelas' => 'required|max:60',
+            'jk' => 'required',
+            'foto' => 'image|file|max:1024',
+        ]);
+
+        if ($request->file('foto')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validateData['foto'] = $request->file('foto')->store('foto-wali-kelas');
+        }
+
+        WaliKelas::where('nip_wali_kelas', $id)->update($validateData);
+        Alert::success('Success', 'Berhasil Mengubah Data Wali Kelas !!');
+        return redirect('/wali-kelas');
     }
 
     /**
@@ -117,8 +163,13 @@ class WaliKelasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        if ($request->oldImage) {
+            Storage::delete($request->oldImage);
+        }
+        WaliKelas::where('nip_wali_kelas', $id)->delete();
+        Alert::success('Success', 'Berhasil Menghapus Data Wali Kelas !!');
+        return redirect('/wali-kelas');
     }
 }

@@ -40,9 +40,23 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Seeder Konsentrasi Keahlian Tabel
+        KonsentrasiKeahlian::create([
+            'id_kk' => 'KK0666',
+            'konsentrasi_keahlian' => 'Rekayasa Perangkat Lunak',
+            'tahun_program' => '3',
+        ]);
+
         KonsentrasiKeahlian::factory(10)->create();
 
         // seeder Wali Kelas Table
+        WaliKelas::create([
+            'nama_wali_kelas' => 'Pak Anas',
+            'nip_wali_kelas' => '111111111111111111',
+            'jk' => 'L',
+            'jabatan' => 'TK',
+            'status_pegawai' => '1',
+        ]);
+
         WaliKelas::factory(6)->create();
     }
 }
