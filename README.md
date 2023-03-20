@@ -21,7 +21,7 @@ E-SPP adalah sebuah aplikasi untuk mempermudah sebuah sekolah dalam mendata pemb
 -   Jalankan server dengan `php artisan serve`
 -   Buka di browser `http://localhost:8000`
 
-Catatan : lakukan terlebih dahulu pembuatan database dengan nama db_spp sebelum melakukan migrate.
+Catatan : lakukan terlebih dahulu pembuatan database dengan nama db_spp1 sebelum melakukan migrate.
 
 ---
 
