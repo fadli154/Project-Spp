@@ -14,10 +14,11 @@ E-SPP adalah sebuah aplikasi untuk mempermudah sebuah sekolah dalam mendata pemb
 ---
 
 ## Cara Pemasangan
-- Clone repositori ini `git clone https://github.com/fadli154/Project-Spp`
-- Install dependensi menggunakan composer. jalankan `composer install`
-- Lakukan migrasi dengan `php artisan migrate --seed`
-- Jalankan server dengan 'php artisan serve'
-- Buka di browser `http://localhost:8000`
+
+-   Clone repositori ini `git clone https://github.com/fadli154/Project-Spp`
+-   Install dependensi menggunakan composer. jalankan `composer install`
+-   Lakukan migrasi dengan `php artisan migrate --seed`
+-   Jalankan server dengan `php artisan serve`
+-   Buka di browser `http://localhost:8000`
 
 Catatan : lakukan terlebih dahulu pembuatan database dengan nama db_spp sebelum melakukan migrate.
