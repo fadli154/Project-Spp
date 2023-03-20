@@ -22,3 +22,9 @@ E-SPP adalah sebuah aplikasi untuk mempermudah sebuah sekolah dalam mendata pemb
 -   Buka di browser `http://localhost:8000`
 
 Catatan : lakukan terlebih dahulu pembuatan database dengan nama db_spp sebelum melakukan migrate.
+
+---
+
+## Author
+
+E-SPP dibuat oleh <a href="https://instagram.com/fadli.890">Fadli</a>.
