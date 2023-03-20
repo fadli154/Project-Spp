@@ -25,7 +25,7 @@ Route::get('/login', [loginController::class, 'index'])->middleware('guest')->na
 Route::post('/login', [loginController::class, 'authenticated']);
 Route::post('/logout', [loginController::class, 'logout']);
 
-Route::get('/dashboard', [dashboardController::class, 'index'])->middleware('petugas');
+Route::get('/dashboard', [dashboardController::class, 'index'])->middleware('admin');
 
 Route::resource('/administrator', AdminController::class)->middleware('petugas');
 Route::resource('/petugas', PetugasController::class)->middleware('petugas');
