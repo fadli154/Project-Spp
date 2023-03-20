@@ -1,6 +1,6 @@
 <h1> E-SPP</h1>
 
-<p align="center">
+<p>
 E-SPP adalah sebuah aplikasi untuk mempermudah sebuah sekolah dalam mendata pembayaran SPP para siswa/siswinya, dengan menggunakan aplikasi ini tentunya akan lebih mengurangi biaya dalam pendataan pembayaran SPP, dan mengurangi penggunaan kertas yang dimana pohon adalah GO GREEN bagi kehidupan manusia.
 </p>
 
@@ -10,3 +10,5 @@ E-SPP adalah sebuah aplikasi untuk mempermudah sebuah sekolah dalam mendata pemb
 - Lakukan migrasi dengan `php artisan migrate --seed`
 - Jalankan server dengan 'php artisan serve'
 - Buka di browser `http://localhost:8000`
+
+Catatan : lakukan terlebih dahulu pembuatan database dengan nama db_spp sebelum melakukan migrate.
