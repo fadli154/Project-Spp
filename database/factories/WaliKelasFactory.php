@@ -18,7 +18,7 @@ class WaliKelasFactory extends Factory
     public function definition()
     {
         return [
-            'nip_wali_kelas' => $this->faker->numerify('##################'),
+            'nip_wali_kelas' => $this->faker->numerify('###############'),
             'nama_wali_kelas' => $this->faker->name(),
             'jk' => $this->faker->randomElement(["L", "P"]),
             'jabatan' => $this->faker->randomElement(["TP", "TK"]),

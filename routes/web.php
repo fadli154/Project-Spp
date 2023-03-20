@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KonsentrasiController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\WaliKelasController;
@@ -40,3 +41,4 @@ Route::resource('/wali-murid', WaliMuridController::class)->middleware('petugas'
 Route::resource('/siswa', SiswaController::class)->middleware('petugas');
 Route::resource('/konsentrasi-keahlian', KonsentrasiController::class)->middleware('petugas');
 Route::resource('/wali-kelas', WaliKelasController::class)->middleware('petugas');
+Route::resource('/kelas', KelasController::class)->middleware('petugas');

@@ -26,13 +26,16 @@
                 </ul>
             </li>
             <li
-                class="dropdown {{ $active === 'siswa' ? 'active' : '' }} {{ $active === 'konsentrasi-keahlian' ? 'active' : '' }}">
+                class="dropdown {{ $active === 'siswa' ? 'active' : '' }} {{ $active === 'konsentrasi-keahlian' ? 'active' : '' }} {{ $active === 'wali-kelas' ? 'text-info' : '' }}{{ $active === 'kelas' ? 'text-info' : '' }} {{ $active === 'siswa' ? 'text-info' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fa-solid fa-user-graduate"></i>
                     <span>Manajemen
                         Siswa</span></a>
                 <ul class="dropdown-menu">
                     <li class=""><a class="nav-link ml-2 {{ $active === 'siswa' ? 'text-info' : '' }}"
                             href="/siswa">Data Siswa</a>
+                    </li>
+                    <li class=""><a class="nav-link ml-2 {{ $active === 'kelas' ? 'text-info' : '' }}"
+                            href="/kelas">Data Kelas</a>
                     </li>
                     <li class=""><a class="nav-link ml-2 {{ $active === 'wali-kelas' ? 'text-info' : '' }}"
                             href="/wali-kelas">Data Wali Kelas</a>

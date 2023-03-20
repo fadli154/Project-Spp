@@ -5,6 +5,24 @@
     border: 3px solid rgba(255, 255, 50, 0.418);
 }
 
+/* Foto kelas */
+.foto-kelas {
+    max-width: 300px;
+}
+
+.img-preview-kelas {
+    max-height: 200px;
+}
+
+.img-kelas {
+    max-width: 350px;
+    max-height: 320px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+        0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
 /* foto user */
 .foto-user {
     max-width: 250px;

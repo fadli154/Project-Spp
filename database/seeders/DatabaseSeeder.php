@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\KonsentrasiKeahlian;
 use App\Models\User;
+use App\Models\Kelas;
 use App\Models\WaliKelas;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\KonsentrasiKeahlian;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -45,6 +46,11 @@ class DatabaseSeeder extends Seeder
             'konsentrasi_keahlian' => 'Rekayasa Perangkat Lunak',
             'tahun_program' => '3',
         ]);
+        KonsentrasiKeahlian::create([
+            'id_kk' => 'KK0777',
+            'konsentrasi_keahlian' => 'Rekayasa Mesin',
+            'tahun_program' => '3',
+        ]);
 
         KonsentrasiKeahlian::factory(10)->create();
 
@@ -57,6 +63,32 @@ class DatabaseSeeder extends Seeder
             'status_pegawai' => '1',
         ]);
 
+        WaliKelas::create([
+            'nama_wali_kelas' => 'Pak sutet',
+            'nip_wali_kelas' => '111111111111111112',
+            'jk' => 'L',
+            'jabatan' => 'TP',
+            'status_pegawai' => '1',
+        ]);
+
         WaliKelas::factory(6)->create();
+        // seeder Kelas Table
+        Kelas::create([
+            'kelas_id' => 'IXRPL2022',
+            'kelas' => 'IX RPL',
+            'angkatan' => '2022',
+            'nip_wali_kelas' => '111111111111111112',
+            'id_kk' => 'KK0666',
+        ]);
+
+        Kelas::create([
+            'kelas_id' => 'XRPL2023',
+            'kelas' => 'X RPL',
+            'angkatan' => '2023',
+            'nip_wali_kelas' => '111111111111111111',
+            'id_kk' => 'KK0777',
+        ]);
+
+        // Kelas::factory(6)->create();
     }
 }
