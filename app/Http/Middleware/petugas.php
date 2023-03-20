@@ -16,9 +16,10 @@ class petugas
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user()->level == 'petugas' || $request->user()->level == 'administrator') {
-            return $next($request);
+        if (auth()->guest() or auth()->user()->level !== 'petugas') {
+            abort(403, 'Akses Petugas');
         }
-        abort(403, 'Akses Petugas');
+
+        return $next($request);
     }
 }
