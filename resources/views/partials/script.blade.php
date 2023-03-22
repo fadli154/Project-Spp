@@ -24,6 +24,16 @@
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
 <script src="{{ asset('assets/js/custom.js') }}"></script>
 
+
+<link href="{{ asset('assets/modules/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
+<script src="{{ asset('assets/modules/select2/dist/js/select2.min.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.select2').select2();
+    });
+</script>
+
 {{-- Preview Image --}}
 <script>
     function previewImage() {
@@ -86,5 +96,26 @@
         })
     });
 </script>
-
 {{-- Akhir Tombol Confirm Hapus --}}
+
+{{-- script Input Rupiah --}}
+<script>
+    document.querySelectorAll('input[type-currency="IDR"]').forEach((element) => {
+        element.addEventListener('keyup', function(e) {
+            let cursorPostion = this.selectionStart;
+            let value = parseInt(this.value.replace(/[^,\d]/g, ''));
+            let originalLenght = this.value.length;
+            if (isNaN(value)) {
+                this.value = "";
+            } else {
+                this.value = value.toLocaleString('id-ID', {
+                    currency: 'IDR',
+                    style: 'currency',
+                    minimumFractionDigits: 0
+                });
+                cursorPostion = this.value.length - originalLenght + cursorPostion;
+                this.setSelectionRange(cursorPostion, cursorPostion);
+            }
+        });
+    });
+</script>

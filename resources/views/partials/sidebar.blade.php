@@ -46,6 +46,15 @@
                     </li>
                 </ul>
             </li>
+            <li class="dropdown {{ $active === 'biaya' ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown"><i class="fa-sharp fa-regular fa-credit-card"></i>
+                    <span>Pembayaran</span></a>
+                <ul class="dropdown-menu">
+                    <li class=""><a class="nav-link ml-2 {{ $active === 'biaya' ? 'text-info' : '' }}"
+                            href="/biaya">Data Biaya</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </aside>
 </div>

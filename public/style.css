@@ -63,3 +63,29 @@
 }
 
 /* Akhir Button */
+
+/* select */
+.dropdown-content {
+    position: absolute;
+    background-color: #f6f6f6;
+    overflow: auto;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block !important;
+}
+
+.dropdown-values {
+    display: none;
+}
