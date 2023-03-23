@@ -32,7 +32,7 @@
                             <a href="/administrator/create" class="text-white">
                                 <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
                                     title="Tambah Data" data-original-title="Tambah Data">
-                                    <i class="bi bi-patch-plus btn-tambah-data"></i>
+                                    <i class="fa fa-plus-circle btn-tambah-data"></i>
                                 </button>
                             </a>
                             {{-- Akhir Button Tambah Data --}}

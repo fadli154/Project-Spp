@@ -24,7 +24,8 @@
     <link rel="stylesheet" href="{{ asset('style.css') }}">
 
     {{-- FontAwesome --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link src="{{ asset('fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('favicon.ico') }}">
 
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
