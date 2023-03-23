@@ -11,6 +11,7 @@ class dashboardController extends Controller
         return view('pages.dashboard', [
             'title' => 'Dashboard',
             'active' => 'Dashboard',
+            'active1' => 'Dashboard',
         ]);
     }
 }

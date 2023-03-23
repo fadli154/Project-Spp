@@ -112,7 +112,7 @@
                         {{-- Akhir Form Pencarian --}}
                         <div class="table-responsive">
                             <table class="table table-bordered table-md">
-                                <tbody>
+                                <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>ID Konsentrasi Keahlian</th>
@@ -120,6 +120,8 @@
                                         <th>Tahun Program</th>
                                         <th>Action</th>
                                     </tr>
+                                </thead>
+                                <tbody>
                                     @foreach ($dataList as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>

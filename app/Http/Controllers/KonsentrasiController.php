@@ -32,6 +32,7 @@ class KonsentrasiController extends Controller
         return view('/manajemen_siswa.konsentrasi_keahlian.konsentrasi_keahlian_data', [
             'title' => 'Konsentrasi Keahlian',
             'active' => 'konsentrasi-keahlian',
+            'active1' => 'siswa',
             'dataList' => $konsentrasiList,
         ]);
     }
@@ -45,7 +46,8 @@ class KonsentrasiController extends Controller
     {
         return view('/manajemen_siswa.konsentrasi_keahlian.konsentrasi_keahlian_create', [
             'title' => 'Tambah Data',
-            'active' => 'Tambah Data'
+            'active' => 'konsentrasi-keahlian',
+            'active1' => 'siswa',
         ]);
     }
 
@@ -85,7 +87,8 @@ class KonsentrasiController extends Controller
 
         return view('/manajemen_siswa.konsentrasi_keahlian.konsentrasi_keahlian_detail', [
             'title' => 'Detail',
-            'active' => 'Detail',
+            'active' => 'konsentrasi-keahlian',
+            'active1' => 'siswa',
             'detailData' => $detailData,
         ]);
     }
@@ -102,7 +105,8 @@ class KonsentrasiController extends Controller
 
         return view('/manajemen_siswa.konsentrasi_keahlian.konsentrasi_keahlian_edit', [
             'title' => 'Edit',
-            'active' => 'Edit',
+            'active' => 'konsentrasi-keahlian',
+            'active1' => 'siswa',
             'dataList' => $dataList,
         ]);
     }

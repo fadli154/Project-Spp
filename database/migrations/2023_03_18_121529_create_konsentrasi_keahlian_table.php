@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('konsentrasi_keahlian', function (Blueprint $table) {
-            $table->string('id_kk', 7)->primary()->unique()->required();
+            $table->string('id_kk', 7)->primary()->unique()->required()->onUpdate('cascade');
             $table->string('konsentrasi_keahlian', 50)->required();
             $table->enum('tahun_program', ['3', '4']);
             $table->timestamps();
