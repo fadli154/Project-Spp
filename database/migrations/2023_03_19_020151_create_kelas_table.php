@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('kelas', function (Blueprint $table) {
-            $table->string('kelas_id', 14)->primary()->unique();
+            $table->string('kelas_id', 14)->primary()->unique()->onUpdate('cascade');
             $table->string('kelas', 50)->required();
             $table->integer('angkatan')->required();
             $table->string('nip_wali_kelas', 18)->unique()->nullable();
-            $table->foreign('nip_wali_kelas')->references('nip_wali_kelas')->on('pegawai');
-            $table->string('id_kk', 7)->required();
+            $table->foreign('nip_wali_kelas')->references('nip_wali_kelas')->on('pegawai')->onUpdate('cascade');
+            $table->string('id_kk', 7)->required()->onUpdate('cascade');
             $table->foreign('id_kk')->references('id_kk', 7)->on('konsentrasi_keahlian')->onUpdate('cascade');
             $table->string('foto', 255)->nullable();
             $table->timestamps();

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('pegawai', function (Blueprint $table) {
-            $table->string('nip_wali_kelas', 18)->primary()->required();
+            $table->string('nip_wali_kelas', 18)->primary()->required()->onUpdate('cascade');
             $table->string('nama_wali_kelas', 60);
             $table->enum('jk', ['L', 'P']);
             $table->enum('jabatan', ['TP', 'TK']);

@@ -24,7 +24,7 @@ class KelasController extends Controller
                 ->paginate(6);
             $filter = Kelas::paginate(6);
             $waliKelasList = DB::table('kelas')->join('pegawai', 'kelas.nip_wali_kelas', '=', 'pegawai.nip_wali_kelas')->select('pegawai.*', 'pegawai.nip_wali_kelas')->get();
-            $konsentrasiList = DB::table('kelas')->join('konsentrasi_keahlian', 'kelas.id_kk', '=', 'konsentrasi_keahlian.id_kk')->select('konsentrasi_keahlian.*', 'konsentrasi_keahlian.id_kk', 'konsentrasi_keahlian.konsentrasi_keahlian')->get();
+            $konsentrasiList = Kelas::with('konsentrasi')->get();
         } else if (strlen($katakunci)) {
             $kelasList = Kelas::where('kelas_id', 'like', "%$katakunci%")
                 ->orWhere('kelas', 'like', "%$katakunci%")
@@ -33,7 +33,7 @@ class KelasController extends Controller
                 ->orWhere('id_kk', 'like', "%$katakunci%")
                 ->paginate(3);
             $waliKelasList = DB::table('kelas')->join('pegawai', 'kelas.nip_wali_kelas', '=', 'pegawai.nip_wali_kelas')->select('pegawai.*', 'pegawai.nip_wali_kelas')->get();
-            $konsentrasiList = DB::table('kelas')->join('konsentrasi_keahlian', 'kelas.id_kk', '=', 'konsentrasi_keahlian.id_kk')->select('konsentrasi_keahlian.*', 'konsentrasi_keahlian.id_kk', 'konsentrasi_keahlian.konsentrasi_keahlian')->get();
+            $konsentrasiList = Kelas::with('konsentrasi')->get();
             $filter = Kelas::paginate(6);
         } else {
             $kelasList = Kelas::paginate(3);
@@ -45,6 +45,7 @@ class KelasController extends Controller
         return view('/manajemen_siswa.kelas.kelas_data', [
             'title' => 'Kelas',
             'active' => 'kelas',
+            'active1' => 'siswa',
             'filter' => $filter,
             'dataList' => $kelasList,
             'waliKelasList' => $waliKelasList,
@@ -64,7 +65,8 @@ class KelasController extends Controller
 
         return view('/manajemen_siswa.kelas.kelas_create', [
             'title' => 'Kelas',
-            'active' => 'Kelas',
+            'active' => 'kelas',
+            'active1' => 'siswa',
             'waliKelasList' => $waliKelasList,
             'konsentrasiList' => $konsentrasiList,
         ]);
@@ -111,7 +113,8 @@ class KelasController extends Controller
 
         return view('/manajemen_siswa.kelas.kelas_detail', [
             'title' => 'Detail',
-            'active' => 'Detail',
+            'active' => 'kelas',
+            'active1' => 'siswa',
             'detailData' => $detailData,
             'waliKelasList' => $waliKelasList,
             'konsentrasiList' => $konsentrasiList,
@@ -134,7 +137,8 @@ class KelasController extends Controller
 
         return view('manajemen_siswa.kelas.kelas_edit', [
             'title' => 'Edit',
-            'active' => 'Edit',
+            'active' => 'kelas',
+            'active1' => 'siswa',
             'editData' => $kelasList,
             'kelasAll' => $kelasListAll,
             'waliKelasList' => $waliKelasList,

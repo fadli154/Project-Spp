@@ -121,7 +121,7 @@
                                                                 <i class="fa-solid fa-briefcase"></i>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control" id="id_kk" name="id_kk">
+                                                        <select class="form-control select2" id="id_kk" name="id_kk">
                                                             <option selected disabled>Pilih Wali Kelas</option>
                                                             @foreach ($konsentrasiList as $item)
                                                                 <option value="{{ $item->id_kk }}"
@@ -144,7 +144,8 @@
                                                         <i class="fa-solid fa-user-tie"></i>
                                                     </div>
                                                 </div>
-                                                <select class="form-control" id="nip_wali_kelas" name="nip_wali_kelas">
+                                                <select class="form-control select2 " id="nip_wali_kelas"
+                                                    name="nip_wali_kelas">
                                                     <option selected disabled>Pilih Wali Kelas</option>
                                                     @foreach ($waliKelasList as $item)
                                                         <option value="{{ $item->nip_wali_kelas }}"

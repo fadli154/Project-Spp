@@ -101,8 +101,8 @@
                                                     <i class="fa-solid fa-briefcase"></i>
                                                 </div>
                                             </div>
-                                            <select class="form-control @error('id_kk') is-invalid @enderror" id="id_kk"
-                                                name="id_kk">
+                                            <select class="form-control select2 @error('id_kk') is-invalid @enderror"
+                                                id="id_kk" name="id_kk">
                                                 <option disabled selected>Pilih Konsentrasi Keahlian</option>
                                                 @foreach ($konsentrasiList as $data)
                                                     <option value="{{ $data->id_kk }}">{{ $data->konsentrasi_keahlian }}
@@ -124,8 +124,8 @@
                                             <i class="fa-solid fa-user-tie"></i>
                                         </div>
                                     </div>
-                                    <select class="form-control @error('nip_wali_kelas') is-invalid @enderror"
-                                        id="nip_wali_kelas" name="nip_wali_kelas">
+                                    <select class="form-control select2 @error('nip_wali_kelas') is-invalid @enderror"
+                                        id="nip_wali_kelas select2" name="nip_wali_kelas">
                                         <option disabled selected>Pilih Wali Kelas</option>
                                         @foreach ($waliKelasList as $data)
                                             <option value="{{ $data->nip_wali_kelas }}">{{ $data->nama_wali_kelas }}
