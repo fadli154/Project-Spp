@@ -11,4 +11,9 @@ class WaliKelas extends Model
 
     protected $table = 'pegawai';
     protected $guarded = [''];
+
+    public function kelas()
+    {
+        return $this->hasOne(Kelas::class, 'nip_wali_kelas', 'nip_wali_kelas');
+    }
 }

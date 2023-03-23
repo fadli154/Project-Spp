@@ -11,4 +11,13 @@ class Siswa extends Model
 
     protected $table = 'siswa';
     protected $guarded = [];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'wali_id')->withDefault(
+            [
+                'wali_id' => 'belum',
+            ]
+        );
+    }
 }

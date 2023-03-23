@@ -39,13 +39,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Get all of the siswa for the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function siswa(): HasMany
+    public function siswa()
     {
-        return $this->hasMany(Siswa::class, 'wali_id', 'wali_id');
+        return $this->hasMany(Siswa::class, 'wali_id');
     }
 }

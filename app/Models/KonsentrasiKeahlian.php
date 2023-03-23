@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Kelas;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class KonsentrasiKeahlian extends Model
 {
@@ -11,4 +13,9 @@ class KonsentrasiKeahlian extends Model
 
     protected $table = 'konsentrasi_keahlian';
     protected $guarded = [];
+
+    public function kelas()
+    {
+        return $this->hasMany(Kelas::class, 'id_kk', 'id_kk');
+    }
 }
