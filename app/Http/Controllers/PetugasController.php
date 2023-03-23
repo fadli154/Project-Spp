@@ -33,6 +33,7 @@ class PetugasController extends Controller
         return view('/admin.petugas.petugas_data', [
             'title' => 'Petugas',
             'active' => 'Petugas',
+            'active1' => 'users',
             'users' => $usersList,
         ]);
     }
@@ -46,7 +47,8 @@ class PetugasController extends Controller
     {
         return view('/admin.petugas.petugas_create', [
             'title' => 'Tambah Data',
-            'active' => 'Tambah Data'
+            'active' => 'Petugas',
+            'active1' => 'users',
         ]);
     }
 
@@ -92,7 +94,8 @@ class PetugasController extends Controller
 
         return view('admin.petugas.petugas_detail', [
             'title' => 'Detail',
-            'active' => 'Detail',
+            'active' => 'Petugas',
+            'active1' => 'users',
             'detailData' => $detailData,
         ]);
     }
@@ -109,7 +112,8 @@ class PetugasController extends Controller
 
         return view('admin.petugas.petugas_edit', [
             'title' => 'edit',
-            'active' => 'edit',
+            'active' => 'Petugas',
+            'active1' => 'users',
             'editData' => $editData,
         ]);
     }

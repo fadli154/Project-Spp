@@ -93,19 +93,18 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label class="capitalize" for="wali_id">ID Wali Murid : </label>
+                                            <label class="capitalize" for="id">ID Wali Murid : </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
                                                         <i class="bi bi-key-fill"></i>
                                                     </div>
                                                 </div>
-                                                <input type="text"
-                                                    class="form-control @error('wali_id') is-invalid @enderror"
-                                                    placeholder="Contoh : WALI001" value="{{ $data->wali_id }}"
-                                                    id="wali_id" name="wali_id">
+                                                <input type="text" class="form-control @error('id') is-invalid @enderror"
+                                                    placeholder="Contoh : WALI001" value="{{ $data->id }}"
+                                                    id="id" name="id">
                                             </div>
-                                            @error('wali_id')
+                                            @error('id')
                                                 {{ $message }}
                                             @enderror
                                         </div>

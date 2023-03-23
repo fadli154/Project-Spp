@@ -99,18 +99,17 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label class="capitalize" for="wali_id">ID Wali Murid : </label>
+                                            <label class="capitalize" for="id">ID Wali Murid : </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
                                                         <i class="bi bi-key-fill"></i>
                                                     </div>
                                                 </div>
-                                                <input type="text"
-                                                    class="form-control @error('wali_id') is-invalid @enderror"
-                                                    value="{{ $data->wali_id }}" id="wali_id" name="wali_id" readonly>
+                                                <input type="text" class="form-control @error('id') is-invalid @enderror"
+                                                    value="{{ $data->id }}" id="id" name="id" readonly>
                                             </div>
-                                            @error('wali_id')
+                                            @error('id')
                                                 {{ $message }}
                                             @enderror
                                         </div>
@@ -167,12 +166,92 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <h4 class="mt-3 col-12">Data Anak</h4>
+                                    <div class="table-responsive col-7">
+                                        <table class="table table-bordered table-success table-striped table-md">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Nama Siswa</th>
+                                                    <th>NISN</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($siswaData as $item)
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td class="capitalize"><a href="/siswa/{{ $item->nisn }}"
+                                                                class="text-dark" title="Klik Untuk Detail">
+                                                                {{ $item->nama }}</a>
+                                                        </td>
+                                                        <td>{{ $item->nisn }}</td>
+                                                        <td>
+                                                            <form action="/wali-siswa/{{ $item->nisn }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('put')
+                                                                <button type="submit"
+                                                                    class="confirm btn btn-danger has-icon ">
+                                                                    <i
+                                                                        class="far bi-trash-fill mt-2 mr-2"></i>Hapus</button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-5">
+                                        <div class="card" style="border: 2px solid rgb(240, 240, 240)">
+                                            <div class="card-header">
+                                                <h6 class="text-center">Tambah Data Anak</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <form class="form" method="post" action="/wali-siswa">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text">
+                                                                    <i class="fa-solid fa-user-plus"></i>
+                                                                </div>
+                                                            </div>
+                                                            <select
+                                                                class="form-control @error('nisn') is-invalid @enderror select2"
+                                                                id="select2" name="nisn" placeholder="pilih">
+                                                                <option value="" selected disabled>Pilih Siswa
+                                                                </option>
+                                                                @foreach ($allSiswa as $item)
+                                                                    <option value="{{ $item->nisn }}">
+                                                                        {{ $item->nama }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        @error('nisn')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </div>
+                                                    <input type="hidden" name="wali_id" value="{{ $data->id }}">
+                                                    <div class="d-flex justify-content-end">
+                                                        <button type="submit" class="btn btn-primary justify-content-end"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="Tambah Data" data-original-title="Tambah Data">
+                                                            <i class="bi bi-patch-plus btn-tambah-data"></i>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
                             </div>
-                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
     </section>
     @endforeach
 @endsection

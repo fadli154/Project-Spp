@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\WaliKelas;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -30,23 +31,22 @@ class WaliKelasController extends Controller
             })->when(!is_null($status_pegawai), function ($query) use ($status_pegawai) {
                 return $query->where('status_pegawai', $status_pegawai);
             })->latest()->paginate(8);
-            $kelasList = DB::table('pegawai')->join('kelas', 'pegawai.nip_wali_kelas', '=', 'kelas.nip_wali_kelas')->select('kelas.*', 'kelas.kelas_id', 'kelas.kelas', 'kelas.angkatan')->get();
+            $kelasList = WaliKelas::with('kelas')->paginate(6);
         } else if (strlen($katakunci)) {
             $waliKelasList = WaliKelas::where('nip_wali_kelas', 'like', "%$katakunci%")
                 ->orWhere('nama_wali_kelas', 'like', "%$katakunci%")
-                ->orWhere('jk', 'like', "%$katakunci%")
+                ->orWhere('jabatan', 'like', "%$katakunci%")
                 ->paginate(8);
-            $kelasList = DB::table('pegawai')->join('kelas', 'pegawai.nip_wali_kelas', '=', 'kelas.nip_wali_kelas')->where('kelas', 'like', "%$katakunci%")
-                ->orWhere('angkatan', 'like', "%$katakunci%")
-                ->paginate(8);
+            $kelasList = WaliKelas::has('kelas')->paginate(6);
         } else {
             $waliKelasList = WaliKelas::paginate(8);
-            $kelasList = DB::table('pegawai')->join('kelas', 'pegawai.nip_wali_kelas', '=', 'kelas.nip_wali_kelas')->select('kelas.*', 'kelas.kelas_id', 'kelas.kelas', 'kelas.angkatan')->get();
+            $kelasList = WaliKelas::with('kelas')->paginate(6);
         }
 
         return view('/manajemen_siswa.wali_kelas.wali_kelas_data', [
             'title' => 'Wali Kelas',
             'active' => 'wali-kelas',
+            'active1' => 'siswa',
             'dataList' => $waliKelasList,
             'kelasList' => $kelasList,
         ]);
@@ -63,7 +63,8 @@ class WaliKelasController extends Controller
 
         return view('/manajemen_siswa.wali_kelas.wali_kelas_create', [
             'title' => 'Wali Kelas',
-            'active' => 'Wali Kelas',
+            'active' => 'wali-kelas',
+            'active1' => 'siswa',
             'kelasList' => $kelasList,
         ]);
     }
@@ -106,7 +107,8 @@ class WaliKelasController extends Controller
 
         return view('/manajemen_siswa.wali_kelas.wali_kelas_detail', [
             'title' => 'Detail',
-            'active' => 'Detail',
+            'active' => 'wali-kelas',
+            'active1' => 'siswa',
             'detailData' => $detailData,
             'kelasList' => $kelasList,
         ]);
@@ -124,7 +126,8 @@ class WaliKelasController extends Controller
 
         return view('manajemen_siswa.wali_kelas.wali_kelas_edit', [
             'title' => 'Edit',
-            'active' => 'Edit',
+            'active' => 'wali-kelas',
+            'active1' => 'siswa',
             'editData' => $waliKelasList,
         ]);
     }

@@ -8,13 +8,14 @@
         </div>
         <ul class="sidebar-menu">
             <li class="{{ $active === 'Dashboard' ? 'active' : '' }}">
-                <a href="/dashboard" class="nav-link"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a>
+                <a href="/dashboard" class="nav-link"><i
+                        class="fa-solid fa-gauge fa-lg ml-3"></i><span>Dashboard</span></a>
             </li>
-            <li
-                class="dropdown {{ $active === 'Petugas' ? 'active' : '' }} {{ $active === 'administrator' ? 'active' : '' }} {{ $active === 'wali-murid' ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown"><i class="fa-solid fa-user-tie"></i><span>Manajemen
+            <li class="dropdown {{ $active1 === 'users' ? 'active' : '' }} ">
+                <a href="#" class="nav-link has-dropdown"><i
+                        class="fa-solid fa-user-tie fa-lg ml-3"></i><span>Manajemen
                         Users</span></a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu ml-3">
                     <li class=""><a class="nav-link ml-2 {{ $active === 'administrator' ? 'text-info' : '' }}"
                             href="/administrator">Data Administrator</a></li>
                     <li class=""><a class="nav-link ml-2 {{ $active === 'Petugas' ? 'text-info' : '' }}"
@@ -25,12 +26,11 @@
                             Data Wali Murid</a></li>
                 </ul>
             </li>
-            <li
-                class="dropdown {{ $active === 'siswa' ? 'active' : '' }} {{ $active === 'konsentrasi-keahlian' ? 'active' : '' }} {{ $active === 'wali-kelas' ? 'text-info' : '' }}{{ $active === 'kelas' ? 'text-info' : '' }} {{ $active === 'siswa' ? 'text-info' : '' }}">
-                <a href="#" class="nav-link has-dropdown"><i class="fa-solid fa-user-graduate"></i>
+            <li class="dropdown {{ $active1 === 'siswa' ? 'active' : '' }} ">
+                <a href="#" class="nav-link has-dropdown"><i class="fa-solid fa-user-graduate fa-lg ml-3"></i>
                     <span>Manajemen
                         Siswa</span></a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu ml-3">
                     <li class=""><a class="nav-link ml-2 {{ $active === 'siswa' ? 'text-info' : '' }}"
                             href="/siswa">Data Siswa</a>
                     </li>
@@ -46,10 +46,11 @@
                     </li>
                 </ul>
             </li>
-            <li class="dropdown {{ $active === 'biaya' ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown"><i class="fa-sharp fa-regular fa-credit-card"></i>
+            <li class="dropdown {{ $active1 === 'pembayaran' ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown"><i
+                        class="fa-sharp fa-regular fa-credit-card fa-lg ml-3"></i>
                     <span>Pembayaran</span></a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu ml-3">
                     <li class=""><a class="nav-link ml-2 {{ $active === 'biaya' ? 'text-info' : '' }}"
                             href="/biaya">Data Biaya</a>
                     </li>

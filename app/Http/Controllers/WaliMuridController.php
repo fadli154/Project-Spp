@@ -32,6 +32,7 @@ class WaliMuridController extends Controller
         return view('/admin.wali_murid.wali_murid_data', [
             'title' => 'Wali-Murid',
             'active' => 'wali-murid',
+            'active1' => 'users',
             'users' => $usersList,
         ]);
     }
@@ -45,7 +46,8 @@ class WaliMuridController extends Controller
     {
         return view('/admin.wali_murid.wali_murid_create', [
             'title' => 'Tambah Data',
-            'active' => 'Tambah Data'
+            'active' => 'wali-murid',
+            'active1' => 'users',
         ]);
     }
 
@@ -60,7 +62,6 @@ class WaliMuridController extends Controller
         $validateData = $request->validate([
             'name' => 'required|max:60|min:1',
             'username' => 'required|max:40|min:4|unique:users',
-            'wali_id' => 'required|unique:users',
             'level' => 'required',
             'email' => 'required|email:dns|unique:users',
             'no_telp' => 'required|max:13|min:10',
@@ -89,12 +90,18 @@ class WaliMuridController extends Controller
      */
     public function show($id)
     {
-        $detailData = User::where('id', $id)->get();
+        $siswa = User::find($id)->siswa()->get();
+        $detailData = User::where('id', $id)->with('siswa')->get();
+
+        // dd($siswaData[0]->siswa);
 
         return view('admin.wali_murid.wali_murid_detail', [
             'title' => 'Detail',
-            'active' => 'Detail',
+            'active' => 'wali-murid',
+            'active1' => 'users',
             'detailData' => $detailData,
+            'siswaData' => $siswa,
+            'allSiswa' => \App\Models\Siswa::whereNotIn('wali_id', [$id])->orWhere('wali_id', '=', null)->get(),
         ]);
     }
 
@@ -110,7 +117,8 @@ class WaliMuridController extends Controller
 
         return view('admin.wali_murid.wali_murid_edit', [
             'title' => 'Edit',
-            'active' => 'Edit',
+            'active' => 'wali-murid',
+            'active1' => 'users',
             'editData' => $editData,
         ]);
     }
@@ -127,7 +135,7 @@ class WaliMuridController extends Controller
         $validateData = $request->validate([
             'name' => 'required|max:60|min:1',
             'username' => 'required|max:40|min:4',
-            'wali_id' => 'required|max:10|min:6|unique:users,wali_id,' . $id . ',id',
+            'id' => 'unique:users,id,' . $id . ',id',
             'level' => 'required',
             'email' => 'required|email:dns',
             'no_telp' => 'required|max:13|min:10',

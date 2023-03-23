@@ -61,7 +61,7 @@
                         {{-- Akhir Form Pencarian --}}
                         <div class="table-responsive">
                             <table class="table table-bordered table-md">
-                                <tbody>
+                                <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Nama</th>
@@ -69,6 +69,8 @@
                                         <th>Akses</th>
                                         <th>Action</th>
                                     </tr>
+                                </thead>
+                                <tbody>
                                     @foreach ($users as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>

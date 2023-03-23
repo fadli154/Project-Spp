@@ -32,6 +32,7 @@ class AdminController extends Controller
         return view('/admin.admin_data', [
             'title' => 'Admin',
             'active' => 'administrator',
+            'active1' => 'users',
             'users' => $usersList,
         ]);
     }
@@ -45,7 +46,8 @@ class AdminController extends Controller
     {
         return view('/admin.admin_create', [
             'title' => 'Tambah Data',
-            'active' => 'Tambah Data'
+            'active' => 'administrator',
+            'active1' => 'users',
         ]);
     }
 
@@ -91,7 +93,8 @@ class AdminController extends Controller
 
         return view('admin.admin_detail', [
             'title' => 'Detail',
-            'active' => 'Detail',
+            'active' => 'administrator',
+            'active1' => 'users',
             'detailData' => $detailData,
         ]);
     }
@@ -108,7 +111,8 @@ class AdminController extends Controller
 
         return view('admin.admin_edit', [
             'title' => 'edit',
-            'active' => 'edit',
+            'active' => 'administrator',
+            'active1' => 'users',
             'editData' => $editData,
         ]);
     }

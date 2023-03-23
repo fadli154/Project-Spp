@@ -250,11 +250,10 @@
                                                             <p><strong> Jabatan :</strong> Tenaga Kependidikan</p>
                                                         @endif
                                                         @foreach ($kelasList as $item)
-                                                            @if ($item->nip_wali_kelas != $data->nip_wali_kelas)
-                                                                <p></p>
-                                                            @elseif ($item->nip_wali_kelas == $data->nip_wali_kelas)
+                                                            @if ($item->nip_wali_kelas == $data->nip_wali_kelas)
                                                                 <p><strong> Kelas :</strong>
-                                                                    <span class="uppercase">{{ $item->kelas }}</span>
+                                                                    <span
+                                                                        class="uppercase">{{ $item->kelas ? $item->kelas->kelas : 'belum mengisi kelas' }}</span>
                                                                 </p>
                                                             @break
                                                         @endif

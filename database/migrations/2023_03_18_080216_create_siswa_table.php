@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('nisn', 10)->primary()->required();
             $table->string('nik', 16)->unique()->required();
             $table->string('nama', 60)->required();
-            $table->string('wali_id', 10)->nullable();
-            $table->foreign('wali_id')->references('wali_id')->on('users');
+            $table->unsignedBigInteger('wali_id')->nullable();
+            $table->foreign('wali_id')->references('id')->on('users')->onUpdate('cascade');
             $table->enum('jk', ['P', 'L']);
             $table->string('tempat_lahir', 100);
             $table->string('foto', 255)->nullable();

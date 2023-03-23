@@ -75,19 +75,21 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label class="capitalize" for="wali_id">Masukkan ID Wali Murid : </label>
+                                        <label class="capitalize" for="level">Pilih Level : </label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
-                                                    <i class="bi bi-key-fill"></i>
+                                                    <i class="bi bi-layers-fill"></i>
                                                 </div>
                                             </div>
-                                            <input type="text"
-                                                class="form-control @error('wali_id') is-invalid @enderror"
-                                                placeholder="Contoh : WALI001" value="{{ old('wali_id') }}" id="wali_id"
-                                                name="wali_id">
+                                            <select class="form-control" id="level" name="level">
+                                                <option selected disabled>Pilih Level</option>
+                                                <option value="administrator" disabled>Administrator</option>
+                                                <option value="petugas" disabled>Petugas</option>
+                                                <option value="wali" selected>Wali Murid</option>
+                                            </select>
                                         </div>
-                                        @error('wali_id')
+                                        @error('level')
                                             {{ $message }}
                                         @enderror
                                     </div>
@@ -144,25 +146,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="capitalize" for="level">Pilih Level : </label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="bi bi-layers-fill"></i>
-                                        </div>
-                                    </div>
-                                    <select class="form-control" id="level" name="level">
-                                        <option selected disabled>Pilih Level</option>
-                                        <option value="administrator" disabled>Administrator</option>
-                                        <option value="petugas" disabled>Petugas</option>
-                                        <option value="wali" selected>Wali Murid</option>
-                                    </select>
-                                </div>
-                                @error('level')
-                                    {{ $message }}
-                                @enderror
                             </div>
                             <div class="form-group">
                                 <label class="capitalize" for="foto">Masukkan Foto : </label>

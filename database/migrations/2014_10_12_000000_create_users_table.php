@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->id()->onUpdate('cascade');
             $table->string('name', 35);
             $table->string('username', 25)->unique();
             $table->enum('level', ['wali', 'petugas', 'administrator']);
