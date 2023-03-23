@@ -61,7 +61,7 @@
                         {{-- Akhir Form Pencarian --}}
                         <div class="table-responsive">
                             <table class="table table-bordered table-md">
-                                <tbody>
+                                <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Nama Biaya</th>
@@ -69,6 +69,8 @@
                                         <th>Dibuat</th>
                                         <th>Action</th>
                                     </tr>
+                                </thead>
+                                <tbody>
                                     @foreach ($dataList as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>

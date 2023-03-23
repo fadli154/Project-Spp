@@ -7,6 +7,7 @@ use App\Models\Kelas;
 use App\Models\WaliKelas;
 use Illuminate\Database\Seeder;
 use App\Models\KonsentrasiKeahlian;
+use App\Models\Siswa;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
@@ -33,7 +34,6 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'wali Murid',
             'username' => 'wali',
-            'wali_id' => 'WALI001',
             'level' => 'wali',
             'password' => bcrypt('password'),
             'email' => 'wali154@gmail.com',
@@ -90,5 +90,16 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Kelas::factory(6)->create();
+
+        // seeder Siswa Table
+        Siswa::create([
+            'nisn' => '1111111111',
+            'nik' => '1111111111111111',
+            'nama' => 'fauzi abdullah',
+            'kelas_id' => 'XRPL2023',
+            'wali_id' => '17',
+            'jk' => 'L',
+            'tempat_lahir' => 'wali154@gmail.com',
+        ]);
     }
 }

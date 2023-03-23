@@ -27,7 +27,8 @@ class BiayaController extends Controller
 
         return view('/pembayaran.biaya.biaya_data', [
             'title' => 'SPP',
-            'active' => 'SPP',
+            'active' => 'biaya',
+            'active1' => 'pembayaran',
             'dataList' => $sppList,
         ]);
     }
@@ -41,7 +42,8 @@ class BiayaController extends Controller
     {
         return view('/pembayaran.biaya.biaya_create', [
             'title' => 'Tambah Data',
-            'active' => 'Tambah Data'
+            'active' => 'biaya',
+            'active1' => 'pembayaran',
         ]);
     }
 
@@ -84,7 +86,8 @@ class BiayaController extends Controller
 
         return view('/pembayaran.biaya.biaya_detail', [
             'title' => 'Detail',
-            'active' => 'Detail',
+            'active' => 'biaya',
+            'active1' => 'pembayaran',
             'detailData' => $detailData,
             'detail_data' => $detailData,
         ]);
@@ -102,7 +105,8 @@ class BiayaController extends Controller
 
         return view('/pembayaran.biaya.biaya_edit', [
             'title' => 'Edit',
-            'active' => 'Edit',
+            'active' => 'biaya',
+            'active1' => 'pembayaran',
             'editData' => $sppList,
         ]);
     }
