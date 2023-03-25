@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Biaya;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use App\Models\Tagihan;
-use App\Models\TagihanDetails;
 use Illuminate\Http\Request;
+use App\Models\TagihanDetails;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class TagihanController extends Controller
@@ -117,7 +118,20 @@ class TagihanController extends Controller
      */
     public function show($id)
     {
-        //
+        $detailData = siswa::where('nisn', $id)->get();
+        $waliList = User::with('siswa')->get();
+        $kelasList = Kelas::with('siswa', 'WaliKelas')->get();
+        $tagihan =  Tagihan::with('siswa', 'tagihanDetails')->get();
+
+        return view('/manajemen_siswa.siswa_detail', [
+            'title' => 'Detail',
+            'active' => 'siswa',
+            'active1' => 'siswa',
+            'detailData' => $detailData,
+            'waliList' => $waliList,
+            'kelasList' => $kelasList,
+            'showTab' => 'tagihan',
+        ]);
     }
 
     /**
