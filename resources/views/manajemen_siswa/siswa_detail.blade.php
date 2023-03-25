@@ -14,7 +14,7 @@
                     <div class="col-md-4 col-sm-4 text-center items-center mt-2 ">
                         <div class="breadcrumb-item d-inline active"><a href="/dashboard">Dashboard</a></div>
                         <div class="breadcrumb-item d-inline active"><a href="/siswa">Siswa</a></div>
-                        <div class="breadcrumb-item d-inline">Profile Siswa</div>
+                        <div class="breadcrumb-item d-inline">Detail Siswa</div>
                     </div>
                     {{-- Akhir Breadcrumb --}}
                 </div>
@@ -34,7 +34,7 @@
                                         </a>
                                     </div>
                                     <div class="col">
-                                        <h4 class="text-primary">Profile Siswa</h4>
+                                        <h4 class="text-primary">Detail Data Siswa</h4>
                                     </div>
                                 </div>
                             </div>
@@ -270,42 +270,107 @@
                                         </div>
                                         <div class="tab-pane fade {{ $showTab === 'tagihan' ? 'active show' : '' }}"
                                             id="tagihan2" role="tabpanel" aria-labelledby="profile-tab2">
-                                            <h4 class="mt-3 col-12">Data Tagihan</h4>
-                                            <div class="table-responsive col-6">
-                                                <table class="table table-bordered table-success table-striped table-md">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>No</th>
-                                                            <th>Nama Biaya/Tagihan</th>
-                                                            <th>Nominal</th>
-                                                            <th>Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach ($waliList as $item)
+                                            <h4 class="mt-3 col-12 capitalize">Detail Data Tagihan Siswa |
+                                                ({{ $data->nama }})
+                                            </h4>
+                                            <div class="row">
+                                                <div class="table-responsive col-7">
+                                                    <table
+                                                        class="table table-bordered table-success table-striped table-md">
+                                                        <thead>
                                                             <tr>
-                                                                <td>{{ $loop->iteration }}</td>
-                                                                <td class="capitalize"><a
-                                                                        href="/siswa/{{ $item->nisn }}"
-                                                                        class="text-dark" title="Klik Untuk Detail">
-                                                                        {{ $item->nama }}</a>
-                                                                </td>
-                                                                <td>{{ $item->nisn }}</td>
-                                                                <td>
-                                                                    <form action="/wali-siswa/{{ $item->nisn }}"
-                                                                        method="post">
-                                                                        @csrf
-                                                                        @method('put')
-                                                                        <button type="submit"
-                                                                            class="confirm btn btn-danger has-icon ">
-                                                                            <i
-                                                                                class="far bi-trash-fill mt-2 mr-2"></i>Hapus</button>
-                                                                    </form>
-                                                                </td>
+                                                                <th>No</th>
+                                                                <th>Nama Biaya/Tagihan</th>
+                                                                <th>Nominal</th>
+                                                                <th>Aksi</th>
                                                             </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($tagihanList as $item)
+                                                                @foreach ($tagihanDetailList as $data)
+                                                                    <tr>
+                                                                        <td>{{ $loop->iteration }}</td>
+                                                                        <td class="capitalize">
+                                                                            {{ $data->nama_biaya }}</td>
+                                                                        <td>{{ currency_IDR($data->nominal_biaya) }}</td>
+                                                                        <td>
+                                                                            <form action="/wali-siswa/{{ $item->nisn }}"
+                                                                                method="post">
+                                                                                @csrf
+                                                                                @method('put')
+                                                                                <button type="submit"
+                                                                                    class="confirm btn btn-danger has-icon ">
+                                                                                    <i
+                                                                                        class="far bi-trash-fill mt-2 mr-2"></i>Hapus</button>
+                                                                            </form>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-5">
+                                                    <div class="card" style="border: 2px solid rgb(240, 240, 240)">
+                                                        <div class="card-header">
+                                                            <h6 class="text-center">Form Pembayaran</h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <form class="form" method="post" action="/wali-siswa">
+                                                                @csrf
+                                                                <div class="form-group">
+                                                                    <label class="capitalize"
+                                                                        for="jumlah_dibayar">Masukkan
+                                                                        Jumlah/Nominal Yang Dibayar :
+                                                                    </label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">
+                                                                                <i class="bi bi-cash"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <input type="text" type-currency="IDR"
+                                                                            class="form-control @error('jumlah_dibayar') is-invalid @enderror"
+                                                                            placeholder="Contoh : Rp. 100.000"
+                                                                            value="{{ old('jumlah_dibayar') }}"
+                                                                            id="jumlah_dibayar" name="jumlah_dibayar">
+                                                                    </div>
+                                                                    @error('jumlah_dibayar')
+                                                                        {{ $message }}
+                                                                    @enderror
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="capitalize" for="tanggal_bayar">Masukkan
+                                                                        Tanggal Pembayaran :
+                                                                    </label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">
+                                                                                <i class="fa fa-calendar"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <input type="date"
+                                                                            class="form-control @error('tanggal_bayar') is-invalid @enderror"
+                                                                            value="{{ old('tanggal_bayar') ?? date('Y-m-d') }}"
+                                                                            id="tanggal_bayar" name="tanggal_bayar">
+                                                                    </div>
+                                                                    @error('tanggal_bayar')
+                                                                        {{ $message }}
+                                                                    @enderror
+                                                                </div>
+                                                                <input type="hidden" name="wali_id"
+                                                                    value="{{ $data->id }}">
+                                                                <button type="submit"
+                                                                    class="btn btn-primary justify-content-end"
+                                                                    data-toggle="tooltip" data-placement="top"
+                                                                    title="Konfirmasi Bayar"
+                                                                    data-original-title="Konfirmasi Bayar">
+                                                                    <i class="fa fa-check"></i> Simpan
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="contact2" role="tabpanel"
