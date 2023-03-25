@@ -17,8 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('tagihan_id')->index();
             $table->foreign('tagihan_id')->references('id')->on('tagihan');
-            $table->unsignedBigInteger('wali_id')->index();
-            $table->foreign('wali_id')->references('wali_id')->on('siswa');
+            $table->foreignId('wali_id')->index();
             $table->enum('status_konfirmasi', ['belum', 'sudah']);
             $table->bigInteger('jumlah_dibayar');
             $table->dateTime('tanggal_bayar');

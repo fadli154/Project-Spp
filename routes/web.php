@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
-use App\Http\Controllers\{AdminController, loginController, PetugasController, dashboardController, KonsentrasiController, SiswaController, WaliKelasController, WaliMuridController, KelasController, BiayaController, TagihanController, WaliSiswaController};
+use App\Http\Controllers\{AdminController, loginController, PetugasController, dashboardController, KonsentrasiController, SiswaController, WaliKelasController, WaliMuridController, KelasController, BiayaController, TagihanController, WaliSiswaController, PembayaranController};
 
 Route::get('/', function () {
     return view('pages.index', [
@@ -27,3 +27,4 @@ Route::resource('/kelas', KelasController::class)->middleware('petugas');
 Route::resource('/biaya', BiayaController::class)->middleware('petugas');
 Route::resource('/tagihan', TagihanController::class)->middleware('petugas');
 Route::resource('/wali-siswa', WaliSiswaController::class)->except('index', 'create', 'show', 'destroy', 'edit')->middleware('petugas');
+Route::resource('/pembayaran', PembayaranController::class)->middleware('petugas');

@@ -121,6 +121,9 @@ class SiswaController extends Controller
         $waliList = User::with('siswa')->get();
         $kelasList = Kelas::with('siswa', 'WaliKelas')->get();
         $tagihan =  Tagihan::with('tagihanDetails')->where('nisn', $id)->get();
+        foreach ($tagihan as $item) {
+            $tagihanDetails = $item->tagihanDetails;
+        }
 
         return view('/manajemen_siswa.siswa_detail', [
             'title' => 'Detail',
@@ -130,6 +133,7 @@ class SiswaController extends Controller
             'waliList' => $waliList,
             'kelasList' => $kelasList,
             'tagihanList' => $tagihan,
+            'tagihanDetailList' => $tagihanDetails,
             'showTab' => 'profile',
         ]);
     }

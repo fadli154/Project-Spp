@@ -11,4 +11,11 @@ class Pembayaran extends Model
 
     protected $table = 'pembayaran';
     protected $guarded = [''];
+    protected $dates = ['tanggal_bayar'];
+
+
+    public function tagihan()
+    {
+        return $this->belongsTo(Tagihan::class);
+    }
 }
