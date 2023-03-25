@@ -157,7 +157,7 @@
                                                     </div>
                                                 </div>
                                                 <input type="text"
-                                                    class="form-control @error('no_telp') is-invalid @enderror"
+                                                    class="form-control phone @error('no_telp') is-invalid @enderror"
                                                     value="{{ $data->no_telp }}" id="no_telp" name="no_telp" readonly>
                                             </div>
                                             @error('no_telp')
@@ -168,7 +168,7 @@
                                 </div>
                                 <div class="row">
                                     <h4 class="mt-3 col-12">Data Anak</h4>
-                                    <div class="table-responsive col-7">
+                                    <div class="table-responsive col-6">
                                         <table class="table table-bordered table-success table-striped table-md">
                                             <thead>
                                                 <tr>
@@ -203,7 +203,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="col-5">
+                                    <div class="col-6">
                                         <div class="card" style="border: 2px solid rgb(240, 240, 240)">
                                             <div class="card-header">
                                                 <h6 class="text-center">Tambah Data Anak</h6>
@@ -215,7 +215,7 @@
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <div class="input-group-text">
-                                                                    <i class="fa-solid fa-user-plus"></i>
+                                                                    <i class="fa fa-user"></i>
                                                                 </div>
                                                             </div>
                                                             <select
@@ -235,13 +235,11 @@
                                                         @enderror
                                                     </div>
                                                     <input type="hidden" name="wali_id" value="{{ $data->id }}">
-                                                    <div class="d-flex justify-content-end">
-                                                        <button type="submit" class="btn btn-primary justify-content-end"
-                                                            data-toggle="tooltip" data-placement="top"
-                                                            title="Tambah Data" data-original-title="Tambah Data">
-                                                            <i class="bi bi-patch-plus btn-tambah-data"></i>
-                                                        </button>
-                                                    </div>
+                                                    <button type="submit" class="btn btn-primary justify-content-end"
+                                                        data-toggle="tooltip" data-placement="top" title="Tambah Data"
+                                                        data-original-title="Tambah Data">
+                                                        <i class="bi bi-patch-plus btn-tambah-data"></i>
+                                                    </button>
                                                 </form>
                                             </div>
                                         </div>

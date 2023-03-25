@@ -51,7 +51,7 @@
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
-                                                        <i class="fa-solid fa-money-check-dollar"></i>
+                                                        <i class="fa fa-credit-card"></i>
                                                     </div>
                                                 </div>
                                                 <input type="text"

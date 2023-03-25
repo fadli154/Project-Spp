@@ -58,7 +58,7 @@
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
-                                                        <i class="fa-solid fa-money-check-dollar"></i>
+                                                        <i class="fa fa-credit-card"></i>
                                                     </div>
                                                 </div>
                                                 <input type="text"
@@ -96,7 +96,7 @@
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
-                                                        <i class="fa-sharp fa-solid fa-calendar-days"></i>
+                                                        <i class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>
                                                 <input type="text"
@@ -109,12 +109,12 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label class="capitalize" for="updated_at">Dibuat Pada :
+                                            <label class="capitalize" for="updated_at">Diubah Pada :
                                             </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
-                                                        <i class="fa-solid fa-calendar"></i>
+                                                        <i class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>
                                                 <input type="text"
@@ -134,7 +134,7 @@
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
-                                                        <i class="fa-solid fa-user-tie"></i>
+                                                        <i class="fa fa-user-tie"></i>
                                                     </div>
                                                 </div>
                                                 <input type="text"

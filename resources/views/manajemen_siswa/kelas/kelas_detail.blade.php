@@ -138,7 +138,7 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text bg-secondary">
-                                                <i class="fa-solid fa-user-tie"></i>
+                                                <i class="fa fa-user-tie"></i>
                                             </div>
                                         </div>
                                         <input type="text"

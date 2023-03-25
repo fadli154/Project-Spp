@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\Tagihan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -19,13 +22,16 @@ class SiswaController extends Controller
     {
         $katakunci = $request->katakunci;
         $jenis_kelamin = $request->jk;
+        $status = $request->status;
 
-        if (strlen($jenis_kelamin)) {
+        if (strlen($jenis_kelamin) || strlen($status)) {
             $siswaList = Siswa::when(!is_null($jenis_kelamin), function ($query) use ($jenis_kelamin) {
                 return $query->where('jk', $jenis_kelamin);
+            })->when(!is_null($status), function ($query) use ($status) {
+                return $query->where('status', $status);
             })->latest()->paginate(8);
-            $waliList = DB::table('siswa')->join('users', 'siswa.wali_id', '=', 'users.id')->select('users.*', 'users.name', 'users.id')->paginate(3);
-            $kelasList = DB::table('siswa')->join('kelas', 'siswa.kelas_id', '=', 'kelas.kelas_id')->select('kelas.*', 'kelas.angkatan', 'kelas.kelas')->paginate(3);
+            $waliList = DB::table('siswa')->join('users', 'siswa.wali_id', '=', 'users.id')->select('users.*', 'users.name', 'users.id')->paginate(6);
+            $kelasList = DB::table('siswa')->join('kelas', 'siswa.kelas_id', '=', 'kelas.kelas_id')->select('kelas.*', 'kelas.angkatan', 'kelas.kelas')->paginate(6);
         } else if (strlen($katakunci)) {
             $siswaList = Siswa::where('nisn', 'like', "%$katakunci%")
                 ->orWhere('nik', 'like', "%$katakunci%")
@@ -34,11 +40,11 @@ class SiswaController extends Controller
                 ->orWhere('spp_id', 'like', "%$katakunci%")
                 ->orWhere('jk', 'like', "%$katakunci%")
                 ->orWhere('tempat_lahir', 'like', "%$katakunci%")
-                ->paginate(3);
+                ->paginate(6);
         } else {
-            $siswaList = siswa::paginate(3);
-            $waliList = DB::table('siswa')->join('users', 'siswa.wali_id', '=', 'users.id')->select('users.*', 'users.name', 'users.id')->paginate(3);
-            $kelasList = DB::table('siswa')->join('kelas', 'siswa.kelas_id', '=', 'kelas.kelas_id')->select('kelas.*', 'kelas.angkatan', 'kelas.kelas')->paginate(3);
+            $siswaList = siswa::paginate(6);
+            $waliList = DB::table('siswa')->join('users', 'siswa.wali_id', '=', 'users.id')->select('users.*', 'users.name', 'users.id')->paginate(6);
+            $kelasList = DB::table('siswa')->join('kelas', 'siswa.kelas_id', '=', 'kelas.kelas_id')->select('kelas.*', 'kelas.angkatan', 'kelas.kelas')->paginate(6);
         }
 
         return view('/manajemen_siswa.siswa_data', [
@@ -58,8 +64,9 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        $waliList = DB::table('siswa')->rightJoin('users', 'siswa.wali_id', '=', 'users.id')->select('users.*', 'users.name', 'users.id')->where('users.id', '!=', 'NULL')->get();
-        $kelasList = DB::table('siswa')->rightJoin('kelas', 'siswa.kelas_id', '=', 'kelas.kelas_id')->select('kelas.*', 'kelas.angkatan', 'kelas.kelas')->get();
+        $waliList = user::where('level', 'wali')->get();
+        // dd($waliList[16]->siswa[0]->wali_id);
+        $kelasList = Kelas::with('siswa')->groupBy('kelas_id')->get();
         // $sppList = DB::table('siswa')->rightJoin('spp', 'siswa.spp_id', '=', 'spp.spp_id')->select('spp.*', 'spp.tahun', 'spp.nominal')->get();
         return view('/manajemen_siswa.siswa_create', [
             'title' => 'Tambah Data',
@@ -85,6 +92,7 @@ class SiswaController extends Controller
             'wali_id' => '',
             'nama' => 'required|max:60',
             'jk' => 'required',
+            'status' => 'required',
             'tempat_lahir' => 'required|max:60',
             'kelas_id' => 'required',
             // 'spp_id' => 'required',
@@ -110,15 +118,9 @@ class SiswaController extends Controller
     public function show($id)
     {
         $detailData = siswa::where('nisn', $id)->get();
-        $waliList = DB::table('siswa')->rightJoin('users', 'siswa.wali_id', '=', 'users.id')->select('users.*', 'users.name', 'users.id')->where('users.id', '!=', 'NULL')->get();
-        $kelasList = DB::table('siswa')->rightJoin('kelas', 'siswa.kelas_id', '=', 'kelas.kelas_id')->select('kelas.*', 'kelas.angkatan', 'kelas.kelas')->get();
-        // $sppList = DB::table('siswa')->rightJoin('spp', 'siswa.spp_id', '=', 'spp.spp_id')->select('spp.*', 'spp.tahun', 'spp.nominal')->get();
-        $siswa = DB::table('siswa')
-            ->join('kelas', 'siswa.kelas_id', '=', 'kelas.kelas_id')
-            ->join('pegawai', 'pegawai.nip_wali_kelas', '=', 'kelas.nip_wali_kelas')
-            ->select('kelas.*', 'kelas.kelas_id', 'kelas.nip_wali_kelas')
-            ->select('pegawai.*', 'pegawai.nip_wali_kelas')
-            ->get();
+        $waliList = User::with('siswa')->get();
+        $kelasList = Kelas::with('siswa', 'WaliKelas')->get();
+        $tagihan =  Tagihan::with('siswa', 'tagihanDetails')->get();
 
         return view('/manajemen_siswa.siswa_detail', [
             'title' => 'Detail',
@@ -127,7 +129,7 @@ class SiswaController extends Controller
             'detailData' => $detailData,
             'waliList' => $waliList,
             'kelasList' => $kelasList,
-            // 'sppList' => $sppList,
+            'showTab' => 'profile',
         ]);
     }
 

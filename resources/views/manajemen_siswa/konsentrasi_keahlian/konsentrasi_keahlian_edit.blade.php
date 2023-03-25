@@ -70,7 +70,7 @@
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
-                                                        <i class="fa-solid fa-briefcase"></i>
+                                                        <i class="fa fa-briefcase"></i>
                                                     </div>
                                                 </div>
                                                 <input type="text"
@@ -88,7 +88,7 @@
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
-                                                        <i class="fa-solid fa-calendar-days"></i>
+                                                        <i class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>
                                                 <select class="form-control" id="tahun_program" name="tahun_program">

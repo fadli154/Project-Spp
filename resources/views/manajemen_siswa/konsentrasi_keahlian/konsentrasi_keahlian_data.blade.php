@@ -45,7 +45,7 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
-                                            <i class="fa-solid fa-calendar-days"></i>
+                                            <i class="fa fa-calendar"></i>
                                         </div>
                                     </div>
                                     <select class="form-control" id="tahun_program" name="tahun_program">
@@ -83,7 +83,7 @@
                             <a href="/konsentrasi-keahlian/create" class="text-white">
                                 <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
                                     title="Tambah Data" data-original-title="Tambah Data">
-                                    <i class="bi bi-patch-plus btn-tambah-data"></i>
+                                    <i class="fa fa-plus-circle btn-tambah-data"></i>
                                 </button>
                             </a>
                             {{-- Akhir Button Tambah Data --}}

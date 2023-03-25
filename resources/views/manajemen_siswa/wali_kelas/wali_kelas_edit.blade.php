@@ -112,7 +112,7 @@
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text  bg-secondary">
-                                                                <i class="fa-solid fa-venus-mars"></i>
+                                                                <i class="fa fa-venus-mars"></i>
                                                             </div>
                                                         </div>
                                                         <select class="form-control" id="jk" name="jk">
@@ -136,7 +136,7 @@
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text  bg-secondary">
-                                                                <i class="fa-solid fa-user-plus"></i>
+                                                                <i class="fa fa-user-plus"></i>
                                                             </div>
                                                         </div>
                                                         <select class="form-control" id="jabatan" name="jabatan">
@@ -162,7 +162,7 @@
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
-                                                        <i class="fa-solid fa-list"></i>
+                                                        <i class="fa fa-list"></i>
                                                     </div>
                                                 </div>
                                                 <select class="form-control" id="status_pegawai" name="status_pegawai">

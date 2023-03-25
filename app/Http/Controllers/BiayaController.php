@@ -26,7 +26,7 @@ class BiayaController extends Controller
 
 
         return view('/pembayaran.biaya.biaya_data', [
-            'title' => 'SPP',
+            'title' => 'Biaya',
             'active' => 'biaya',
             'active1' => 'pembayaran',
             'dataList' => $sppList,

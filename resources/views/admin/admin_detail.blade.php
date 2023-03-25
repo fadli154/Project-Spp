@@ -131,7 +131,7 @@
                                                             </div>
                                                         </div>
                                                         <input type="text"
-                                                            class="form-control @error('no_telp') is-invalid @enderror"
+                                                            class="form-control phone @error('no_telp') is-invalid @enderror"
                                                             value="{{ $data->no_telp }}" id="no_telp" name="no_telp"
                                                             readonly>
                                                     </div>

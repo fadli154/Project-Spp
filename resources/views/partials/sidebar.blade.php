@@ -51,6 +51,9 @@
                     <li class=""><a class="nav-link ml-2 {{ $active === 'biaya' ? 'text-info' : '' }}"
                             href="/biaya">Data Biaya</a>
                     </li>
+                    <li class=""><a class="nav-link ml-2 {{ $active === 'tagihan' ? 'text-info' : '' }}"
+                            href="/tagihan">Data Tagihan</a>
+                    </li>
                 </ul>
             </li>
         </ul>

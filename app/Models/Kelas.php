@@ -18,6 +18,11 @@ class Kelas extends Model
         return $this->hasMany(KonsentrasiKeahlian::class, 'id_kk', 'id_kk');
     }
 
+    public function siswa()
+    {
+        return $this->hasMany(Siswa::class, 'kelas_id', 'kelas_id');
+    }
+
     public function WaliKelas()
     {
         return $this->hasOne(WaliKelas::class, 'nip_wali_kelas', 'nip_wali_kelas');

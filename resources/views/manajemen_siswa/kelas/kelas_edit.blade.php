@@ -118,7 +118,7 @@
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text  bg-secondary">
-                                                                <i class="fa-solid fa-briefcase"></i>
+                                                                <i class="fa fa-briefcase"></i>
                                                             </div>
                                                         </div>
                                                         <select class="form-control select2" id="id_kk" name="id_kk">
@@ -141,7 +141,7 @@
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text  bg-secondary">
-                                                        <i class="fa-solid fa-user-tie"></i>
+                                                        <i class="fa fa-user-tie"></i>
                                                     </div>
                                                 </div>
                                                 <select class="form-control select2 " id="nip_wali_kelas"

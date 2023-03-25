@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Biaya;
 use App\Models\User;
 use App\Models\Kelas;
 use App\Models\WaliKelas;
@@ -91,6 +92,21 @@ class DatabaseSeeder extends Seeder
 
         // Kelas::factory(6)->create();
 
+        // seeder Biaya Table
+        Biaya::create([
+            'id' => '1',
+            'nama_biaya' => 'SPP 2022',
+            'nominal' => '100000',
+            'user_id' => '17',
+        ]);
+
+        Biaya::create([
+            'id' => '2',
+            'nama_biaya' => 'Baju Olahraga',
+            'nominal' => '600000',
+            'user_id' => '17',
+        ]);
+
         // seeder Siswa Table
         Siswa::create([
             'nisn' => '1111111111',
@@ -99,7 +115,8 @@ class DatabaseSeeder extends Seeder
             'kelas_id' => 'XRPL2023',
             'wali_id' => '17',
             'jk' => 'L',
-            'tempat_lahir' => 'wali154@gmail.com',
+            'status' => '1',
+            'tempat_lahir' => 'Perum',
         ]);
     }
 }

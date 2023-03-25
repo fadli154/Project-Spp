@@ -98,7 +98,7 @@
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
-                                                    <i class="fa-solid fa-briefcase"></i>
+                                                    <i class="fa fa-briefcase"></i>
                                                 </div>
                                             </div>
                                             <select class="form-control select2 @error('id_kk') is-invalid @enderror"
@@ -121,7 +121,7 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
-                                            <i class="fa-solid fa-user-tie"></i>
+                                            <i class="fa fa-user-tie"></i>
                                         </div>
                                     </div>
                                     <select class="form-control select2 @error('nip_wali_kelas') is-invalid @enderror"

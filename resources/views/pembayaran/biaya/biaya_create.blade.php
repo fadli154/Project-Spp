@@ -46,7 +46,7 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
-                                                <i class="fa-solid fa-money-check-dollar"></i>
+                                                <i class="fa fa-credit-card"></i>
                                             </div>
                                         </div>
                                         <input type="text" class="form-control @error('nama_biaya') is-invalid @enderror"

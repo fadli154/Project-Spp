@@ -13,7 +13,7 @@
                     {{-- Breadcrumb --}}
                     <div class="col-md-4 col-sm-4 text-center items-center mt-2 ">
                         <div class="breadcrumb-item d-inline active capitalize"><a href="/dashboard">Dashboard</a></div>
-                        <div class="breadcrumb-item d-inline active capitalize"><a href="/siswa">Siswa</a></div>
+                        <div class="breadcrumb-item d-inline active capitalize"><a href="/siswa">List Siswa</a></div>
                         <div class="breadcrumb-item d-inline capitalize">Tambah Data</div>
                     </div>
                     {{-- Akhir Breadcrumb --}}
@@ -90,21 +90,22 @@
                                         @enderror
                                     </div>
                                 </div>
-
                                 <div class="col">
                                     <div class="form-group">
                                         <label class="capitalize" for="wali_id">Pilih Wali Murid : </label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
-                                                    <i class="fa-solid fa-user-plus"></i>
+                                                    <i class="fa fa-user"></i>
                                                 </div>
                                             </div>
                                             <select class="form-control @error('wali_id') is-invalid @enderror select2"
                                                 id="select2" name="wali_id" placeholder="pilih">
-                                                <option value="" selected disabled>Pilih Wali Murid</option>
+                                                <option value="" selected>Pilih Wali Murid</option>
                                                 @foreach ($waliList as $data)
-                                                    <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                                    <option value="{{ $data->id }}"
+                                                        {{ old('wali_id') == $data->id ? 'selected' : '' }}>
+                                                        {{ $data->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -124,7 +125,10 @@
                                                 id="kelas_id select-state" name="kelas_id" placeholder="pilih">
                                                 <option value="" selected disabled>Pilih Kelas</option>
                                                 @foreach ($kelasList as $data)
-                                                    <option value="{{ $data->kelas_id }}">{{ $data->kelas }}</option>
+                                                    <option value="{{ $data->kelas_id }}"
+                                                        {{ old('kelas_id') == $data->kelas_id ? 'selected' : '' }}>
+                                                        {{ $data->kelas }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -137,13 +141,15 @@
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
-                                                    <i class="fa-solid fa-venus-mars"></i>
+                                                    <i class="fa fa-venus-mars"></i>
                                                 </div>
                                             </div>
                                             <select class="form-control" id="jk" name="jk">
                                                 <option selected>Pilih Jenis Kelamin</option>
-                                                <option value="L">Laki Laki</option>
-                                                <option value="P">Perempuan</option>
+                                                <option value="L" {{ old('jk') == 'L' ? 'selected' : '' }}>
+                                                    Laki Laki</option>
+                                                <option value="P" {{ old('jk') == 'P' ? 'selected' : '' }}>
+                                                    Perempuan</option>
                                             </select>
                                         </div>
                                         @error('jk')
@@ -190,6 +196,7 @@
                                     {{ $message }}
                                 @enderror
                             </div>
+                            <input type="hidden" name="status" value="1">
                             <div class="col-12 d-flex justify-content-end">
                                 <div class="mr-2">
                                     <a href="/siswa" class="btn btn-warning pe-2 mb-1"><i

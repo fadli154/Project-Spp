@@ -17,6 +17,14 @@
 <script src="{{ asset('assets/modules/summernote/summernote-bs4.js') }}"></script>
 <script src="{{ asset('assets/modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 
+{{-- jquery mask input --}}
+
+<script src="{{ asset('assets/js/jquery.mask.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $('.phone').mask('0000-0000-00000');
+    });
+</script>
 <!-- Page Specific JS File -->
 <script src="{{ asset('assets/js/page/index.js') }}"></script>
 

@@ -45,7 +45,7 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
-                                            <i class="fa-solid fa-venus-mars"></i>
+                                            <i class="fa fa-venus-mars"></i>
                                         </div>
                                     </div>
                                     <select class="form-control" name="jk" id="jk">
@@ -59,6 +59,28 @@
                                     </select>
                                 </div>
                                 @error('jk')
+                                    {{ $message }}
+                                @enderror
+                            </div>
+                            <div class="col form-group">
+                                <label class="capitalize" for="status">Filter Status : </label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="bi bi-bookmark-fill"></i>
+                                        </div>
+                                    </div>
+                                    <select class="form-control" name="status" id="status">
+                                        <option {{ is_null(request()->input('status')) ? 'selected' : '' }} value="">
+                                            Semua </option>
+                                        <option {{ request()->input('status') == 1 ? 'selected' : '' }} value="1">Aktif
+                                        </option>
+                                        <option
+                                            {{ !is_null(request()->input('status')) && request()->input('status') == 0 ? 'selected' : '' }}
+                                            value="0">Tidak Aktif</option>
+                                    </select>
+                                </div>
+                                @error('status')
                                     {{ $message }}
                                 @enderror
                             </div>
@@ -88,7 +110,7 @@
                             <a href="/siswa/create" class="text-white">
                                 <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
                                     title="Tambah Data" data-original-title="Tambah Data">
-                                    <i class="bi bi-patch-plus btn-tambah-data"></i>
+                                    <i class="fa fa-plus-circle btn-tambah-data"></i>
                                 </button>
                             </a>
                             {{-- Akhir Button Tambah Data --}}
@@ -121,8 +143,7 @@
                             @foreach ($dataList as $data)
                                 <div class="col-lg-6">
                                     <div class="card">
-                                        <div class="card-header"
-                                            style="background-color: @if ($data->jk == 'L') rgb(212, 232, 250) @else rgb(250, 211, 247) @endif">
+                                        <div class="card-header" style="background-color: rgb(220, 211, 228)">
                                             <h4 class="capitalize">{{ $data->nama }} | ({{ $data->nisn }})</h4>
                                             <div class="card-header-action mr-2">
                                                 <a title="Lihat Detail"
@@ -157,7 +178,7 @@
                                             </div>
                                         </div>
                                         <div class="collapse" id="mycard-collapse-{{ $data->nisn }}"
-                                            style="background-color : @if ($data->jk == 'L') aliceblue @else rgb(252, 239, 252) @endif ;">
+                                            style="background-color : @if ($data->jk == 'L') rgb(189, 189, 216) @else rgb(252, 239, 252) @endif ;">
                                             <div class="card-body">
                                                 <div class="row ">
                                                     {{-- fotoCard --}}

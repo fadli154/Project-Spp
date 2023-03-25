@@ -20,4 +20,14 @@ class Siswa extends Model
             ]
         );
     }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id', 'kelas_id');
+    }
+
+    public function tagihan()
+    {
+        return $this->hasMany(tagihan::class, 'kelas_id', 'kelas_id');
+    }
 }

@@ -45,7 +45,7 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
-                                            <i class="fa-solid fa-venus-mars"></i>
+                                            <i class="fa fa-venus-mars"></i>
                                         </div>
                                     </div>
                                     <select class="form-control" name="jk" id="jk">
@@ -67,7 +67,7 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
-                                            <i class="fa-solid fa-user-plus"></i>
+                                            <i class="fa fa-user-plus"></i>
                                         </div>
                                     </div>
                                     <select class="form-control" name="jabatan" id="jabatan">
@@ -90,7 +90,7 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
-                                            <i class="fa-solid fa-list"></i>
+                                            <i class="fa fa-list"></i>
                                         </div>
                                     </div>
                                     <select class="form-control" name="status_pegawai" id="status_pegawai">
@@ -136,7 +136,7 @@
                             <a href="/wali-kelas/create" class="text-white">
                                 <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
                                     title="Tambah Data" data-original-title="Tambah Data">
-                                    <i class="bi bi-patch-plus btn-tambah-data"></i>
+                                    <i class="fa fa-plus-circle btn-tambah-data"></i>
                                 </button>
                             </a>
                             {{-- Akhir Button Tambah Data --}}
@@ -169,8 +169,7 @@
                             @foreach ($dataList as $data)
                                 <div class="col-6">
                                     <div class="card">
-                                        <div class="card-header"
-                                            style="background-color: @if ($data->jk == 'L') rgb(212, 232, 250) @else rgb(250, 211, 247) @endif">
+                                        <div class="card-header" style="background-color: rgb(220, 211, 228)">
                                             <h4>{{ $data->nama_wali_kelas }} | ({{ $data->nip_wali_kelas }})</h4>
                                             <div class="card-header-action mr-2">
                                                 <a title="Lihat Detail"
