@@ -59,10 +59,6 @@
                                         <a class="nav-link" id="tagihan-tab2" data-toggle="tab" href="#tagihan2"
                                             role="tab" aria-controls="tagihan">Tagihan</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="contact-tab2" data-toggle="tab" href="#contact2"
-                                            role="tab" aria-controls="contact">Contact</a>
-                                    </li>
                                 </ul>
                                 <div class="tab-content tab-bordered" id="myTab3Content">
                                     <div class="tab-pane fade {{ $showTab === 'profile' ? 'active show' : '' }}"
@@ -271,38 +267,48 @@
                                             ({{ $data->nama }})
                                         </h4>
                                         <div class="row">
-                                            <div class="table-responsive col-7">
-                                                <table class="table table-bordered table-success table-striped table-md">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>No</th>
-                                                            <th>Nama Biaya/Tagihan</th>
-                                                            <th>Nominal</th>
-                                                            <th>Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    @foreach ($tagihanList as $item)
-                                                        @foreach ($tagihanDetailList as $data)
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>{{ $loop->iteration }}</td>
-                                                                    <td class="capitalize">
-                                                                        {{ $data->nama_biaya }}</td>
-                                                                    <td class="text-center">
-                                                                        {{ currency_IDR($data->nominal_biaya) }}</td>
-                                                                    <td>
-                                                                        <form action="/wali-siswa/{{ $item->nisn }}"
-                                                                            method="post">
-                                                                            @csrf
-                                                                            @method('put')
-                                                                            <button type="submit"
-                                                                                class="confirm btn btn-danger has-icon ">
-                                                                                <i
-                                                                                    class="far bi-trash-fill mt-2 mr-2"></i>Hapus</button>
-                                                                        </form>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
+                                            <div class="col-7">
+                                                <div class="table-responsive">
+                                                    <table
+                                                        class="table table-bordered table-success table-striped table-md">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Nama Biaya/Tagihan</th>
+                                                                <th>Nominal</th>
+                                                                <th>Aksi</th>
+                                                            </tr>
+                                                        </thead>
+                                                        @foreach ($tagihanList as $item)
+                                                            @foreach ($tagihanDetailList as $data)
+                                                                @if ($item->id == $data->tagihan_id)
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>{{ $loop->iteration }}</td>
+                                                                            <td class="capitalize">
+                                                                                {{ $data->nama_biaya }}</td>
+                                                                            <td class="text-center">
+                                                                                {{ currency_IDR($data->nominal_biaya) }}
+                                                                            </td>
+                                                                            <td>
+                                                                                <form
+                                                                                    action="/tagihan/{{ $item->nisn }}"
+                                                                                    method="post">
+                                                                                    @csrf
+                                                                                    @method('DELETE')
+                                                                                    <input type="hidden"
+                                                                                        name="id_details"
+                                                                                        value="{{ $data->id }}">
+                                                                                    <button type="submit"
+                                                                                        class="confirm btn btn-danger has-icon ">
+                                                                                        <i
+                                                                                            class="far bi-trash-fill mt-2 mr-2"></i>Hapus</button>
+                                                                                </form>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                @endif
+                                                            @endforeach
                                                             <tfoot>
                                                                 <tr>
                                                                     <td colspan="2"
@@ -315,6 +321,50 @@
                                                                         {{ currency_IDR($item->tagihanDetails->sum('nominal_biaya')) }}
                                                                     </td>
                                                                 </tr>
+                                                            </tfoot>
+                                                        @endforeach
+                                                    </table>
+                                                </div>
+                                                <h4>Riwayat Pembayaran Siswa</h4>
+                                                <div class="table-responsive">
+                                                    <table
+                                                        class="table table-bordered table-success table-striped table-md">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Tanggal</th>
+                                                                <th>Jumlah Dibayar</th>
+                                                            </tr>
+                                                        </thead>
+                                                        @foreach ($tagihanList as $item)
+                                                            @foreach ($pembayaranList as $data)
+                                                                @if ($item->id == $data->tagihan_id)
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>{{ $loop->iteration }}</td>
+                                                                            <td class="capitalize">
+                                                                                {{ $data->created_at->format('d-M-Y | g:i:s') }}
+                                                                            </td>
+                                                                            <td class="text-center">
+                                                                                {{ currency_IDR($data->jumlah_dibayar) }}
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                @endif
+                                                            @endforeach
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td colspan="2"
+                                                                        class="uppercase text-dark font-weight-bold text-center">
+                                                                        Sisa
+                                                                        Tagihan
+                                                                    </td>
+                                                                    <td
+                                                                        class="uppercase text-dark font-weight-bold d-flex justify-content-center">
+                                                                        {{ currency_IDR($item->tagihanDetails->sum('nominal_biaya') - $data->sum('jumlah_dibayar')) }}
+                                                                    </td>
+                                                                </tr>
+
                                                                 <tr>
                                                                     <td colspan="2"
                                                                         class="uppercase text-dark font-weight-bold text-center">
@@ -361,8 +411,8 @@
                                                                 </tr>
                                                             </tfoot>
                                                         @endforeach
-                                                    @endforeach
-                                                </table>
+                                                    </table>
+                                                </div>
                                             </div>
                                             <div class="col-5">
                                                 <div class="card" style="border: 2px solid rgb(240, 240, 240)">
@@ -457,15 +507,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="contact2" role="tabpanel"
-                                        aria-labelledby="contact-tab2">
-                                        Vestibulum imperdiet odio sed neque ultricies, ut dapibus mi maximus.
-                                        Proin ligula massa, gravida in lacinia efficitur, hendrerit eget mauris.
-                                        Pellentesque fermentum, sem interdum molestie finibus, nulla diam varius
-                                        leo, nec varius lectus elit id dolor. Nam malesuada orci non ornare
-                                        vulputate. Ut ut sollicitudin magna. Vestibulum eget ligula ut ipsum
-                                        venenatis ultrices. Proin bibendum bibendum augue ut luctus.
                                     </div>
                                 </div>
                             </div>

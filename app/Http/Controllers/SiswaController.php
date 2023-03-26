@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
+use App\Models\Pembayaran;
 use App\Models\Siswa;
 use App\Models\Tagihan;
+use App\Models\TagihanDetails;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -120,10 +122,9 @@ class SiswaController extends Controller
         $detailData = siswa::where('nisn', $id)->get();
         $waliList = User::with('siswa')->get();
         $kelasList = Kelas::with('siswa', 'WaliKelas')->get();
-        $tagihan =  Tagihan::with('tagihanDetails')->where('nisn', $id)->get();
-        foreach ($tagihan as $item) {
-            $tagihanDetails = $item->tagihanDetails;
-        }
+        $tagihan =  Tagihan::where('nisn', $id)->get();
+        $tagihanDetails = TagihanDetails::get();
+        $pembayaran = Pembayaran::get();
 
         return view('/manajemen_siswa.siswa_detail', [
             'title' => 'Detail',
@@ -134,6 +135,7 @@ class SiswaController extends Controller
             'kelasList' => $kelasList,
             'tagihanList' => $tagihan,
             'tagihanDetailList' => $tagihanDetails,
+            'pembayaranList' => $pembayaran,
             'showTab' => 'profile',
         ]);
     }
@@ -147,22 +149,13 @@ class SiswaController extends Controller
     public function edit($id)
     {
         $dataList = siswa::where('nisn', $id)->get();
-        $waliList = DB::table('siswa')->rightJoin('users', 'siswa.wali_id', '=', 'users.id')->select('users.*', 'users.name', 'users.id')->where('users.id', '!=', 'NULL')->get();
-        $kelasList = DB::table('siswa')->rightJoin('kelas', 'siswa.kelas_id', '=', 'kelas.kelas_id')->select('kelas.*', 'kelas.angkatan', 'kelas.kelas', 'kelas.kelas_id')->get();
-        $siswa = DB::table('siswa')
-            ->join('kelas', 'siswa.kelas_id', '=', 'kelas.kelas_id')
-            ->join('wali_kelas', 'wali_kelas.nip_wali_kelas', '=', 'kelas.nip_wali_kelas')
-            ->select('kelas.*', 'kelas.kelas_id', 'kelas.nip_wali_kelas')
-            ->select('wali_kelas.*', 'wali_kelas.nip_wali_kelas')
-            ->get();
+
 
         return view('/data_peserta.siswa.edit', [
             'title' => 'edit',
             'active' => 'siswa',
             'active1' => 'siswa',
             'dataList' => $dataList,
-            'waliList' => $waliList,
-            'kelasList' => $kelasList,
         ]);
     }
 

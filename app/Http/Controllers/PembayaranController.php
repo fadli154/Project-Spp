@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tagihan;
 use App\Models\Pembayaran;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -14,9 +15,30 @@ class PembayaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $katakunci = $request->katakunci;
+        if (strlen($katakunci)) {
+            $pembayaranList = Pembayaran::where('nama_biaya', 'like', "%$katakunci%")
+                ->orWhere('nominal', 'like', "%$katakunci%")
+                ->paginate(3);
+        } else {
+            $pembayaranList = Pembayaran::with('tagihan')->paginate(6);
+            $tagihanList = Tagihan::with('siswa', 'kelas')->get();
+        }
+
+        foreach ($tagihanList as $item) {
+            $kelasList = $item->kelas;
+        }
+
+        return view('/pembayaran.pembayaran.pembayaran_data', [
+            'title' => 'pembayaran',
+            'active' => 'pembayaran',
+            'active1' => 'pembayaran',
+            'dataList' => $pembayaranList,
+            'tagihanList' => $tagihanList,
+            'kelasList' => $kelasList,
+        ]);
     }
 
     /**
@@ -40,6 +62,7 @@ class PembayaranController extends Controller
         $request['jumlah_dibayar'] =
             currencyIDRToNumeric($request->jumlah_dibayar);
 
+
         $validateData = $request->validate([
             'tagihan_id' => 'required',
             'jumlah_dibayar' => 'required',
@@ -54,13 +77,14 @@ class PembayaranController extends Controller
         }
 
         $tagihan = Tagihan::findOrFail($validateData['tagihan_id']);
-        if ($validateData['jumlah_dibayar'] >= $tagihan->tagihanDetails->sum('nominal_biaya')) {
-            $tagihan->status = 'lunas';
+        if (intval($validateData['jumlah_dibayar']) >= $tagihan->tagihanDetails->sum('nominal_biaya')) {
+            Tagihan::where('id', $validateData['tagihan_id'])->update(array('status' => 'lunas'));
         } else {
-            $tagihan->status = 'angsur';
+            Tagihan::where('id', $validateData['tagihan_id'])->update(array('status' => 'angsur'));
         }
-        $tagihan->save();
+
         Pembayaran::create($validateData);
+
         Alert::success('Success', 'Berhasil Menambah Data Pembayaran !!');
         return back();
     }

@@ -22,7 +22,6 @@ class KelasController extends Controller
         if (strlen($request->angkatan)) {
             $kelasList = Kelas::where('angkatan', '=', "$request->angkatan")
                 ->paginate(6);
-            $filter = Kelas::paginate(6);
             $waliKelasList = DB::table('kelas')->join('pegawai', 'kelas.nip_wali_kelas', '=', 'pegawai.nip_wali_kelas')->select('pegawai.*', 'pegawai.nip_wali_kelas')->get();
             $konsentrasiList = Kelas::with('konsentrasi')->get();
         } else if (strlen($katakunci)) {
@@ -34,19 +33,16 @@ class KelasController extends Controller
                 ->paginate(3);
             $waliKelasList = DB::table('kelas')->join('pegawai', 'kelas.nip_wali_kelas', '=', 'pegawai.nip_wali_kelas')->select('pegawai.*', 'pegawai.nip_wali_kelas')->get();
             $konsentrasiList = Kelas::with('konsentrasi')->get();
-            $filter = Kelas::paginate(6);
         } else {
             $kelasList = Kelas::paginate(3);
             $waliKelasList = DB::table('kelas')->join('pegawai', 'kelas.nip_wali_kelas', '=', 'pegawai.nip_wali_kelas')->select('pegawai.*', 'pegawai.nip_wali_kelas')->get();
             $konsentrasiList = DB::table('kelas')->join('konsentrasi_keahlian', 'kelas.id_kk', '=', 'konsentrasi_keahlian.id_kk')->select('konsentrasi_keahlian.*', 'konsentrasi_keahlian.id_kk', 'konsentrasi_keahlian.konsentrasi_keahlian')->get();
-            $filter = Kelas::paginate(6);
         }
 
         return view('/manajemen_siswa.kelas.kelas_data', [
             'title' => 'Kelas',
             'active' => 'kelas',
             'active1' => 'siswa',
-            'filter' => $filter,
             'dataList' => $kelasList,
             'waliKelasList' => $waliKelasList,
             'konsentrasiList' => $konsentrasiList,

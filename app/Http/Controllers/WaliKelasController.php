@@ -81,6 +81,8 @@ class WaliKelasController extends Controller
             'nip_wali_kelas' => 'required|max:18|min:18|unique:pegawai',
             'nama_wali_kelas' => 'required|max:60|min:2',
             'jk' => 'required',
+            'jabatan' => 'required',
+            'status_pegawai' => 'required',
             'foto' => 'image|file|max:1024',
         ]);
 
@@ -145,6 +147,8 @@ class WaliKelasController extends Controller
             'nip_wali_kelas' => 'required|max:18|min:18|unique:pegawai,nip_wali_kelas,' . $id . ',nip_wali_kelas',
             'nama_wali_kelas' => 'required|max:60',
             'jk' => 'required',
+            'jabatan' => 'required',
+            'status_pegawai' => 'required',
             'foto' => 'image|file|max:1024',
         ]);
 

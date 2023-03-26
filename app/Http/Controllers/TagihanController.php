@@ -8,6 +8,7 @@ use App\Models\Biaya;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use App\Models\Tagihan;
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use App\Models\TagihanDetails;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -23,11 +24,11 @@ class TagihanController extends Controller
     {
         $katakunci = $request->katakunci;
         if (strlen($katakunci)) {
-            $sppList = Tagihan::where('nama_biaya', 'like', "%$katakunci%")
+            $tagihanList = Tagihan::where('nama_biaya', 'like', "%$katakunci%")
                 ->orWhere('nominal', 'like', "%$katakunci%")
                 ->paginate(3);
         } else {
-            $sppList = Tagihan::paginate(6);
+            $tagihanList = Tagihan::paginate(6);
         }
 
 
@@ -35,7 +36,7 @@ class TagihanController extends Controller
             'title' => 'tagihan',
             'active' => 'tagihan',
             'active1' => 'pembayaran',
-            'dataList' => $sppList,
+            'dataList' => $tagihanList,
         ]);
     }
 
@@ -122,6 +123,7 @@ class TagihanController extends Controller
         $waliList = User::with('siswa')->get();
         $kelasList = Kelas::with('siswa', 'WaliKelas')->get();
         $tagihan =  Tagihan::with('tagihanDetails')->where('nisn', $id)->get();
+        $pembayaran = Pembayaran::get();
         foreach ($tagihan as $item) {
             $tagihanDetails = $item->tagihanDetails;
         }
@@ -135,6 +137,7 @@ class TagihanController extends Controller
             'kelasList' => $kelasList,
             'tagihanList' => $tagihan,
             'tagihanDetailList' => $tagihanDetails,
+            'pembayaranList' => $pembayaran,
             'showTab' => 'tagihan',
         ]);
     }
@@ -168,8 +171,10 @@ class TagihanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        TagihanDetails::where('id', $request['id_details'])->delete();
+        Alert::success('Success', 'Berhasil Menghapus Data Tagihan Siswa !!');
+        return back();
     }
 }

@@ -13,7 +13,7 @@
                     {{-- Breadcrumb --}}
                     <div class="col-md-3 col-sm-4 text-center items-center mt-2 ">
                         <div class="breadcrumb-item d-inline active"><a href="/dashboard">Dashboard</a></div>
-                        <div class="breadcrumb-item d-inline">List Tagihan</div>
+                        <div class="breadcrumb-item d-inline">List Pembayaran</div>
                     </div>
                     {{-- Akhir Breadcrumb --}}
                 </div>
@@ -25,11 +25,11 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="col-lg-11 col-sm">
-                            <h4 class="text-primary">List Tagihan</h4>
+                            <h4 class="text-primary">List Pembayaran</h4>
                         </div>
                         <div class="col-lg-1 col-sm d-flex justify-content-end">
                             {{-- Button Tambah Data --}}
-                            <a href="/tagihan/create" class="text-white">
+                            <a href="/pembayaran/create" class="text-white">
                                 <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
                                     title="Tambah Data" data-original-title="Tambah Data">
                                     <i class="fa fa-plus-circle btn-tambah-data"></i>
@@ -42,7 +42,7 @@
                     <div class="card-body">
                         <!-- FORM PENCARIAN -->
                         <div class="">
-                            <form class="" action="/tagihan" method="get">
+                            <form class="" action="/pembayaran" method="get">
                                 <div class="input-group input-group mb-3 float-right" style="width: 350px;">
                                     <input type="search" name="katakunci" class="form-control float-right"
                                         placeholder="Masukkan Kata Kunci" value="{{ Request::get('katakunci') }}"
@@ -60,13 +60,15 @@
                         </div>
                         {{-- Akhir Form Pencarian --}}
                         <div class="table-responsive">
-                            <table class="table table-bordered table-md">
+                            <table class="table table-bordered table-striped table-md">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Nama Biaya</th>
-                                        <th>Nominal/Jumlah</th>
-                                        <th>Dibuat</th>
+                                        <th>Nama Siswa & NISN</th>
+                                        <th>Kelas Siswa</th>
+                                        <th>Jumlah Dibayar</th>
+                                        <th>Tanggal Dibayar</th>
+                                        <th>Status Konfirmasi</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -74,16 +76,36 @@
                                     @foreach ($dataList as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td class="capitalize"><a class="text-dark" href="/tagihan/{{ $data->id }}"
-                                                    title="klik Untuk Detailnya">
-                                                    {{ $data->nama_Tagihan }}</a></td>
-                                            <td>{{ currency_IDR($data->nominal) }}</td>
-                                            <td class="capitalize">
-                                                @if ($data->user_id == $data->user->id)
-                                                    {{ $data->user->name }} | {{ $data->user->level }}
+                                            @foreach ($tagihanList as $item)
+                                                @if ($data->tagihan->nisn == $item->siswa->nisn)
+                                                    <td class="capitalize"><a class="text-dark"
+                                                            href="/pembayaran/{{ $data->tagihan->nisn }}"
+                                                            title="klik Untuk Detailnya">{{ $item->siswa->nama }} |
+                                                            {{ $data->tagihan->nisn }}</a></td>
                                                 @endif
+                                            @endforeach
+                                            @foreach ($kelasList as $itemKelas)
+                                                @if ($data->tagihan->kelas_id == $itemKelas->kelas_id)
+                                                    <td>{{ $itemKelas->kelas }}</td>
+                                                @endif
+                                            @endforeach
+                                            <td>{{ currency_IDR($data->jumlah_dibayar) }}</td>
+                                            <td>{{ $data->tanggal_bayar->translatedFormat('d-F-Y | g:i:s') }}</td>
+                                            @if ($data->status_konfirmasi == 'sudah')
+                                                <td class="text-center">
+                                                    <div class="badge badge-success "><i class="bi bi-hand-thumbs-up-fill">
+                                                            Sudah</i>
+                                                    </div>
+                                                </td>
+                                            @else
+                                                <td class="text-center">
+                                                    <div class="badge badge-danger "><i
+                                                            class="bi bi-hand-thumbs-down">Belum</i>
+                                                    </div>
+                                                </td>
+                                            @endif
+                                            {{-- Tombol Action --}}
                                             <td>
-                                                {{-- Tombol Action --}}
                                                 <div class="dropdown d-inline">
                                                     <button class="btn btn-primary dropdown-toggle" type="button"
                                                         id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
@@ -92,13 +114,14 @@
                                                     </button>
                                                     <div class="dropdown-menu ">
                                                         <a class="dropdown-item has-icon text-info"
-                                                            href="/tagihan/{{ $data->id }}"><i class="far bi-eye"></i>
+                                                            href="/pembayaran/{{ $data->id }}"><i
+                                                                class="far bi-eye"></i>
                                                             Detail</a>
                                                         <a class="dropdown-item has-icon text-warning"
-                                                            href="/tagihan/{{ $data->id }}/edit"><i
+                                                            href="/pembayaran/{{ $data->id }}/edit"><i
                                                                 class="far bi-pencil-square"></i>
                                                             Edit</a>
-                                                        <form action="/tagihan/{{ $data->id }}" method="post">
+                                                        <form action="/pembayaran/{{ $data->id }}" method="post">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"
@@ -109,7 +132,8 @@
                                                         </form>
                                                     </div>
                                                 </div>
-                                                {{-- Tombol Action --}}
+                                            </td>
+                                            {{-- Tombol Action --}}
                                             </td>
                                     @endforeach
                                 </tbody>

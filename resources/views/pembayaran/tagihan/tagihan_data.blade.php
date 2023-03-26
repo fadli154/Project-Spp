@@ -82,7 +82,24 @@
                                             <td>{{ $data->tanggal_tagihan->translatedFormat('d-F-Y') }}</td>
                                             <td class="capitalize">
                                                 {{ currency_IDR($data->tagihanDetails->sum('nominal_biaya')) }}</td>
-                                            <td class="capitalize">{{ $data->status }}</td>
+                                            @if ($data->status == 'lunas')
+                                                <td class="text-center">
+                                                    <div class="badge badge-success "><i class="bi bi-patch-check-fill">
+                                                            Lunas</i>
+                                                </td>
+                                            @elseif ($data->status == 'angsur')
+                                                <td class="text-center">
+                                                    <div class="badge badge-warning "><i
+                                                            class="bi bi-patch-exclamation-fill"> Angsur</i>
+                                                    </div>
+                                                </td>
+                                            @else
+                                                <td class="text-center">
+                                                    <div class="badge badge-primary "><i class="bi bi-patch-minus-fill">
+                                                            Baru</i>
+                                                    </div>
+                                                </td>
+                                            @endif
                                             <td class="capitalize">
                                                 @if ($data->user_id == $data->user->id)
                                                     {{ $data->user->name }} | {{ $data->user->level }}
