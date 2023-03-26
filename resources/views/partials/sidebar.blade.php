@@ -49,7 +49,7 @@
                     <span>Pembayaran</span></a>
                 <ul class="dropdown-menu">
                     <li class=""><a class="nav-link ml-2 {{ $active === 'biaya' ? 'text-info' : '' }}"
-                            href="/biaya">Data Biaya</a>
+                            href="/biaya">Jenis Pembayaran </a>
                     </li>
                     <li class=""><a class="nav-link ml-2 {{ $active === 'tagihan' ? 'text-info' : '' }}"
                             href="/tagihan">Data Tagihan</a>

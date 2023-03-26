@@ -13,8 +13,8 @@
                     {{-- Breadcrumb --}}
                     <div class="col-md-6 col-sm-4 text-center items-center mt-2 ">
                         <div class="breadcrumb-item d-inline active capitalize"><a href="/dashboard">Dashboard</a></div>
-                        <div class="breadcrumb-item d-inline active capitalize"><a href="/biaya">List Biaya</a></div>
-                        <div class="breadcrumb-item d-inline capitalize">Detail Biaya</div>
+                        <div class="breadcrumb-item d-inline active capitalize"><a href="/biaya">Jenis Pembayaran</a></div>
+                        <div class="breadcrumb-item d-inline capitalize">Detail Jenis Pembayaran</div>
                     </div>
                     {{-- Akhir Breadcrumb --}}
                 </div>
@@ -34,7 +34,7 @@
                                         </a>
                                     </div>
                                     <div class="col">
-                                        <h4 class="text-primary capitalize">Detail Biaya</h4>
+                                        <h4 class="text-primary capitalize">Detail Jenis Pembayaran</h4>
                                     </div>
                                 </div>
                             </div>

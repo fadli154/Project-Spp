@@ -13,7 +13,7 @@
                     {{-- Breadcrumb --}}
                     <div class="col-md-5 col-sm-4 text-center items-center mt-2 ">
                         <div class="breadcrumb-item d-inline active capitalize"><a href="/dashboard">Dashboard</a></div>
-                        <div class="breadcrumb-item d-inline active capitalize"><a href="/biaya">List Biaya</a></div>
+                        <div class="breadcrumb-item d-inline active capitalize"><a href="/biaya">Jenis Pembayaran</a></div>
                         <div class="breadcrumb-item d-inline capitalize">Tambah Data</div>
                     </div>
                     {{-- Akhir Breadcrumb --}}
