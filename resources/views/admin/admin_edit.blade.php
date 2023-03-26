@@ -72,9 +72,11 @@
                                                             placeholder="Masukkan Nama Lengkap" value="{{ $data->name }}"
                                                             id="name" name="name">
                                                     </div>
-                                                    @error('name')
-                                                        {{ $message }}
-                                                    @enderror
+                                                    <span class="text-danger">
+                                                        @error('name')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="username">Username : </label>
@@ -89,9 +91,11 @@
                                                             placeholder="Masukkan Username" value="{{ $data->username }}"
                                                             id="username" name="username">
                                                     </div>
-                                                    @error('username')
-                                                        {{ $message }}
-                                                    @enderror
+                                                    <span class="text-danger">
+                                                        @error('username')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -108,9 +112,11 @@
                                                             placeholder="contoh154@gmail.com" value="{{ $data->email }}"
                                                             id="email" name="email">
                                                     </div>
-                                                    @error('email')
-                                                        {{ $message }}
-                                                    @enderror
+                                                    <span class="text-danger">
+                                                        @error('email')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="no_telp">Nomor Telepon : </label>
@@ -125,9 +131,11 @@
                                                             placeholder="Masukkan Nomor Telepon"
                                                             value="{{ $data->no_telp }}" id="no_telp" name="no_telp">
                                                     </div>
-                                                    @error('no_telp')
-                                                        {{ $message }}
-                                                    @enderror
+                                                    <span class="text-danger">
+                                                        @error('no_telp')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -146,14 +154,19 @@
                                                     <option value="wali">wali</option>
                                                 </select>
                                             </div>
-                                            @error('level')
-                                                {{ $message }}
-                                            @enderror
+                                            <span class="text-danger">
+                                                @error('level')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="foto">Ubah Foto : </label>
+                                    <small class="d-block">Catatan : Masukkan Foto dengan Format(png, jpg, jpeg), maksimal
+                                        1
+                                        mb</small>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text bg-secondary">
@@ -170,9 +183,11 @@
                                         <input type="file" class="custom-file-input ">
                                         <img class="img-preview img-fluid mt-2 col-sm-2">
                                     </div>
-                                    @error('foto')
-                                        {{ $message }}
-                                    @enderror
+                                    <span class="text-danger">
+                                        @error('foto')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">
                                     <div class="mr-2">

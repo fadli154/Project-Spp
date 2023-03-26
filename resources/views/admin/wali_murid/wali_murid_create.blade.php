@@ -53,9 +53,11 @@
                                                 placeholder="Masukkan Nama Lengkap" value="{{ old('name') }}"
                                                 id="name" name="name">
                                         </div>
-                                        @error('name')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('name')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <label class="capitalize" for="username">Masukkan Username : </label>
@@ -70,9 +72,11 @@
                                                 placeholder="Masukkan Username" value="{{ old('username') }}" id="username"
                                                 name="username">
                                         </div>
-                                        @error('username')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('username')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <label class="capitalize" for="level">Pilih Level : </label>
@@ -89,9 +93,11 @@
                                                 <option value="wali" selected>Wali Murid</option>
                                             </select>
                                         </div>
-                                        @error('level')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('level')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -107,9 +113,11 @@
                                                 placeholder="contoh154@gmail.com" value="{{ old('email') }}" id="email"
                                                 name="email">
                                         </div>
-                                        @error('email')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('email')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <label class="capitalize" for="no_telp">Masukkan Nomor Telepon : </label>
@@ -124,9 +132,11 @@
                                                 placeholder="Masukkan Nomor Telepon" value="{{ old('no_telp') }}"
                                                 id="no_telp" name="no_telp">
                                         </div>
-                                        @error('no_telp')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('no_telp')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <label class="capitalize" for="password">Masukkan Password : </label>
@@ -141,14 +151,18 @@
                                                 placeholder="Masukkan Password" value="{{ old('password') }}"
                                                 id="password" name="password">
                                         </div>
-                                        @error('password')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('password')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="capitalize" for="foto">Masukkan Foto : </label>
+                                <small class="d-block">Catatan : Masukkan Foto dengan Format(png, jpg, jpeg), maksimal 1
+                                    mb</small>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -165,9 +179,11 @@
                                     <input type="file" class="custom-file-input ">
                                     <img class="img-preview img-preview-create img-fluid mt-2 col-sm-2">
                                 </div>
-                                @error('foto')
-                                    {{ $message }}
-                                @enderror
+                                <span class="text-danger">
+                                    @error('foto')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                             <div class="col-12 d-flex justify-content-end">
                                 <div class="mr-2">

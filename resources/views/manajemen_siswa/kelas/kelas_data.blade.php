@@ -20,61 +20,6 @@
             </div>
         </div>
 
-        {{-- Filter --}}
-        <div class="card">
-            <div class="card-header">
-                <div class="col-lg-11 col-sm">
-                    <h5 class="text-info">Filter</h5>
-                </div>
-                <div class="col-lg-1 col-sm d-flex justify-content-end">
-                    {{-- Button Triger Filter --}}
-                    <button class="btn btn-info collapsed" type="button" data-toggle="collapse"
-                        data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
-                        title="Tombol Filter">
-                        <i class="bi bi-funnel-fill btn-tambah-data"></i>
-                    </button>
-                    {{-- Akhir Button Triger Filter --}}
-                </div>
-            </div>
-            <div class="collapse" id="collapseExample" style="">
-                <div class="p-4">
-                    <form class="" action="/kelas" method="get">
-                        <div class="row">
-                            <div class="col form-group">
-                                <label class="capitalize" for="angkatan">Filter Angkatan : </label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="bi bi-calendar-event-fill"></i>
-                                        </div>
-                                    </div>
-                                    <select class="form-control" name="angkatan" id="angkatan">
-                                        <option value="" selected>Semua Angkatan</option>
-                                        @foreach ($filter as $data)
-                                            <option value="{{ $data->angkatan }}">
-                                                {{ $data->angkatan }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                @error('angkatan')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-success mr-2 mb-1 " title="Filter">
-                                <i class="bi bi-funnel mr-1 "></i><span class="bi-text mr-2">Filter Data</span></button>
-                            <a type="reset" href="/kelas" class="btn btn-secondary mb-1" title="Reset">
-                                <i class="bi bi-arrow-clockwise mr-1"></i><span class="bi-text mr-2">Reset
-                                    Filter</span></a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        {{-- Filter --}}
-
         <div class="section-body">
             <div class="">
                 <div class="card">

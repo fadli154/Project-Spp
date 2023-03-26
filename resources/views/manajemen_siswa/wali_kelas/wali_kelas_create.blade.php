@@ -54,9 +54,11 @@
                                                 placeholder="Masukkan Nama Wali Kelas" value="{{ old('nama_wali_kelas') }}"
                                                 id="nama_wali_kelas" name="nama_wali_kelas">
                                         </div>
-                                        @error('nama_wali_kelas')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('nama_wali_kelas')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <label class="capitalize" for="nip_wali_kelas">Masukkan NIP Wali Kelas : </label>
@@ -71,9 +73,11 @@
                                                 placeholder="Masukkan NIP Wali Kelas" value="{{ old('nip_wali_kelas') }}"
                                                 id="nip_wali_kelas" name="nip_wali_kelas">
                                         </div>
-                                        @error('nip_wali_kelas')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('nip_wali_kelas')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -85,15 +89,20 @@
                                                     <i class="fa fa-user-plus"></i>
                                                 </div>
                                             </div>
-                                            <select class="form-control" id="jabatan" name="jabatan">
+                                            <select class="form-control @error('jabatan') is-invalid @enderror"
+                                                id="jabatan" name="jabatan">
                                                 <option selected disabled>Pilih Jabatan</option>
-                                                <option value="TP">Tenaga Pendidik</option>
-                                                <option value="TK">Tenaga Kependidikan</option>
+                                                <option value="TP" {{ old('tahun_program') == 'TP' ? 'selected' : '' }}>
+                                                    Tenaga Pendidik</option>
+                                                <option value="TK" {{ old('tahun_program') == 'TK' ? 'selected' : '' }}>
+                                                    Tenaga Kependidikan</option>
                                             </select>
                                         </div>
-                                        @error('jabatan')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('jabatan')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <label class="capitalize" for="status_pegawai">Pilih Status Pegawai : </label>
@@ -103,15 +112,20 @@
                                                     <i class="fa fa-list"></i>
                                                 </div>
                                             </div>
-                                            <select class="form-control" id="status_pegawai" name="status_pegawai">
+                                            <select class="form-control @error('status_pegawai') is-invalid @enderror"
+                                                id="status_pegawai" name="status_pegawai">
                                                 <option selected disabled>Pilih Status Pegawai</option>
-                                                <option value="0">Aktif</option>
-                                                <option value="1">Tidak Aktif</option>
+                                                <option value="0" {{ old('tahun_program') == '0' ? 'selected' : '' }}>
+                                                    Tidak Aktif</option>
+                                                <option value="1" {{ old('tahun_program') == '1' ? 'selected' : '' }}>
+                                                    Aktif</option>
                                             </select>
                                         </div>
-                                        @error('status_pegawai')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('status_pegawai')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -123,18 +137,25 @@
                                             <i class="fa fa-venus-mars"></i>
                                         </div>
                                     </div>
-                                    <select class="form-control" id="jk" name="jk">
-                                        <option selected>Pilih Jenis Kelamin</option>
-                                        <option value="L">Laki Laki</option>
-                                        <option value="P">Perempuan</option>
+                                    <select class="form-control @error('jk') is-invalid @enderror" id="jk"
+                                        name="jk">
+                                        <option selected disabled>Pilih Jenis Kelamin</option>
+                                        <option value="L" {{ old('tahun_program') == 'L' ? 'selected' : '' }}>
+                                            Laki-Laki</option>
+                                        <option value="P" {{ old('tahun_program') == 'P' ? 'selected' : '' }}>
+                                            Perempuan</option>
                                     </select>
                                 </div>
-                                @error('jk')
-                                    {{ $message }}
-                                @enderror
+                                <span class="text-danger">
+                                    @error('jk')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label class="capitalize" for="foto">Masukkan Foto : </label>
+                                <small class="d-block">Catatan : Masukkan Foto dengan Format(png, jpg, jpeg), maksimal 1
+                                    mb</small>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -142,17 +163,20 @@
                                         </div>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input @error('foto') is-invalid @enderror"
-                                            id="foto" name="foto" onchange="previewImage()">
+                                        <input type="file"
+                                            class="custom-file-input @error('foto') is-invalid @enderror" id="foto"
+                                            name="foto" onchange="previewImage()">
                                         <label class="custom-file-label" class="capitalize" for="foto">Pilih
                                             Foto</label>
                                     </div>
                                     <input type="file" class="custom-file-input ">
                                     <img class="img-preview img-preview-create img-fluid mt-2 col-sm-2">
                                 </div>
-                                @error('foto')
-                                    {{ $message }}
-                                @enderror
+                                <span class="text-danger">
+                                    @error('foto')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                             <div class="col-12 d-flex justify-content-end">
                                 <div class="mr-2">

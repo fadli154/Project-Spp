@@ -53,9 +53,11 @@
                                                 placeholder="Masukkan Nama Siswa" value="{{ old('nama') }}" id="nama"
                                                 name="nama">
                                         </div>
-                                        @error('nama')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('nama')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <label class="capitalize" for="nisn">Masukkan NISN Siswa : </label>
@@ -69,9 +71,11 @@
                                                 placeholder="Masukkan NIP Siswa" value="{{ old('nisn') }}" id="nisn"
                                                 name="nisn">
                                         </div>
-                                        @error('nisn')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('nisn')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <label class="capitalize" for="nik">Masukkan NIK Siswa : </label>
@@ -85,9 +89,11 @@
                                                 placeholder="Masukkan NIP Siswa" value="{{ old('nik') }}" id="nik"
                                                 name="nik">
                                         </div>
-                                        @error('nik')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('nik')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -109,9 +115,11 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        @error('wali_id')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('wali_id')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <label class="capitalize" for="kelas_id">Pilih Kelas : </label>
@@ -132,9 +140,11 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        @error('kelas_id')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('kelas_id')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <label class="capitalize" for="jk">Pilih Jenis Kelamin : </label>
@@ -144,17 +154,20 @@
                                                     <i class="fa fa-venus-mars"></i>
                                                 </div>
                                             </div>
-                                            <select class="form-control" id="jk" name="jk">
-                                                <option selected>Pilih Jenis Kelamin</option>
+                                            <select class="form-control  @error('jk') is-invalid @enderror "
+                                                id="jk" name="jk">
+                                                <option selected disabled>Pilih Jenis Kelamin</option>
                                                 <option value="L" {{ old('jk') == 'L' ? 'selected' : '' }}>
                                                     Laki Laki</option>
                                                 <option value="P" {{ old('jk') == 'P' ? 'selected' : '' }}>
                                                     Perempuan</option>
                                             </select>
                                         </div>
-                                        @error('jk')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('jk')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -170,12 +183,16 @@
                                         placeholder="Masukkan Tempat Lahir Siswa" value="{{ old('tempat_lahir') }}"
                                         id="tempat_lahir" name="tempat_lahir">
                                 </div>
-                                @error('tempat_lahir')
-                                    {{ $message }}
-                                @enderror
+                                <span class="text-danger">
+                                    @error('tempat_lahir')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label class="capitalize" for="foto">Masukkan Foto : </label>
+                                <small class="d-block">Catatan : Masukkan Foto dengan Format(png, jpg, jpeg), maksimal 1
+                                    mb</small>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -192,9 +209,11 @@
                                     <input type="file" class="custom-file-input ">
                                     <img class="img-preview img-preview-create img-fluid mt-2 col-sm-2">
                                 </div>
-                                @error('foto')
-                                    {{ $message }}
-                                @enderror
+                                <span class="text-danger">
+                                    @error('foto')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                             <input type="hidden" name="status" value="1">
                             <div class="col-12 d-flex justify-content-end">

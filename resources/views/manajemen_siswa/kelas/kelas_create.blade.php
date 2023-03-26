@@ -54,9 +54,11 @@
                                                 placeholder="Contoh : XIRPL2022" value="{{ old('kelas_id') }}"
                                                 id="kelas_id" name="kelas_id">
                                         </div>
-                                        @error('kelas_id')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('kelas_id')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <label class="capitalize" for="kelas">Masukkan Nama Kelas : </label>
@@ -70,9 +72,11 @@
                                                 placeholder="Contoh : Rekayasa Perangkat Lunak" value="{{ old('kelas') }}"
                                                 id="kelas" name="kelas">
                                         </div>
-                                        @error('kelas')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('kelas')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="col">
@@ -89,9 +93,11 @@
                                                 placeholder="Contoh : 2022" value="{{ old('angkatan') }}" id="angkatan"
                                                 name="angkatan">
                                         </div>
-                                        @error('angkatan')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('angkatan')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <label class="capitalize" for="id_kk">Pilih Konsentrasi Keahlian : </label>
@@ -105,14 +111,18 @@
                                                 id="id_kk" name="id_kk">
                                                 <option disabled selected>Pilih Konsentrasi Keahlian</option>
                                                 @foreach ($konsentrasiList as $data)
-                                                    <option value="{{ $data->id_kk }}">{{ $data->konsentrasi_keahlian }}
+                                                    <option value="{{ $data->id_kk }}"
+                                                        {{ old('id_kk') == $data->id_kk ? 'selected' : '' }}>
+                                                        {{ $data->konsentrasi_keahlian }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        @error('id_kk')
-                                            {{ $message }}
-                                        @enderror
+                                        <span class="text-danger">
+                                            @error('id_kk')
+                                                {{ $message }}
+                                            @enderror
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -128,17 +138,23 @@
                                         id="nip_wali_kelas select2" name="nip_wali_kelas">
                                         <option disabled selected>Pilih Wali Kelas</option>
                                         @foreach ($waliKelasList as $data)
-                                            <option value="{{ $data->nip_wali_kelas }}">{{ $data->nama_wali_kelas }}
+                                            <option value="{{ $data->nip_wali_kelas }}"
+                                                {{ old('nip_wali_kelas') == $data->nip_wali_kelas ? 'selected' : '' }}>
+                                                {{ $data->nama_wali_kelas }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
-                                @error('nip_wali_kelas')
-                                    {{ $message }}
-                                @enderror
+                                <span class="text-danger">
+                                    @error('nip_wali_kelas')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label class="capitalize" for="foto">Masukkan Foto : </label>
+                                <small class="d-block">Catatan : Masukkan Foto dengan Format(png, jpg, jpeg), maksimal 1
+                                    mb</small>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -146,17 +162,20 @@
                                         </div>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input @error('foto') is-invalid @enderror"
-                                            id="foto" name="foto" onchange="previewImage()">
+                                        <input type="file"
+                                            class="custom-file-input @error('foto') is-invalid @enderror" id="foto"
+                                            name="foto" onchange="previewImage()">
                                         <label class="custom-file-label" class="capitalize" for="foto">Pilih
                                             Foto</label>
                                     </div>
                                     <input type="file" class="custom-file-input ">
                                     <img class="img-preview img-preview-kelas img-fluid mt-2 col-sm-2">
                                 </div>
-                                @error('foto')
-                                    {{ $message }}
-                                @enderror
+                                <span class="text-danger">
+                                    @error('foto')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                             <div class="col-12 d-flex justify-content-end">
                                 <div class="mr-2">

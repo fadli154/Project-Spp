@@ -73,9 +73,11 @@
                                                             placeholder="Masukkan kelas_id" value="{{ $data->kelas_id }}"
                                                             id="kelas_id" name="kelas_id">
                                                     </div>
-                                                    @error('kelas_id')
-                                                        {{ $message }}
-                                                    @enderror
+                                                    <span class="text-danger">
+                                                        @error('kelas_id')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="capitalize" for="angkatan">Angkatan : </label>
@@ -90,9 +92,11 @@
                                                             placeholder="Masukkan angkatan" value="{{ $data->angkatan }}"
                                                             id="angkatan" name="angkatan">
                                                     </div>
-                                                    @error('angkatan')
-                                                        {{ $message }}
-                                                    @enderror
+                                                    <span class="text-danger">
+                                                        @error('angkatan')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -109,9 +113,11 @@
                                                             placeholder="Masukkan kelas" value="{{ $data->kelas }}"
                                                             id="kelas" name="kelas">
                                                     </div>
-                                                    @error('kelas')
-                                                        {{ $message }}
-                                                    @enderror
+                                                    <span class="text-danger">
+                                                        @error('kelas')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="capitalize" for="id_kk">Konsentrasi Keahlian : </label>
@@ -130,9 +136,11 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                    @error('id_kk')
-                                                        {{ $message }}
-                                                    @enderror
+                                                    <span class="text-danger">
+                                                        @error('id_kk')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -154,14 +162,19 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            @error('nip_wali_kelas')
-                                                {{ $message }}
-                                            @enderror
+                                            <span class="text-danger">
+                                                @error('nip_wali_kelas')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="capitalize" for="foto">Ubah Foto : </label>
+                                    <small class="d-block">Catatan : Masukkan Foto dengan Format(png, jpg, jpeg), maksimal
+                                        1
+                                        mb</small>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text bg-secondary">
@@ -179,9 +192,11 @@
                                         <input type="file" class="custom-file-input ">
                                         <img class="img-preview img-fluid mt-2 col-sm-2">
                                     </div>
-                                    @error('foto')
-                                        {{ $message }}
-                                    @enderror
+                                    <span class="text-danger">
+                                        @error('foto')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">
                                     <div class="mr-2">

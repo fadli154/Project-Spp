@@ -278,19 +278,18 @@
                                                             <th>No</th>
                                                             <th>Nama Biaya/Tagihan</th>
                                                             <th>Nominal</th>
-                                                            <th>Status</th>
                                                             <th>Aksi</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        @foreach ($tagihanList as $item)
-                                                            @foreach ($tagihanDetailList as $data)
+                                                    @foreach ($tagihanList as $item)
+                                                        @foreach ($tagihanDetailList as $data)
+                                                            <tbody>
                                                                 <tr>
                                                                     <td>{{ $loop->iteration }}</td>
                                                                     <td class="capitalize">
                                                                         {{ $data->nama_biaya }}</td>
-                                                                    <td>{{ currency_IDR($data->nominal_biaya) }}</td>
-                                                                    <td>{{ $item->status }}</td>
+                                                                    <td class="text-center">
+                                                                        {{ currency_IDR($data->nominal_biaya) }}</td>
                                                                     <td>
                                                                         <form action="/wali-siswa/{{ $item->nisn }}"
                                                                             method="post">
@@ -303,9 +302,66 @@
                                                                         </form>
                                                                     </td>
                                                                 </tr>
-                                                            @endforeach
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td colspan="2"
+                                                                        class="uppercase text-dark font-weight-bold text-center">
+                                                                        Total
+                                                                        Tagihan
+                                                                    </td>
+                                                                    <td
+                                                                        class="uppercase text-dark font-weight-bold d-flex justify-content-center">
+                                                                        {{ currency_IDR($item->tagihanDetails->sum('nominal_biaya')) }}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="2"
+                                                                        class="uppercase text-dark font-weight-bold text-center">
+                                                                        Status
+                                                                        Tagihan
+                                                                    </td>
+                                                                    @if ($item->status == 'lunas')
+                                                                        <td colspan="2"
+                                                                            class="d-flex justify-content-center">
+                                                                            <button type="submit"
+                                                                                class="btn btn-success capitalize justify-content-end"
+                                                                                data-toggle="tooltip" data-placement="top"
+                                                                                title="Status Tagihan"
+                                                                                data-original-title="Status Tagihan">
+                                                                                <i class="bi bi-patch-check-fill">
+                                                                                    {{ $item->status }}</i>
+                                                                            </button>
+                                                                        </td>
+                                                                    @elseif ($item->status == 'angsur')
+                                                                        <td colspan="2"
+                                                                            class="d-flex justify-content-center">
+                                                                            <button type="submit"
+                                                                                class="btn btn-warning capitalize justify-content-end"
+                                                                                data-toggle="tooltip" data-placement="top"
+                                                                                title="Status Tagihan"
+                                                                                data-original-title="Status Tagihan"><i
+                                                                                    class="bi bi-patch-exclamation-fill">
+                                                                                    {{ $item->status }}</i>
+                                                                            </button>
+                                                                        </td>
+                                                                    @else
+                                                                        <td colspan="2"
+                                                                            class="d-flex justify-content-center">
+                                                                            <button type="submit"
+                                                                                class="btn btn-primary capitalize justify-content-end"
+                                                                                data-toggle="tooltip" data-placement="top"
+                                                                                title="Status Tagihan"
+                                                                                data-original-title="Status Tagihan">
+                                                                                <i class="bi bi-patch-minus-fill">
+                                                                                    Baru</i>
+                                                                            </button>
+                                                                        </td>
+                                                                    @endif
+                                                                </tr>
+                                                            </tfoot>
                                                         @endforeach
-                                                    </tbody>
+                                                    @endforeach
                                                 </table>
                                             </div>
                                             <div class="col-5">

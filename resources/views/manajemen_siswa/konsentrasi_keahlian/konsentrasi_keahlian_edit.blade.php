@@ -60,9 +60,11 @@
                                                     placeholder="Contoh : KK0666" value="{{ $data->id_kk }}" id="id_kk"
                                                     name="id_kk">
                                             </div>
-                                            @error('id_kk')
-                                                {{ $message }}
-                                            @enderror
+                                            <span class="text-danger">
+                                                @error('id_kk')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
                                         </div>
                                         <div class="form-group">
                                             <label class="capitalize" for="konsentrasi_keahlian">Konsentrasi Keahlian :
@@ -79,9 +81,11 @@
                                                     value="{{ $data->konsentrasi_keahlian }}" id="konsentrasi_keahlian"
                                                     name="konsentrasi_keahlian">
                                             </div>
-                                            @error('konsentrasi_keahlian')
-                                                {{ $message }}
-                                            @enderror
+                                            <span class="text-danger">
+                                                @error('konsentrasi_keahlian')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
                                         </div>
                                         <div class="form-group">
                                             <label class="capitalize" for="tahun_program">Pilih Tahun Program : </label>
@@ -101,9 +105,11 @@
                                                         4 Tahun</option>
                                                 </select>
                                             </div>
-                                            @error('tahun_program')
-                                                {{ $message }}
-                                            @enderror
+                                            <span class="text-danger">
+                                                @error('tahun_program')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
