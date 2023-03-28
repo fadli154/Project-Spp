@@ -28,6 +28,6 @@ class Siswa extends Model
 
     public function tagihan()
     {
-        return $this->hasMany(tagihan::class, 'kelas_id', 'kelas_id');
+        return $this->hasOne(tagihan::class, 'kelas_id', 'kelas_id');
     }
 }

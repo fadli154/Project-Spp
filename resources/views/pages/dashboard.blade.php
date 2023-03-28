@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="card p-3 shadow-md">
-            <p>Hallo, {{ auth()->user()->level }}</p>
+            <p>Hallo {{ $greeting }} , {{ auth()->user()->level }}</p>
         </div>
     </section>
 @endsection

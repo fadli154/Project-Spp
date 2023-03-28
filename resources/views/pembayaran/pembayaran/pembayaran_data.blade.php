@@ -79,7 +79,7 @@
                                             @foreach ($tagihanList as $item)
                                                 @if ($data->tagihan->nisn == $item->siswa->nisn)
                                                     <td class="capitalize"><a class="text-dark"
-                                                            href="/pembayaran/{{ $data->tagihan->nisn }}"
+                                                            href="/siswa/{{ $data->tagihan->nisn }}"
                                                             title="klik Untuk Detailnya">{{ $item->siswa->nama }} |
                                                             {{ $data->tagihan->nisn }}</a></td>
                                                 @endif
@@ -90,7 +90,7 @@
                                                 @endif
                                             @endforeach
                                             <td>{{ currency_IDR($data->jumlah_dibayar) }}</td>
-                                            <td>{{ $data->tanggal_bayar->translatedFormat('d-F-Y | g:i:s') }}</td>
+                                            <td>{{ $data->updated_at->translatedFormat('d-F-Y | g:i:s') }}</td>
                                             @if ($data->status_konfirmasi == 'sudah')
                                                 <td class="text-center">
                                                     <div class="badge badge-success "><i class="bi bi-hand-thumbs-up-fill">

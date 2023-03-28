@@ -59,6 +59,11 @@
                                         <a class="nav-link" id="tagihan-tab2" data-toggle="tab" href="#tagihan2"
                                             role="tab" aria-controls="tagihan">Tagihan</a>
                                     </li>
+                                    <li class="nav-item {{ $showTab === 'riwayat-pembayaran' ? 'active show' : '' }}">
+                                        <a class="nav-link" id="riwayat-pembayaran-tab2" data-toggle="tab"
+                                            href="#riwayat-pembayaran2" role="tab"
+                                            aria-controls="riwayat-pembayaran">Riwayat Pembayaran</a>
+                                    </li>
                                 </ul>
                                 <div class="tab-content tab-bordered" id="myTab3Content">
                                     <div class="tab-pane fade {{ $showTab === 'profile' ? 'active show' : '' }}"
@@ -263,11 +268,9 @@
                                     </div>
                                     <div class="tab-pane fade {{ $showTab === 'tagihan' ? 'active show' : '' }}"
                                         id="tagihan2" role="tabpanel" aria-labelledby="profile-tab2">
-                                        <h4 class="mt-3 col-12 capitalize">Detail Data Tagihan Siswa |
-                                            ({{ $data->nama }})
-                                        </h4>
                                         <div class="row">
                                             <div class="col-7">
+                                                <h4 class="capitalize">Detail Tagihan Siswa | ({{ $data->nama }})</h4>
                                                 <div class="table-responsive">
                                                     <table
                                                         class="table table-bordered table-success table-striped table-md">
@@ -316,23 +319,142 @@
                                                                         Total
                                                                         Tagihan
                                                                     </td>
-                                                                    <td
-                                                                        class="uppercase text-dark font-weight-bold d-flex justify-content-center">
+                                                                    <td colspan="2"
+                                                                        class="uppercase text-dark font-weight-bold text-center">
                                                                         {{ currency_IDR($item->tagihanDetails->sum('nominal_biaya')) }}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="2"
+                                                                        class="uppercase text-dark font-weight-bold text-center">
+                                                                        Sisa
+                                                                        Tagihan
+                                                                    </td>
+                                                                    <td colspan="2"
+                                                                        class="uppercase text-dark font-weight-bold text-center">
+                                                                        {{ currency_IDR($item->sisa_tagihan) }}
                                                                     </td>
                                                                 </tr>
                                                             </tfoot>
                                                         @endforeach
                                                     </table>
+                                                    @if ($data->keterangan == null)
+                                                        <strong>
+                                                            Keterangan Tagihan : Tidak Ada Keterangan
+                                                        </strong>
+                                                    @else
+                                                        <strong>
+                                                            Keterangan Tagihan : {{ $data->keterangan }}
+                                                        </strong>
+                                                    @endif
                                                 </div>
-                                                <h4>Riwayat Pembayaran Siswa</h4>
+                                            </div>
+                                            <div class="col-5">
+                                                <div class="card" style="border: 2px solid rgb(240, 240, 240)">
+                                                    <div class="card-header">
+                                                        <h6 class="text-center">Form Pembayaran</h6>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <form class="form" method="post" action="/pembayaran"
+                                                            enctype="multipart/form-data">
+                                                            @csrf
+                                                            <div class="form-group">
+                                                                <label class="capitalize" for="jumlah_dibayar">Masukkan
+                                                                    Jumlah/Nominal Yang Dibayar :
+                                                                </label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">
+                                                                            <i class="bi bi-cash"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <input type="text" type-currency="IDR"
+                                                                        class="form-control @error('jumlah_dibayar') is-invalid @enderror"
+                                                                        placeholder="Contoh : Rp. 100.000"
+                                                                        value="{{ old('jumlah_dibayar') }}"
+                                                                        id="jumlah_dibayar" name="jumlah_dibayar">
+                                                                </div>
+                                                                @error('jumlah_dibayar')
+                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="capitalize" for="tanggal_bayar">Masukkan
+                                                                    Tanggal Pembayaran :
+                                                                </label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">
+                                                                            <i class="fa fa-calendar"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <input type="date"
+                                                                        class="form-control @error('tanggal_bayar') is-invalid @enderror"
+                                                                        value="{{ old('tanggal_bayar') ?? date('Y-m-d') }}"
+                                                                        id="tanggal_bayar" name="tanggal_bayar">
+                                                                </div>
+                                                                @error('tanggal_bayar')
+                                                                    {{ $message }}
+                                                                @enderror
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="capitalize" for="bukti_bayar">Masukkan
+                                                                    Foto/Bukti Pembayaran :
+                                                                </label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">
+                                                                            <i class="bi bi-file-earmark-image"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="custom-file">
+                                                                        <input type="file"
+                                                                            class="custom-file-input @error('bukti_bayar') is-invalid @enderror"
+                                                                            id="foto" name="bukti_bayar"
+                                                                            onchange="previewImage()">
+                                                                        <label class="custom-file-label"
+                                                                            class="capitalize" for="bukti_bayar">Pilih
+                                                                            Foto</label>
+                                                                    </div>
+                                                                    <input type="file" class="custom-file-input ">
+                                                                    <img
+                                                                        class="img-preview img-preview-create img-fluid mt-2 col-sm-2">
+                                                                </div>
+                                                                @error('bukti_bayar')
+                                                                    {{ $message }}
+                                                                @enderror
+                                                            </div>
+                                                            @foreach ($tagihanList as $item)
+                                                                <input type="hidden" name="tagihan_id"
+                                                                    value="{{ $item->id }}">
+                                                            @endforeach
+                                                            <input type="hidden" name="user_id"
+                                                                value="{{ auth()->user()->id }}">
+                                                            <button type="submit"
+                                                                class="btn btn-primary justify-content-end"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                title="Konfirmasi Bayar"
+                                                                data-original-title="Konfirmasi Bayar">
+                                                                <i class="fa fa-check"></i> Simpan
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade {{ $showTab === 'riwayat-pembayaran' ? 'active show' : '' }}"
+                                        id="riwayat-pembayaran2" role="tabpanel" aria-labelledby="profile-tab2">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <h4>Riwayat Pembayaran Siswa </h4>
                                                 <div class="table-responsive">
                                                     <table
                                                         class="table table-bordered table-success table-striped table-md">
                                                         <thead>
                                                             <tr>
-                                                                <th>No</th>
-                                                                <th>Tanggal</th>
+                                                                <th class="text-center">Kwitansi</th>
+                                                                <th>Tanggal Pembayaran</th>
                                                                 <th>Jumlah Dibayar</th>
                                                             </tr>
                                                         </thead>
@@ -341,7 +463,20 @@
                                                                 @if ($item->id == $data->tagihan_id)
                                                                     <tbody>
                                                                         <tr>
-                                                                            <td>{{ $loop->iteration }}</td>
+                                                                            <td class="text-center">
+                                                                                <a href="/kwitansi-pembayaran/{{ $data->id }}"
+                                                                                    target="blank" class="text-white">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-primary"
+                                                                                        data-toggle="tooltip"
+                                                                                        data-placement="top"
+                                                                                        title="Kwitansi Pembayaran"
+                                                                                        data-original-title="Kwitansi Pembayaran">
+                                                                                        <i
+                                                                                            class="bi bi-printer-fill btn-tambah-data"></i>
+                                                                                    </button>
+                                                                                </a>
+                                                                            </td>
                                                                             <td class="capitalize">
                                                                                 {{ $data->created_at->format('d-M-Y | g:i:s') }}
                                                                             </td>
@@ -359,10 +494,17 @@
                                                                         Sisa
                                                                         Tagihan
                                                                     </td>
-                                                                    <td
-                                                                        class="uppercase text-dark font-weight-bold d-flex justify-content-center">
-                                                                        {{ currency_IDR($item->tagihanDetails->sum('nominal_biaya') - $data->sum('jumlah_dibayar')) }}
-                                                                    </td>
+                                                                    @if ($data->jumlah_dibayar != null)
+                                                                        <td
+                                                                            class="uppercase text-dark font-weight-bold d-flex justify-content-center">
+                                                                            {{ currency_IDR($item->sisa_tagihan) }}
+                                                                        </td>
+                                                                    @else
+                                                                        <td
+                                                                            class="uppercase text-dark font-weight-bold d-flex justify-content-center">
+                                                                            {{ currency_IDR($item->tagihanDetails->sum('nominal_biaya')) }}
+                                                                        </td>
+                                                                    @endif
                                                                 </tr>
 
                                                                 <tr>

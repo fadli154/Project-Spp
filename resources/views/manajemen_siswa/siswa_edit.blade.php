@@ -88,6 +88,32 @@
                                                     </span>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="kelas_id">Kelas Siswa : </label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text bg-secondary">
+                                                                <i class="bi bi-person-fill"></i>
+                                                            </div>
+                                                        </div>
+                                                        <select class="form-control select2 " id="nip_wali_kelas"
+                                                            name="nip_wali_kelas">
+                                                            <option selected disabled>Pilih Wali Kelas</option>
+                                                            @foreach ($kelasList as $item)
+                                                                <option value="{{ $item->kelas_id }}"
+                                                                    {{ $data->kelas_id === $item->kelas_id ? 'selected' : '' }}>
+                                                                    {{ $item->kelas }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <span class="text-danger">
+                                                        @error('kelas_id')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
                                                     <label for="nisn">NISN Siswa : </label>
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -106,8 +132,25 @@
                                                         @enderror
                                                     </span>
                                                 </div>
-                                            </div>
-                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="nik">NIK Siswa : </label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text bg-secondary">
+                                                                <i class="bi bi-key-fill"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text"
+                                                            class="form-control @error('nik') is-invalid @enderror"
+                                                            placeholder="Masukkan nik List Siswa"
+                                                            value="{{ $data->nik }}" id="nik" name="nik">
+                                                    </div>
+                                                    <span class="text-danger">
+                                                        @error('nik')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
                                                 <div class="form-group">
                                                     <label for="jk">Pilih Jenis Kelamin : </label>
                                                     <div class="input-group">
@@ -152,7 +195,8 @@
                                                     <input type="file"
                                                         class="custom-file-input @error('foto') is-invalid @enderror"
                                                         id="foto" name="foto" onchange="previewImage()">
-                                                    <label class="custom-file-label" for="foto">Pilih Foto Baru</label>
+                                                    <label class="custom-file-label" for="foto">Pilih Foto
+                                                        Baru</label>
                                                     <input type="hidden" name="oldImage" value="{{ $data->foto }}">
                                                 </div>
                                                 <input type="file" class="custom-file-input ">

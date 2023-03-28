@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('tagihan_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tagihan_id')->index();
-            $table->foreign('tagihan_id')->references('id')->on('tagihan');
+            $table->unsignedBigInteger('tagihan_id')->index()->onDelete('cascade');
+            $table->foreign('tagihan_id')->references('id')->on('tagihan')->onDelete('cascade');
+            $table->foreignId('biaya_id')->index();
             // $table->unsignedBigInteger('biaya_id')->index();
             // $table->foreign('biaya_id')->references('id')->on('biaya');
             $table->string('nama_biaya', 20);

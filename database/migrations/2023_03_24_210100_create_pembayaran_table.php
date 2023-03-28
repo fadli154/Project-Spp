@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tagihan_id')->index();
-            $table->foreign('tagihan_id')->references('id')->on('tagihan');
+            $table->unsignedBigInteger('tagihan_id')->index()->onDelete('cascade');
+            $table->foreign('tagihan_id')->references('id')->on('tagihan')->onDelete('cascade');
             $table->foreignId('wali_id')->index();
             $table->enum('status_konfirmasi', ['belum', 'sudah']);
             $table->bigInteger('jumlah_dibayar');

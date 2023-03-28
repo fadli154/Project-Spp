@@ -16,4 +16,9 @@ class Biaya extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function tagihanDetails()
+    {
+        return $this->hasMany(TagihanDetails::class, 'biaya_id', 'id');
+    }
 }

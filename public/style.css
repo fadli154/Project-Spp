@@ -23,6 +23,16 @@
         0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
+/* foto Bukti Pembayaran */
+
+.img-bukti-pembayaran {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgb(202, 202, 202);
+}
+
 /* foto user */
 .foto-user {
     max-width: 250px;
@@ -42,6 +52,18 @@
 
 .uppercase {
     text-transform: uppercase;
+}
+
+/* kwitansi */
+
+.card-kwitansi {
+    margin-top: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid black;
+}
+.title-kwitansi {
+    border-bottom: 1.5px solid black;
 }
 
 /* Button */

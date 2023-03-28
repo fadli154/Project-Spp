@@ -26,9 +26,9 @@ class TagihanController extends Controller
         if (strlen($katakunci)) {
             $tagihanList = Tagihan::where('nama_biaya', 'like', "%$katakunci%")
                 ->orWhere('nominal', 'like', "%$katakunci%")
-                ->paginate(3);
+                ->latest()->paginate(3);
         } else {
-            $tagihanList = Tagihan::paginate(6);
+            $tagihanList = Tagihan::latest()->paginate(6);
         }
 
 
@@ -78,10 +78,18 @@ class TagihanController extends Controller
         $biayaIdArray = $request['biaya_id'];
 
         $siswa = Siswa::with('tagihan')->where('kelas_id', $request['kelas_id'])->get();
+        if (count($siswa) == 0) {
+            Alert::error('Error', 'Data Siswa Tidak ada !!');
+            return redirect('/tagihan');
+        }
 
         foreach ($siswa as $item) {
             $itemSiswa = $item;
             $biaya = Biaya::whereIn('id', $biayaIdArray)->get();
+            foreach ($biaya as $biayaData) {
+                $sisa_tagihan[] = $biayaData->nominal;
+            }
+
             $dataTagihan = [
                 'nisn' => $itemSiswa->nisn,
                 'user_id' => $request['user_id'],
@@ -90,21 +98,34 @@ class TagihanController extends Controller
                 'tanggal_jatuh_tempo' => $request['tanggal_jatuh_tempo'],
                 'keterangan' => $request['keterangan'],
                 'status' => 'baru',
+                'sisa_tagihan' => array_sum($sisa_tagihan),
             ];
+
             $tanggalTagihan = Carbon::parse($request['tanggal_tagihan']);
-            $bulanTagihan = $tanggalTagihan->format('m');
-            $tahunTagihan = $tanggalTagihan->format('Y');
-            $cekTagihan = Tagihan::where('nisn', $itemSiswa->nisn)
+            // $bulanTagihan = $tanggalTagihan->format('m');
+            // $tahunTagihan = $tanggalTagihan->format('Y');
+            $cekTagihan = TagihanDetails::with('tagihan')->where('biaya_id', $biayaIdArray)
                 ->first();
-            if ($cekTagihan == null) {
+            $cekSiswa = Tagihan::has('siswa')->where('nisn', $itemSiswa->nisn)->first();
+            // $cekKelas = Tagihan::has('kelas')->where('kelas_id', $request['kelas_id'])->first();
+
+            if ($cekTagihan == null && $cekSiswa == null) {
                 $tagihan = Tagihan::create($dataTagihan);
+                // $sisa_tagihan[] = 0;
                 foreach ($biaya as $itemBiaya) {
                     $detail = TagihanDetails::create([
                         'tagihan_id' => $tagihan->id,
+                        'biaya_id' => $itemBiaya->id,
                         'nama_biaya' => $itemBiaya->nama_biaya,
                         'nominal_biaya' => $itemBiaya->nominal,
                     ]);
+                    for ($i = 0; $i < count($sisa_tagihan); $i++) {
+                        $sisa_tagihan = [$i => 0];
+                    }
                 }
+            } else {
+                Alert::error('Error', 'Gagal Menambah data Tagihan !!');
+                return redirect('/tagihan');
             }
         }
         Alert::success('Success', 'Berhasil Menambah Data Tagihan !!');
@@ -174,6 +195,19 @@ class TagihanController extends Controller
     public function destroy($id, Request $request)
     {
         TagihanDetails::where('id', $request['id_details'])->delete();
+        Alert::success('Success', 'Berhasil Menghapus Data Tagihan Siswa !!');
+        return back();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function hapus($id, Request $request)
+    {
+        Tagihan::where('id', $id)->with('tagihanDetails', 'pembayaran')->delete();
         Alert::success('Success', 'Berhasil Menghapus Data Tagihan Siswa !!');
         return back();
     }

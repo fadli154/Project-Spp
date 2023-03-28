@@ -149,13 +149,14 @@ class SiswaController extends Controller
     public function edit($id)
     {
         $dataList = siswa::where('nisn', $id)->get();
+        $kelasList = Kelas::get();
 
-
-        return view('/data_peserta.siswa.edit', [
+        return view('/manajemen_siswa.siswa_edit', [
             'title' => 'edit',
             'active' => 'siswa',
             'active1' => 'siswa',
-            'dataList' => $dataList,
+            'editData' => $dataList,
+            'kelasList' => $kelasList,
         ]);
     }
 

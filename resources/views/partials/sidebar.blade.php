@@ -48,6 +48,10 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-credit-card "></i>
                     <span>Pembayaran</span></a>
                 <ul class="dropdown-menu">
+                    <li class=""><a
+                            class="nav-link ml-2 {{ $active === 'transaksi-pembayaran' ? 'text-info' : '' }}"
+                            href="/pembayaran/create">Transaksi Pembayaran </a>
+                    </li>
                     <li class=""><a class="nav-link ml-2 {{ $active === 'pembayaran' ? 'text-info' : '' }}"
                             href="/pembayaran">Data Pembayaran </a>
                     </li>

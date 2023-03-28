@@ -16,4 +16,9 @@ class TagihanDetails extends Model
     {
         return $this->belongsTo(Tagihan::class);
     }
+
+    public function biaya()
+    {
+        return $this->belongsTo(Biaya::class);
+    }
 }

@@ -225,7 +225,8 @@
                                                                 </option>
                                                                 @foreach ($allSiswa as $item)
                                                                     <option value="{{ $item->nisn }}">
-                                                                        {{ $item->nama }}
+                                                                        {{ $item->nama }} | {{ $item->nisn }} |
+                                                                        {{ $item->kelas->kelas }}
                                                                     </option>
                                                                 @endforeach
                                                             </select>

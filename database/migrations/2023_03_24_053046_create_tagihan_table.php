@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date('tanggal_tagihan');
             $table->date('tanggal_jatuh_tempo');
             $table->string('keterangan')->nullable();
+            $table->bigInteger('sisa_tagihan')->nullable();
             $table->enum('status', ['baru', 'angsur', 'lunas']);
             $table->timestamps();
         });

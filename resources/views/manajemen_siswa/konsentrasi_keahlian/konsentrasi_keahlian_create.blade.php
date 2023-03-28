@@ -104,23 +104,24 @@
                                     </span>
                                 </div>
                             </div>
-                    </div>
-                    <div class="col-12 d-flex justify-content-end">
-                        <div class="mr-2">
-                            <a href="/konsentrasi-keahlian" class="btn btn-warning pe-2 mb-1"><i
-                                    class="bi bi-arrow-90deg-left fs-6 mr-1"></i> <span class="bi-text">Kembali</span>
-                            </a>
-                        </div>
-                        <div class="mr-2">
-                            <button type="submit" class="btn btn-primary mb-1 "><i
-                                    class="bi bi-clipboard-plus-fill fs-6 mr-1"></i>
-                                <span class="bi-text">Tambah Data</span></button>
-                        </div>
-                        <div class="">
-                            <button type="reset" class="btn btn-secondary"><i
-                                    class="bi bi-arrow-counterclockwise fs-6 mr-1"></i> <span
-                                    class="bi-text">Reset</span></button>
-                        </div>
+                            <div class="col-12 d-flex justify-content-end">
+                                <div class="mr-2">
+                                    <a href="/konsentrasi-keahlian" class="btn btn-warning pe-2 mb-1"><i
+                                            class="bi bi-arrow-90deg-left fs-6 mr-1"></i> <span
+                                            class="bi-text">Kembali</span>
+                                    </a>
+                                </div>
+                                <div class="mr-2">
+                                    <button type="submit" class="btn btn-primary mb-1 "><i
+                                            class="bi bi-clipboard-plus-fill fs-6 mr-1"></i>
+                                        <span class="bi-text">Tambah Data</span></button>
+                                </div>
+                                <div class="">
+                                    <button type="reset" class="btn btn-secondary"><i
+                                            class="bi bi-arrow-counterclockwise fs-6 mr-1"></i> <span
+                                            class="bi-text">Reset</span></button>
+                                </div>
+                            </div>
                     </div>
                     </form>
                 </div>
