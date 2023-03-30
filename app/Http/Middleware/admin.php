@@ -16,10 +16,9 @@ class admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user()->level == 'administrator') {
+        if (auth()->check() && $request->user()->level == 'administrator') {
             return $next($request);
         }
-
         abort(403, 'Akses Admin');
     }
 }

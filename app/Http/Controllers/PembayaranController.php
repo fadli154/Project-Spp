@@ -26,7 +26,7 @@ class PembayaranController extends Controller
                 ->latest()->paginate(3);
         } else {
             $pembayaranList = Pembayaran::with('tagihan')->latest()->paginate(6);
-            $tagihanList = Tagihan::with('siswa')->get();
+            $tagihanList = Tagihan::with('siswa')->groupBy('nisn')->get();
             $kelasList = Kelas::get();
         }
 
@@ -67,7 +67,7 @@ class PembayaranController extends Controller
     {
         if ($request['nisn'] != null) {
             $tagihan = Tagihan::where('nisn', $request['nisn'])->get();
-            $request['tagihan_id'] = $tagihan[0]->id;
+            $request['tagihan_id'] =  $tagihan[0]->id;
         }
 
         $request['jumlah_dibayar'] =

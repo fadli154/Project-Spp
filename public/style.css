@@ -1,3 +1,68 @@
+/* font transform */
+.capitalize {
+    text-transform: capitalize;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+/* font family */
+
+.lilita {
+    font-family: "Lilita One", cursive;
+}
+
+.montserrat {
+    font-family: "Montserrat", sans-serif;
+}
+
+.oswald {
+    font-family: "Oswald", sans-serif;
+}
+
+.sora {
+    font-family: "Sora", sans-serif;
+}
+
+/* Login */
+.button-login {
+    padding: 5px;
+    border: unset;
+    border-radius: 15px;
+    color: #fcfcfc;
+    z-index: 1;
+    background: #9db0fc;
+    position: relative;
+    font-weight: 1000;
+    font-size: 17px;
+    transition: all 250ms;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.button-login::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    border-radius: 15px;
+    background-color: #5754fe;
+    z-index: -1;
+    transition: all 250ms;
+}
+
+.button-login:hover {
+    color: #ccd6fc;
+}
+
+.button-login:hover::before {
+    width: 100%;
+}
+
+/* back */
 /* Foto Siswa */
 .foto-siswa {
     max-width: 150px;
@@ -46,13 +111,6 @@
     border-radius: 50%;
 }
 /* Akhir Foto user */
-.capitalize {
-    text-transform: capitalize;
-}
-
-.uppercase {
-    text-transform: uppercase;
-}
 
 /* kwitansi */
 
@@ -64,6 +122,26 @@
 }
 .title-kwitansi {
     border-bottom: 1.5px solid black;
+}
+
+/* sidebar */
+
+.logo-sidebar img {
+    max-width: 100px;
+    aspect-ratio: 1/1;
+    padding: 3px;
+    border-radius: 10px;
+    border: 3px solid #ccd6fc;
+    background-color: #5754fe;
+}
+
+.logo-side img {
+    max-width: 65px;
+    aspect-ratio: 1/1;
+    padding: 3px;
+    border-radius: 10px;
+    border: 3px solid #ccd6fc;
+    background-color: #5754fe;
 }
 
 /* Button */
@@ -78,7 +156,12 @@
 
 .bi {
     font-size: 16px;
+    color: #6e8bfd;
 }
+
+/* .fas {
+    color: #6e8bfd;
+} */
 
 .bi-text {
     font-size: 12.5px;
@@ -110,4 +193,75 @@
 
 .dropdown-values {
     display: none;
+}
+
+/* Responsive BreakPoint */
+
+@media only screen and (min-width: 765px) {
+    /* Responsive Login */
+    .logo-brand {
+        max-width: 200px;
+        border-radius: 10px;
+        background-color: #5754fe;
+        border: 3px solid #ccd6fc;
+        padding: 10px;
+    }
+
+    .logo-sm-brand {
+        display: none;
+    }
+    /* Akhir Responsive Login */
+
+    /* responsive data anak */
+    .Search-form .input-group {
+        width: 350px;
+    }
+    /* Akhir responsive data anak */
+}
+
+@media only screen and (max-width: 765px) {
+    /* Judul Halaman */
+    .judul-halaman {
+        text-align: center;
+    }
+
+    /* Responsive Login */
+
+    .card-login {
+        margin: 15px;
+    }
+
+    .logo-brand {
+        display: none;
+    }
+
+    .logo-sm-brand {
+        display: block;
+    }
+
+    .logo-sm-brand .name-brand {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo-sm-brand img {
+        max-width: 65px;
+        aspect-ratio: 1/1;
+        padding: 5px;
+        border-radius: 10px;
+        border: 3px solid #ccd6fc;
+        background-color: #5754fe;
+    }
+
+    .svg-login {
+        display: none;
+    }
+
+    /* Akhir Responsive Login */
+
+    /* responsive data anak */
+    .Search-form .input-group {
+        max-width: max-content;
+    }
+    /* Akhir responsive data anak */
 }

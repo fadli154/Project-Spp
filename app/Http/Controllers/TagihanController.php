@@ -109,7 +109,7 @@ class TagihanController extends Controller
             $cekSiswa = Tagihan::has('siswa')->where('nisn', $itemSiswa->nisn)->first();
             // $cekKelas = Tagihan::has('kelas')->where('kelas_id', $request['kelas_id'])->first();
 
-            if ($cekTagihan == null && $cekSiswa == null) {
+            if ($cekTagihan == null || $cekSiswa == null) {
                 $tagihan = Tagihan::create($dataTagihan);
                 // $sisa_tagihan[] = 0;
                 foreach ($biaya as $itemBiaya) {

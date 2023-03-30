@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class petugas
+class wali
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,9 @@ class petugas
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->check() && $request->user()->level === 'administrator' || $request->user()->level === 'petugas') {
+        if (auth()->check() && $request->user()->level == 'administrator' || $request->user()->level == 'wali') {
             return $next($request);
         }
-        abort(403, 'Akses Petugas');
+        abort(403, 'Akses Wali');
     }
 }
