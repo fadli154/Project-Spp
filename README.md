@@ -29,7 +29,7 @@ Catatan : lakukan terlebih dahulu pembuatan database dengan nama db_spp1 sebelum
 ## Mulai Ngoding
 
 -   Membuat branch dengan `git branch nama_branch`
--   Pindah ke branch yang dibuat dengan `git checkout "nama_branch"`
+-   Pindah ke branch yang dibuat dengan `git checkout nama_branch`
 
 Catatan : `nama_branch` disini biasanya adalah nama fitur yang ingin dibuat
 
@@ -38,7 +38,7 @@ Catatan : `nama_branch` disini biasanya adalah nama fitur yang ingin dibuat
 ## Upload Fitur
 
 -   Jalankan `git add .`
--   Lakukan commit untuk menyimpan ke local `git commit -m nama_commit`
+-   Lakukan commit untuk menyimpan ke local `git commit -m "nama_commit"`
 -   Melakukan Push ke git dengan `git push -u origin nama_branch`
 -   Melakukan/Membuat Pull Request di GitHub
 
