@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
-use App\Http\Controllers\{AdminController, AnakController, loginController, PetugasController, dashboardController, KonsentrasiController, SiswaController, WaliKelasController, WaliMuridController, KelasController, BiayaController, dashboardWaliController, KwitansiPembayaranController, TagihanController, WaliSiswaController, PembayaranController,};
+use App\Http\Controllers\{AdminController, AnakController, loginController, PetugasController, dashboardController, KonsentrasiController, SiswaController, WaliKelasController, WaliMuridController, KelasController, BiayaController, dashboardWaliController, KwitansiPembayaranController, TagihanController, WaliSiswaController, PembayaranController, profileController};
 
 Route::get('/', function () {
     return view('pages.index', [
@@ -16,6 +16,7 @@ Route::post('/login', [loginController::class, 'authenticated']);
 Route::post('/logout', [loginController::class, 'logout']);
 
 Route::get('/dashboard', [dashboardController::class, 'index'])->middleware('auth');
+Route::get('/profile', [profileController::class, 'index'])->middleware('auth');
 
 // route admin\
 Route::resource('/administrator', AdminController::class)->middleware('petugas');
