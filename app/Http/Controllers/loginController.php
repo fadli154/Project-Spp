@@ -40,9 +40,9 @@ class loginController extends Controller
             if (auth()->user()->level == 'administrator' || auth()->user()->level == 'petugas') {
                 Alert::success('Success', 'Berhasil Login !!');
                 return redirect()->intended('/dashboard');
-            } elseif (auth()->user()->level == 'wali-dashboard') {
+            } elseif (auth()->user()->level == 'wali') {
                 Alert::success('Success', 'Berhasil Login !!');
-                return redirect()->intended('/wali');
+                return redirect()->intended('/dashboard');
             }
         }
 

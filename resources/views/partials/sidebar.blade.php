@@ -8,12 +8,15 @@
         </div>
         <ul class="sidebar-menu">
             <li class="{{ $active === 'Dashboard' ? 'active' : '' }}">
-                <a href="/wali-dashboard" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+                <a href="/dashboard" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
             </li>
 
             @can('wali')
                 <li class="{{ $active === 'Anak' ? 'active' : '' }}">
                     <a href="/anak" class="nav-link"><i class="fas fa-user-graduate"></i><span>Data Siswa</span></a>
+                </li>
+                <li class="{{ $active === 'Tagihan' ? 'active' : '' }}">
+                    <a href="/tagihan-wali" class="nav-link"><i class="fas fa-credit-card"></i><span>Data Tagihan</span></a>
                 </li>
             @endcan
 

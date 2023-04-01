@@ -26,6 +26,11 @@
 }
 
 /* Login */
+.form-login .bi {
+    font-size: 16px;
+    color: #6e8bfd;
+}
+
 .button-login {
     padding: 5px;
     border: unset;
@@ -63,6 +68,7 @@
 }
 
 /* back */
+
 /* Foto Siswa */
 .foto-siswa {
     max-width: 150px;
@@ -153,12 +159,6 @@
 .btn-tambah-data {
     font-size: 12px;
 }
-
-.bi {
-    font-size: 16px;
-    color: #6e8bfd;
-}
-
 /* .fas {
     color: #6e8bfd;
 } */
@@ -216,6 +216,10 @@
     .Search-form .input-group {
         width: 350px;
     }
+
+    .table-siswa {
+        display: none;
+    }
     /* Akhir responsive data anak */
 }
 
@@ -263,5 +267,22 @@
     .Search-form .input-group {
         max-width: max-content;
     }
+
+    .foto-user-detail {
+        max-width: 150px;
+        display: flex;
+    }
+
     /* Akhir responsive data anak */
+}
+
+@media only screen and (max-width: 1000px) {
+    /* card siswa */
+    .card-siswa {
+        display: none;
+    }
+
+    .table-siswa {
+        display: block;
+    }
 }

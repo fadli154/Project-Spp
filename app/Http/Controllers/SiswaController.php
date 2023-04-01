@@ -9,6 +9,7 @@ use App\Models\Tagihan;
 use App\Models\TagihanDetails;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -22,6 +23,8 @@ class SiswaController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('administrator');
+
         $katakunci = $request->katakunci;
         $jenis_kelamin = $request->jk;
         $status = $request->status;
@@ -66,6 +69,8 @@ class SiswaController extends Controller
      */
     public function create()
     {
+        $this->authorize('administrator');
+
         $waliList = user::where('level', 'wali')->get();
         // dd($waliList[16]->siswa[0]->wali_id);
         $kelasList = Kelas::with('siswa')->groupBy('kelas_id')->get();
@@ -88,6 +93,8 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('administrator');
+
         $validateData = $request->validate([
             'nisn' => 'required|max:11|min:10|unique:siswa',
             'nik' => 'required|max:17|min:16|unique:siswa',
@@ -119,25 +126,28 @@ class SiswaController extends Controller
      */
     public function show($id)
     {
-        $detailData = siswa::where('nisn', $id)->get();
-        $waliList = User::with('siswa')->get();
-        $kelasList = Kelas::with('siswa', 'WaliKelas')->get();
-        $tagihan =  Tagihan::where('nisn', $id)->get();
-        $tagihanDetails = TagihanDetails::get();
-        $pembayaran = Pembayaran::get();
+        if (auth()->check()) {
+            $detailData = siswa::where('nisn', $id)->get();
+            $waliList = User::with('siswa')->get();
+            $kelasList = Kelas::with('siswa', 'WaliKelas')->get();
+            $tagihan =  Tagihan::where('nisn', $id)->get();
+            $tagihanDetails = TagihanDetails::get();
+            $pembayaran = Pembayaran::get();
 
-        return view('/manajemen_siswa.siswa_detail', [
-            'title' => 'Detail',
-            'active' => 'siswa',
-            'active1' => 'siswa',
-            'detailData' => $detailData,
-            'waliList' => $waliList,
-            'kelasList' => $kelasList,
-            'tagihanList' => $tagihan,
-            'tagihanDetailList' => $tagihanDetails,
-            'pembayaranList' => $pembayaran,
-            'showTab' => 'profile',
-        ]);
+            return view('/manajemen_siswa.siswa_detail', [
+                'title' => 'Detail',
+                'active' => 'siswa',
+                'active' => 'Anak',
+                'active1' => 'siswa',
+                'detailData' => $detailData,
+                'waliList' => $waliList,
+                'kelasList' => $kelasList,
+                'tagihanList' => $tagihan,
+                'tagihanDetailList' => $tagihanDetails,
+                'pembayaranList' => $pembayaran,
+                'showTab' => 'profile',
+            ]);
+        }
     }
 
     /**
@@ -148,6 +158,8 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('administrator');
+
         $dataList = siswa::where('nisn', $id)->get();
         $kelasList = Kelas::get();
 
@@ -169,6 +181,8 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('administrator');
+
         $validateData = $request->validate([
             'nisn' => 'required|max:10|min:10|unique:siswa,nisn,' . $id . ',nisn',
             'nik' => 'required|max:16|min:16|unique:siswa,nik,' . $id . ',nisn',

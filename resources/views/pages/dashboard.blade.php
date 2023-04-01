@@ -6,7 +6,11 @@
             <div class="card-body">
                 <div class="row d-flex">
                     <div class="col-md-10 col-sm-8">
-                        <h4 class="text-dark">Dashboard</h4>
+                        @if (auth()->user()->level == 'wali')
+                            <h4 class="text-dark capitalize">Dashboard Wali Murid</h4>
+                        @else
+                            <h4 class="text-dark capitalize">Dashboard {{ auth()->user()->level }}</h4>
+                        @endif
                     </div>
                     <div class="col-md-2 col-sm-4  text-center items-center align-content-center mt-2 ">
                         <div class="breadcrumb-item d-inline"><a href="/dashboard">Dashboard</a></div>
@@ -16,7 +20,11 @@
             </div>
         </div>
         <div class="card p-3 shadow-md">
-            <p>Hallo {{ $greeting }} , {{ auth()->user()->level }}</p>
+            @if (auth()->user()->level == 'wali')
+                <p>Hallo {{ $greeting }} , Wali Murid</p>
+            @else
+                <p>Hallo {{ $greeting }} , {{ auth()->user()->level }}</p>
+            @endif
         </div>
     </section>
 @endsection

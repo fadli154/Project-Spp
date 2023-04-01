@@ -15,14 +15,13 @@ Route::get('/login', [loginController::class, 'index'])->middleware('guest')->na
 Route::post('/login', [loginController::class, 'authenticated']);
 Route::post('/logout', [loginController::class, 'logout']);
 
-// route admin
 Route::get('/dashboard', [dashboardController::class, 'index'])->middleware('auth');
-Route::get('/wali-dashboard', [dashboardWaliController::class, 'index'])->middleware('wali');
 
+// route admin\
 Route::resource('/administrator', AdminController::class)->middleware('petugas');
 Route::resource('/petugas', PetugasController::class)->middleware('petugas');
 Route::resource('/wali-murid', WaliMuridController::class)->middleware('petugas');
-Route::resource('/siswa', SiswaController::class)->middleware('petugas');
+Route::resource('/siswa', SiswaController::class);
 Route::resource('/konsentrasi-keahlian', KonsentrasiController::class)->middleware('petugas');
 Route::resource('/wali-kelas', WaliKelasController::class)->middleware('petugas');
 Route::resource('/kelas', KelasController::class)->middleware('petugas');
@@ -35,3 +34,4 @@ Route::get('tagihan1/{id}', [TagihanController::class, 'hapus']);
 
 // Router Wali
 Route::get('/anak', [AnakController::class, 'index'])->middleware('wali');
+Route::get('/tagihan-wali', [AnakController::class, 'tagihan'])->middleware('wali');

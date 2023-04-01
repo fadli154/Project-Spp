@@ -13,7 +13,12 @@
                     {{-- Breadcrumb --}}
                     <div class="col-md-4 col-sm-4 text-center items-center mt-2 ">
                         <div class="breadcrumb-item d-inline active"><a href="/dashboard">Dashboard</a></div>
-                        <div class="breadcrumb-item d-inline active"><a href="/siswa">Siswa</a></div>
+                        @can('administrator')
+                            <div class="breadcrumb-item d-inline active"><a href="/siswa">Siswa</a></div>
+                        @endcan
+                        @can('wali')
+                            <div class="breadcrumb-item d-inline active"><a href="/anak">Siswa</a></div>
+                        @endcan
                         <div class="breadcrumb-item d-inline">Detail Siswa</div>
                     </div>
                     {{-- Akhir Breadcrumb --}}
@@ -29,23 +34,32 @@
                             <div class="col-8">
                                 <div class="row">
                                     <div class="col-1 ">
-                                        <a href="/siswa" title="Kembali">
-                                            <i class="bi bi-arrow-left"></i>
-                                        </a>
+                                        @can('administrator')
+                                            <a href="/siswa" title="Kembali">
+                                                <i class="bi bi-arrow-left"></i>
+                                            </a>
+                                        @endcan
+                                        @can('wali')
+                                            <a href="/anak" title="Kembali">
+                                                <i class="bi bi-arrow-left"></i>
+                                            </a>
+                                        @endcan
                                     </div>
                                     <div class="col">
                                         <h4 class="text-primary">Detail Data Siswa</h4>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-4 d-flex justify-content-end">
-                                <a href="/siswa/{{ $data->nisn }}/edit" class="text-white">
-                                    <button type="button" class="btn btn-primary" data-toggle="tooltip"
-                                        data-placement="top" title="Edit Data Siswa" data-original-title="Edit Data Siswa">
-                                        <i class="bi bi-pencil btn-tambah-data"></i>
-                                    </button>
-                                </a>
-                            </div>
+                            @can('administrator')
+                                <div class="col-4 d-flex justify-content-end">
+                                    <a href="/siswa/{{ $data->nisn }}/edit" class="text-white">
+                                        <button type="button" class="btn btn-primary" data-toggle="tooltip"
+                                            data-placement="top" title="Edit Data Siswa" data-original-title="Edit Data Siswa">
+                                            <i class="bi bi-pencil btn-tambah-data"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                            @endcan
                         </div>
                         <div class="card-body ">
                             <div class="card-body">
@@ -69,20 +83,22 @@
                                     <div class="tab-pane fade {{ $showTab === 'profile' ? 'active show' : '' }}"
                                         id="profile2" role="tabpanel" aria-labelledby="profile-tab2">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-lg-4 col-md-12">
                                                 @if ($data->foto)
-                                                    <div class="justify-content-center mt-3 ml-4">
+                                                    <div class="d-flex justify-content-center mt-3 ml-4">
                                                         <img src="{{ asset('storage/' . $data->foto) }}"
-                                                            alt="foto {{ $data->nama }}" class="foto-user">
+                                                            alt="foto {{ $data->nama }}"
+                                                            class="foto-user foto-user-detail">
                                                     </div>
                                                 @else
-                                                    <div class="justify-content-center mt-3 ml-4">
+                                                    <div class="d-flex justify-content-center mt-3 ml-4">
                                                         <img src="{{ asset('img/avatar/avatar-1.png') }}"
-                                                            alt="foto {{ $data->nama }}" class="foto-user">
+                                                            alt="foto {{ $data->nama }}"
+                                                            class="foto-user foto-user-detail">
                                                     </div>
                                                 @endif
                                                 @if ($data->status == '1')
-                                                    <div class="d-flex justify-content-center">
+                                                    <div class="d-flex justify-content-center ml-3">
                                                         <button type="button" class="btn btn-success btn-icon mt-3">
                                                             <i class="bi bi-bookmark-check-fill fa-6 mr-2"
                                                                 style="font-size: 13px;"></i> <strong
@@ -90,7 +106,7 @@
                                                         </button>
                                                     </div>
                                                 @else
-                                                    <div class="d-flex justify-content-center">
+                                                    <div class="d-flex justify-content-center ml-3">
                                                         <button type="button" class="btn btn-danger btn-icon mt-3">
                                                             <i class="bi bi-bookmark-x-fill fa-6 mr-2"
                                                                 style="font-size: 13px;"></i> <strong
@@ -101,7 +117,7 @@
                                             </div>
                                             <div class="col">
                                                 <div class="row">
-                                                    <div class="col">
+                                                    <div class="col-sm-12 col-md-12 col-lg-6">
                                                         <div class="form-group">
                                                             <label for="nama">Nama Siswa : </label>
                                                             <div class="input-group">
@@ -163,7 +179,7 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-                                                    <div class="col">
+                                                    <div class="col-sm-12 col-md-12 col-lg-6">
                                                         <div class="form-group">
                                                             <label for="nisn">NISN Siswa : </label>
                                                             <div class="input-group">
@@ -269,7 +285,7 @@
                                     <div class="tab-pane fade {{ $showTab === 'tagihan' ? 'active show' : '' }}"
                                         id="tagihan2" role="tabpanel" aria-labelledby="profile-tab2">
                                         <div class="row">
-                                            <div class="col-7">
+                                            <div class="{{ auth()->user()->level == 'wali' ? 'col-12' : 'col-lg-7 ' }}">
                                                 <h4 class="capitalize">Detail Tagihan Siswa | ({{ $data->nama }})</h4>
                                                 <div class="table-responsive">
                                                     <table
@@ -349,104 +365,106 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="col-5">
-                                                <div class="card" style="border: 2px solid rgb(240, 240, 240)">
-                                                    <div class="card-header">
-                                                        <h6 class="text-center">Form Pembayaran</h6>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <form class="form" method="post" action="/pembayaran"
-                                                            enctype="multipart/form-data">
-                                                            @csrf
-                                                            <div class="form-group">
-                                                                <label class="capitalize" for="jumlah_dibayar">Masukkan
-                                                                    Jumlah/Nominal Yang Dibayar :
-                                                                </label>
-                                                                <div class="input-group">
-                                                                    <div class="input-group-prepend">
-                                                                        <div class="input-group-text">
-                                                                            <i class="bi bi-cash"></i>
+                                            @can('administrator')
+                                                <div class="col-5">
+                                                    <div class="card" style="border: 2px solid rgb(240, 240, 240)">
+                                                        <div class="card-header">
+                                                            <h6 class="text-center">Form Pembayaran</h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <form class="form" method="post" action="/pembayaran"
+                                                                enctype="multipart/form-data">
+                                                                @csrf
+                                                                <div class="form-group">
+                                                                    <label class="capitalize" for="jumlah_dibayar">Masukkan
+                                                                        Jumlah/Nominal Yang Dibayar :
+                                                                    </label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">
+                                                                                <i class="bi bi-cash"></i>
+                                                                            </div>
                                                                         </div>
+                                                                        <input type="text" type-currency="IDR"
+                                                                            class="form-control @error('jumlah_dibayar') is-invalid @enderror"
+                                                                            placeholder="Contoh : Rp. 100.000"
+                                                                            value="{{ old('jumlah_dibayar') }}"
+                                                                            id="jumlah_dibayar" name="jumlah_dibayar">
                                                                     </div>
-                                                                    <input type="text" type-currency="IDR"
-                                                                        class="form-control @error('jumlah_dibayar') is-invalid @enderror"
-                                                                        placeholder="Contoh : Rp. 100.000"
-                                                                        value="{{ old('jumlah_dibayar') }}"
-                                                                        id="jumlah_dibayar" name="jumlah_dibayar">
+                                                                    @error('jumlah_dibayar')
+                                                                        <span class="text-danger">{{ $message }}</span>
+                                                                    @enderror
                                                                 </div>
-                                                                @error('jumlah_dibayar')
-                                                                    <span class="text-danger">{{ $message }}</span>
-                                                                @enderror
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="capitalize" for="tanggal_bayar">Masukkan
-                                                                    Tanggal Pembayaran :
-                                                                </label>
-                                                                <div class="input-group">
-                                                                    <div class="input-group-prepend">
-                                                                        <div class="input-group-text">
-                                                                            <i class="fa fa-calendar"></i>
+                                                                <div class="form-group">
+                                                                    <label class="capitalize" for="tanggal_bayar">Masukkan
+                                                                        Tanggal Pembayaran :
+                                                                    </label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">
+                                                                                <i class="fa fa-calendar"></i>
+                                                                            </div>
                                                                         </div>
+                                                                        <input type="date"
+                                                                            class="form-control @error('tanggal_bayar') is-invalid @enderror"
+                                                                            value="{{ old('tanggal_bayar') ?? date('Y-m-d') }}"
+                                                                            id="tanggal_bayar" name="tanggal_bayar">
                                                                     </div>
-                                                                    <input type="date"
-                                                                        class="form-control @error('tanggal_bayar') is-invalid @enderror"
-                                                                        value="{{ old('tanggal_bayar') ?? date('Y-m-d') }}"
-                                                                        id="tanggal_bayar" name="tanggal_bayar">
+                                                                    @error('tanggal_bayar')
+                                                                        {{ $message }}
+                                                                    @enderror
                                                                 </div>
-                                                                @error('tanggal_bayar')
-                                                                    {{ $message }}
-                                                                @enderror
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="capitalize" for="bukti_bayar">Masukkan
-                                                                    Foto/Bukti Pembayaran :
-                                                                </label>
-                                                                <div class="input-group">
-                                                                    <div class="input-group-prepend">
-                                                                        <div class="input-group-text">
-                                                                            <i class="bi bi-file-earmark-image"></i>
+                                                                <div class="form-group">
+                                                                    <label class="capitalize" for="bukti_bayar">Masukkan
+                                                                        Foto/Bukti Pembayaran :
+                                                                    </label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">
+                                                                                <i class="bi bi-file-earmark-image"></i>
+                                                                            </div>
                                                                         </div>
+                                                                        <div class="custom-file">
+                                                                            <input type="file"
+                                                                                class="custom-file-input @error('bukti_bayar') is-invalid @enderror"
+                                                                                id="foto" name="bukti_bayar"
+                                                                                onchange="previewImage()">
+                                                                            <label class="custom-file-label"
+                                                                                class="capitalize" for="bukti_bayar">Pilih
+                                                                                Foto</label>
+                                                                        </div>
+                                                                        <input type="file" class="custom-file-input ">
+                                                                        <img
+                                                                            class="img-preview img-preview-create img-fluid mt-2 col-sm-2">
                                                                     </div>
-                                                                    <div class="custom-file">
-                                                                        <input type="file"
-                                                                            class="custom-file-input @error('bukti_bayar') is-invalid @enderror"
-                                                                            id="foto" name="bukti_bayar"
-                                                                            onchange="previewImage()">
-                                                                        <label class="custom-file-label"
-                                                                            class="capitalize" for="bukti_bayar">Pilih
-                                                                            Foto</label>
-                                                                    </div>
-                                                                    <input type="file" class="custom-file-input ">
-                                                                    <img
-                                                                        class="img-preview img-preview-create img-fluid mt-2 col-sm-2">
+                                                                    @error('bukti_bayar')
+                                                                        {{ $message }}
+                                                                    @enderror
                                                                 </div>
-                                                                @error('bukti_bayar')
-                                                                    {{ $message }}
-                                                                @enderror
-                                                            </div>
-                                                            @foreach ($tagihanList as $item)
-                                                                <input type="hidden" name="tagihan_id"
-                                                                    value="{{ $item->id }}">
-                                                            @endforeach
-                                                            <input type="hidden" name="user_id"
-                                                                value="{{ auth()->user()->id }}">
-                                                            <button type="submit"
-                                                                class="btn btn-primary justify-content-end"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Konfirmasi Bayar"
-                                                                data-original-title="Konfirmasi Bayar">
-                                                                <i class="fa fa-check"></i> Simpan
-                                                            </button>
-                                                        </form>
+                                                                @foreach ($tagihanList as $item)
+                                                                    <input type="hidden" name="tagihan_id"
+                                                                        value="{{ $item->id }}">
+                                                                @endforeach
+                                                                <input type="hidden" name="user_id"
+                                                                    value="{{ auth()->user()->id }}">
+                                                                <button type="submit"
+                                                                    class="btn btn-primary justify-content-end"
+                                                                    data-toggle="tooltip" data-placement="top"
+                                                                    title="Konfirmasi Bayar"
+                                                                    data-original-title="Konfirmasi Bayar">
+                                                                    <i class="fa fa-check"></i> Simpan
+                                                                </button>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @endcan
                                         </div>
                                     </div>
                                     <div class="tab-pane fade {{ $showTab === 'riwayat-pembayaran' ? 'active show' : '' }}"
                                         id="riwayat-pembayaran2" role="tabpanel" aria-labelledby="profile-tab2">
                                         <div class="row">
-                                            <div class="col-7">
+                                            <div class="{{ auth()->user()->level == 'wali' ? 'col-12' : 'col-lg-7 ' }}">
                                                 <h4>Riwayat Pembayaran Siswa </h4>
                                                 <div class="table-responsive">
                                                     <table
@@ -556,98 +574,100 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                            <div class="col-5">
-                                                <div class="card" style="border: 2px solid rgb(240, 240, 240)">
-                                                    <div class="card-header">
-                                                        <h6 class="text-center">Form Pembayaran</h6>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <form class="form" method="post" action="/pembayaran"
-                                                            enctype="multipart/form-data">
-                                                            @csrf
-                                                            <div class="form-group">
-                                                                <label class="capitalize" for="jumlah_dibayar">Masukkan
-                                                                    Jumlah/Nominal Yang Dibayar :
-                                                                </label>
-                                                                <div class="input-group">
-                                                                    <div class="input-group-prepend">
-                                                                        <div class="input-group-text">
-                                                                            <i class="bi bi-cash"></i>
+                                            @can('administrator')
+                                                <div class="col-5">
+                                                    <div class="card" style="border: 2px solid rgb(240, 240, 240)">
+                                                        <div class="card-header">
+                                                            <h6 class="text-center">Form Pembayaran</h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <form class="form" method="post" action="/pembayaran"
+                                                                enctype="multipart/form-data">
+                                                                @csrf
+                                                                <div class="form-group">
+                                                                    <label class="capitalize" for="jumlah_dibayar">Masukkan
+                                                                        Jumlah/Nominal Yang Dibayar :
+                                                                    </label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">
+                                                                                <i class="bi bi-cash"></i>
+                                                                            </div>
                                                                         </div>
+                                                                        <input type="text" type-currency="IDR"
+                                                                            class="form-control @error('jumlah_dibayar') is-invalid @enderror"
+                                                                            placeholder="Contoh : Rp. 100.000"
+                                                                            value="{{ old('jumlah_dibayar') }}"
+                                                                            id="jumlah_dibayar" name="jumlah_dibayar">
                                                                     </div>
-                                                                    <input type="text" type-currency="IDR"
-                                                                        class="form-control @error('jumlah_dibayar') is-invalid @enderror"
-                                                                        placeholder="Contoh : Rp. 100.000"
-                                                                        value="{{ old('jumlah_dibayar') }}"
-                                                                        id="jumlah_dibayar" name="jumlah_dibayar">
+                                                                    @error('jumlah_dibayar')
+                                                                        <span class="text-danger">{{ $message }}</span>
+                                                                    @enderror
                                                                 </div>
-                                                                @error('jumlah_dibayar')
-                                                                    <span class="text-danger">{{ $message }}</span>
-                                                                @enderror
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="capitalize" for="tanggal_bayar">Masukkan
-                                                                    Tanggal Pembayaran :
-                                                                </label>
-                                                                <div class="input-group">
-                                                                    <div class="input-group-prepend">
-                                                                        <div class="input-group-text">
-                                                                            <i class="fa fa-calendar"></i>
+                                                                <div class="form-group">
+                                                                    <label class="capitalize" for="tanggal_bayar">Masukkan
+                                                                        Tanggal Pembayaran :
+                                                                    </label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">
+                                                                                <i class="fa fa-calendar"></i>
+                                                                            </div>
                                                                         </div>
+                                                                        <input type="date"
+                                                                            class="form-control @error('tanggal_bayar') is-invalid @enderror"
+                                                                            value="{{ old('tanggal_bayar') ?? date('Y-m-d') }}"
+                                                                            id="tanggal_bayar" name="tanggal_bayar">
                                                                     </div>
-                                                                    <input type="date"
-                                                                        class="form-control @error('tanggal_bayar') is-invalid @enderror"
-                                                                        value="{{ old('tanggal_bayar') ?? date('Y-m-d') }}"
-                                                                        id="tanggal_bayar" name="tanggal_bayar">
+                                                                    @error('tanggal_bayar')
+                                                                        {{ $message }}
+                                                                    @enderror
                                                                 </div>
-                                                                @error('tanggal_bayar')
-                                                                    {{ $message }}
-                                                                @enderror
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="capitalize" for="bukti_bayar">Masukkan
-                                                                    Foto/Bukti Pembayaran :
-                                                                </label>
-                                                                <div class="input-group">
-                                                                    <div class="input-group-prepend">
-                                                                        <div class="input-group-text">
-                                                                            <i class="bi bi-file-earmark-image"></i>
+                                                                <div class="form-group">
+                                                                    <label class="capitalize" for="bukti_bayar">Masukkan
+                                                                        Foto/Bukti Pembayaran :
+                                                                    </label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <div class="input-group-text">
+                                                                                <i class="bi bi-file-earmark-image"></i>
+                                                                            </div>
                                                                         </div>
+                                                                        <div class="custom-file">
+                                                                            <input type="file"
+                                                                                class="custom-file-input @error('bukti_bayar') is-invalid @enderror"
+                                                                                id="foto" name="bukti_bayar"
+                                                                                onchange="previewImage()">
+                                                                            <label class="custom-file-label"
+                                                                                class="capitalize" for="bukti_bayar">Pilih
+                                                                                Foto</label>
+                                                                        </div>
+                                                                        <input type="file" class="custom-file-input ">
+                                                                        <img
+                                                                            class="img-preview img-preview-create img-fluid mt-2 col-sm-2">
                                                                     </div>
-                                                                    <div class="custom-file">
-                                                                        <input type="file"
-                                                                            class="custom-file-input @error('bukti_bayar') is-invalid @enderror"
-                                                                            id="foto" name="bukti_bayar"
-                                                                            onchange="previewImage()">
-                                                                        <label class="custom-file-label"
-                                                                            class="capitalize" for="bukti_bayar">Pilih
-                                                                            Foto</label>
-                                                                    </div>
-                                                                    <input type="file" class="custom-file-input ">
-                                                                    <img
-                                                                        class="img-preview img-preview-create img-fluid mt-2 col-sm-2">
+                                                                    @error('bukti_bayar')
+                                                                        {{ $message }}
+                                                                    @enderror
                                                                 </div>
-                                                                @error('bukti_bayar')
-                                                                    {{ $message }}
-                                                                @enderror
-                                                            </div>
-                                                            @foreach ($tagihanList as $item)
-                                                                <input type="hidden" name="tagihan_id"
-                                                                    value="{{ $item->id }}">
-                                                            @endforeach
-                                                            <input type="hidden" name="user_id"
-                                                                value="{{ auth()->user()->id }}">
-                                                            <button type="submit"
-                                                                class="btn btn-primary justify-content-end"
-                                                                data-toggle="tooltip" data-placement="top"
-                                                                title="Konfirmasi Bayar"
-                                                                data-original-title="Konfirmasi Bayar">
-                                                                <i class="fa fa-check"></i> Simpan
-                                                            </button>
-                                                        </form>
+                                                                @foreach ($tagihanList as $item)
+                                                                    <input type="hidden" name="tagihan_id"
+                                                                        value="{{ $item->id }}">
+                                                                @endforeach
+                                                                <input type="hidden" name="user_id"
+                                                                    value="{{ auth()->user()->id }}">
+                                                                <button type="submit"
+                                                                    class="btn btn-primary justify-content-end"
+                                                                    data-toggle="tooltip" data-placement="top"
+                                                                    title="Konfirmasi Bayar"
+                                                                    data-original-title="Konfirmasi Bayar">
+                                                                    <i class="fa fa-check"></i> Simpan
+                                                                </button>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @endcan
                                         </div>
                                     </div>
                                 </div>
