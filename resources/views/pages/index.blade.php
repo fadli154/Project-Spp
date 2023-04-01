@@ -75,12 +75,13 @@
                 </ul>
                 @guest
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="/login" class="btn btn-1" type="button"> Login <i class="fas fa-sign-in-alt"></i></a>
+                        <a href="/login" class="btn btn-1" type="button"> Login <i
+                                class="fas fa-sign-in-alt ms-2"></i></a>
                     </div>
                 @else
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a href="/dashboard" class="btn btn-1" type="button"> Dahboard <i
-                                class="fas fa-sign-in-alt"></i></a>
+                                class="fas fa-sign-in-alt ms-2"></i></a>
                     </div>
                 @endguest
             </div>
