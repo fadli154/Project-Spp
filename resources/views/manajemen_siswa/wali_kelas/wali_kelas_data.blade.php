@@ -206,7 +206,7 @@
                                             </div>
                                         </div>
                                         <div class="collapse" id="mycard-collapse-{{ $data->nip_wali_kelas }}"
-                                            style="background-color : @if ($data->jk == 'L') aliceblue @else rgb(252, 239, 252) @endif ;">
+                                            style="background-color : @if ($data->jk == 'L') rgb(189, 189, 216) @else rgb(197, 176, 197) @endif ;">
                                             <div class="card-body">
                                                 <div class="row ">
                                                     {{-- fotoCard --}}
