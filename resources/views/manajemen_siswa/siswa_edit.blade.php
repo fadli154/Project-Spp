@@ -92,12 +92,12 @@
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text bg-secondary">
-                                                                <i class="bi bi-person-fill"></i>
+                                                                <i class="bi bi-cast"></i>
                                                             </div>
                                                         </div>
-                                                        <select class="form-control select2 " id="nip_wali_kelas"
-                                                            name="nip_wali_kelas">
-                                                            <option selected disabled>Pilih Wali Kelas</option>
+                                                        <select class="form-control select2 " id="kelas_id"
+                                                            name="kelas_id">
+                                                            <option selected disabled>Pilih Kelas</option>
                                                             @foreach ($kelasList as $item)
                                                                 <option value="{{ $item->kelas_id }}"
                                                                     {{ $data->kelas_id === $item->kelas_id ? 'selected' : '' }}>
@@ -107,6 +107,32 @@
                                                     </div>
                                                     <span class="text-danger">
                                                         @error('kelas_id')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="status">Pilih Status Siswa : </label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text  bg-secondary">
+                                                                <i class="bi bi-bookmark-fill"></i>
+                                                            </div>
+                                                        </div>
+                                                        <select class="form-control" id="status" name="status">
+                                                            <option selected disabled>Pilih Status</option>
+                                                            @foreach ($editData as $item)
+                                                                <option value="0"
+                                                                    {{ $data->status === '0' ? 'selected' : '' }}>
+                                                                    Tidak Aktif</option>
+                                                                <option value="1"
+                                                                    {{ $data->status === '1' ? 'selected' : '' }}>
+                                                                    Aktif</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <span class="text-danger">
+                                                        @error('status')
                                                             {{ $message }}
                                                         @enderror
                                                     </span>
@@ -123,8 +149,8 @@
                                                         </div>
                                                         <input type="text"
                                                             class="form-control @error('nisn') is-invalid @enderror"
-                                                            placeholder="Masukkan NISN List Siswa"
-                                                            value="{{ $data->nisn }}" id="nisn" name="nisn">
+                                                            placeholder="Masukkan NISN" value="{{ $data->nisn }}"
+                                                            id="nisn" name="nisn">
                                                     </div>
                                                     <span class="text-danger">
                                                         @error('nisn')
@@ -142,8 +168,8 @@
                                                         </div>
                                                         <input type="text"
                                                             class="form-control @error('nik') is-invalid @enderror"
-                                                            placeholder="Masukkan nik List Siswa"
-                                                            value="{{ $data->nik }}" id="nik" name="nik">
+                                                            placeholder="Masukkan NIK" value="{{ $data->nik }}"
+                                                            id="nik" name="nik">
                                                     </div>
                                                     <span class="text-danger">
                                                         @error('nik')
@@ -151,6 +177,7 @@
                                                         @enderror
                                                     </span>
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label for="jk">Pilih Jenis Kelamin : </label>
                                                     <div class="input-group">
@@ -179,6 +206,29 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="tempat_lahir">Tempat Lahir Siswa : </label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text bg-secondary">
+                                                        <i class="bi bi-key-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <input type="text"
+                                                    class="form-control @error('tempat_lahir') is-invalid @enderror"
+                                                    placeholder="Masukkan Tempat Lahir" value="{{ $data->tempat_lahir }}"
+                                                    id="tempat_lahir" name="tempat_lahir">
+                                            </div>
+                                            <span class="text-danger">
+                                                @error('tempat_lahir')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
                                         <div class="form-group">
                                             <label for="foto">Ubah Foto : </label>
                                             <small class="d-block">Catatan : Masukkan Foto dengan Format(png, jpg, jpeg),
@@ -208,24 +258,26 @@
                                                 @enderror
                                             </span>
                                         </div>
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <div class="mr-2">
-                                                <a href="/siswa" class="btn btn-warning pe-2 mb-1"><i
-                                                        class="bi bi-arrow-90deg-left fs-6 mr-1"></i> <span
-                                                        class="bi-text">Kembali</span>
-                                                </a>
-                                            </div>
-                                            <div class="mr-2">
-                                                <button type="submit" class="btn btn-primary mb-1 "><i
-                                                        class="bi bi-clipboard-plus-fill fs-6 mr-1"></i>
-                                                    <span class="bi-text">Edit Data</span></button>
-                                            </div>
-                                            <div class="">
-                                                <button type="reset" class="btn btn-secondary"><i
-                                                        class="bi bi-arrow-counterclockwise fs-6 mr-1"></i> <span
-                                                        class="bi-text">Reset</span></button>
-                                            </div>
-                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex justify-content-end">
+                                    <div class="mr-2">
+                                        <a href="/siswa" class="btn btn-warning pe-2 mb-1"><i
+                                                class="bi bi-arrow-90deg-left fs-6 mr-1"></i> <span
+                                                class="bi-text">Kembali</span>
+                                        </a>
+                                    </div>
+                                    <div class="mr-2">
+                                        <button type="submit" class="btn btn-primary mb-1 "><i
+                                                class="bi bi-clipboard-plus-fill fs-6 mr-1"></i>
+                                            <span class="bi-text">Edit Data</span></button>
+                                    </div>
+                                    <div class="">
+                                        <button type="reset" class="btn btn-secondary"><i
+                                                class="bi bi-arrow-counterclockwise fs-6 mr-1"></i> <span
+                                                class="bi-text">Reset</span></button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
