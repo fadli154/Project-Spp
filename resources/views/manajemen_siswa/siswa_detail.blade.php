@@ -91,11 +91,19 @@
                                                             class="foto-user foto-user-detail">
                                                     </div>
                                                 @else
-                                                    <div class="d-flex justify-content-center mt-3 ml-4">
-                                                        <img src="{{ asset('img/avatar/avatar-1.png') }}"
-                                                            alt="foto {{ $data->nama }}"
-                                                            class="foto-user foto-user-detail">
-                                                    </div>
+                                                    @if ($data->jk == 'L')
+                                                        <div class="d-flex justify-content-center mt-3 ml-4">
+                                                            <img src="{{ asset('img/avatar/avatar-1.png') }}"
+                                                                alt="foto {{ $data->nama }}"
+                                                                class="foto-user foto-user-detail">
+                                                        </div>
+                                                    @else
+                                                        <div class="d-flex justify-content-center mt-3 ml-4">
+                                                            <img src="{{ asset('img/avatar/avatar-5.png') }}"
+                                                                alt="foto {{ $data->nama }}"
+                                                                class="foto-user foto-user-detail">
+                                                        </div>
+                                                    @endif
                                                 @endif
                                                 @if ($data->status == '1')
                                                     <div class="d-flex justify-content-center ml-3">
@@ -239,26 +247,60 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="kelas_id">Wali Kelas Siswa : </label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text bg-secondary">
-                                                                <i class="bi bi-cast"></i>
+                                                <div class="row">
+                                                    <div class="form-group col-sm-12 col-md-12 col-lg-6">
+                                                        <label for="kelas_id">Wali Kelas Siswa : </label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <div class="input-group-text bg-secondary">
+                                                                    <i class="bi bi-cast"></i>
+                                                                </div>
                                                             </div>
+                                                            <input type="text" placeholder="Belum Memiliki Wali Kelas"
+                                                                class="form-control capitalize @error('kelas_id') is-invalid @enderror"
+                                                                @foreach ($kelasList as $item)
+                                                                                @if ($item->kelas_id === $data->kelas_id)
+                                                                                    value="{{ $item->WaliKelas->nama_wali_kelas }}"
+                                                                                    @break
+                                                                                @endif @endforeach
+                                                                id="kelas_id" name="kelas_id" readonly>
                                                         </div>
-                                                        <input type="text" placeholder="Belum Memiliki Wali Kelas"
-                                                            class="form-control capitalize @error('kelas_id') is-invalid @enderror"
-                                                            @foreach ($kelasList as $item)
-                                                                            @if ($item->kelas_id === $data->kelas_id)
-                                                                                value="{{ $item->WaliKelas->nama_wali_kelas }}"
-                                                                                @break
-                                                                            @endif @endforeach
-                                                            id="kelas_id" name="kelas_id" readonly>
+                                                        @error('kelas_id')
+                                                            {{ $message }}
+                                                        @enderror
                                                     </div>
-                                                    @error('kelas_id')
-                                                        {{ $message }}
-                                                    @enderror
+                                                    <div class="form-group col-sm-12 col-md-12 col-lg-6">
+                                                        <label for="jk">Jenis Kelamin Siswa : </label>
+                                                        @if ($data->jk == 'L')
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <div class="input-group-text bg-secondary">
+                                                                        <i class="bi bi-gender-male"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <input type="text"
+                                                                    class="form-control capitalize @error('jk') is-invalid @enderror"
+                                                                    value="Laki - Laki" id="jk" name="jk"
+                                                                    readonly>
+                                                            </div>
+                                                        @else
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <div class="input-group-text bg-secondary">
+                                                                        <i class="bi bi-gender-female"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <input type="text"
+                                                                    class="form-control capitalize @error('jk') is-invalid @enderror"
+                                                                    value="Perempuan" id="jk" name="jk"
+                                                                    readonly>
+                                                            </div>
+                                                        @endif
+
+                                                        @error('jk')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-12">
