@@ -65,7 +65,7 @@
                             @foreach ($dataList as $data)
                                 <div class="col-lg-4 ">
                                     <div class="card">
-                                        <div class="card-header" style="background-color: rgb(212, 232, 250) ">
+                                        <div class="card-header" style="background-color:  rgb(189, 189, 216)  ">
                                             <h4 class="uppercase">{{ $data->kelas }} {{ $data->angkatan }}</h4>
                                             <div class="card-header-action mr-2">
                                                 <a title="Lihat Detail"
@@ -100,7 +100,7 @@
                                             </div>
                                         </div>
                                         <div class="collapse" id="mycard-collapse-{{ $data->nip_wali_kelas }}"
-                                            style="background-color : aliceblue ;">
+                                            style="background-color : rgb(214, 200, 226) ;">
                                             @if ($data->foto)
                                                 <a href="/kelas/{{ $data->kelas_id }}" title="klik melihat Detail Kelas">
                                                     <img src="{{ asset('storage/' . $data->foto) }}"
