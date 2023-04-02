@@ -143,8 +143,8 @@
                             @foreach ($dataList as $data)
                                 <div class="col-lg-6">
                                     <div class="card">
-                                        <div class="card-header" style="background-color: rgb(220, 211, 228)">
-                                            <h4 class="capitalize">{{ $data->nama }} | ({{ $data->nisn }})</h4>
+                                        <div class="card-header" style="background-color: rgb(214, 200, 226)">
+                                            <h4 class="capitalize">{{ $data->nama }} | {{ $data->kelas->kelas }}</h4>
                                             <div class="card-header-action mr-2">
                                                 <a title="Lihat Detail"
                                                     data-collapse="#mycard-collapse-{{ $data->nisn }}"
@@ -178,7 +178,7 @@
                                             </div>
                                         </div>
                                         <div class="collapse" id="mycard-collapse-{{ $data->nisn }}"
-                                            style="background-color : @if ($data->jk == 'L') rgb(189, 189, 216) @else rgb(252, 239, 252) @endif ;">
+                                            style="background-color :  @if ($data->jk == 'L') rgb(189, 189, 216) @else rgb(197, 176, 197) @endif ;">
                                             <div class="card-body">
                                                 <div class="row ">
                                                     {{-- fotoCard --}}
@@ -223,7 +223,9 @@
                                                         </p>
                                                         @foreach ($kelasList as $item)
                                                             @if ($item->kelas_id == $data->kelas_id)
-                                                                <p>Kelas : {{ $item->kelas }} {{ $item->angkatan }}</p>
+                                                                <p><strong> Kelas : </strong> {{ $item->kelas->kelas }}
+                                                                    {{ $item->angkatan }}
+                                                                </p>
                                                             @break
 
                                                         @elseif ($data->kelas_id == '')
