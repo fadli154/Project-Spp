@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tagihan', function (Blueprint $table) {
             $table->id()->onDelete('cascade');
             $table->string('nisn', 10)->index();
-            $table->foreign('nisn')->references('nisn')->on('siswa')->onUpdate('cascade');
+            $table->foreign('nisn')->references('nisn')->on('siswa')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
             $table->string('kelas_id', 14);
