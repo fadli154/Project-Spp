@@ -68,7 +68,7 @@
                                                 </div>
                                             </div>
                                             <input type="number" class="form-control @error('nisn') is-invalid @enderror"
-                                                placeholder="Masukkan NIP Siswa" value="{{ old('nisn') }}" id="nisn"
+                                                placeholder="Masukkan NISN Siswa" value="{{ old('nisn') }}" id="nisn"
                                                 name="nisn">
                                         </div>
                                         <span class="text-danger">
@@ -86,7 +86,7 @@
                                                 </div>
                                             </div>
                                             <input type="number" class="form-control @error('nik') is-invalid @enderror"
-                                                placeholder="Masukkan NIP Siswa" value="{{ old('nik') }}" id="nik"
+                                                placeholder="Masukkan NIK Siswa" value="{{ old('nik') }}" id="nik"
                                                 name="nik">
                                         </div>
                                         <span class="text-danger">
