@@ -69,8 +69,8 @@
                                 class="bi bi-gear-fill me-2"></i>Tutorial</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-scroll-nav="4" href="#contact"><i
-                                class="bi bi-telephone-fill me-2"></i>Contact</a>
+                        <a class="nav-link" data-scroll-nav="4" href="#map"><i
+                                class="bi bi-geo-alt-fill me-2"></i>Lokasi</a>
                     </li>
                 </ul>
                 @guest
@@ -139,12 +139,6 @@
                         <span class="text-icon">facebook</span>
                     </li>
                 </a>
-                <a href="">
-                    <li style="--i:#64adf1;--j:#6178e0;">
-                        <span class="icon"><i class="bi bi-twitter"></i></span>
-                        <span class="text-icon">twitter</span>
-                    </li>
-                </a>
                 <a href="https://github.com/fadli154" target="_blank">
                     <li style="--i:#373738;--j:#787879;">
                         <span class="icon"><i class="bi bi-github"></i></span>
@@ -177,8 +171,8 @@
     <!-- Tentang Section End -->
 
     <!-- About Section Start -->
-    <section class="about section-padding">
-        <div class="container" id="tentang" data-scroll-index="1">
+    <section class="about section-padding" id="tentang" data-scroll-index="1">
+        <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-md-5 d-flex align-items-center justify-content-center">
                     <div class="about-img">
@@ -410,88 +404,30 @@
         @endcan
     @endauth
 
-    <!-- Contact Section Start -->
-    <section class="contact section-padding">
-        <div class="container" id="contact" data-scroll-index="4">
+    <!-- Map Section Start -->
+    <section class="map section-padding " id="map" data-scroll-index="4">
+        <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="section-title" id="report">
-                        <h2>Contact <span>Us</span></h2>
+                        <h2>Lokasi <span>Kami</span></h2>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-5">
-                    <div class="contact-info">
-                        <h3>For Any Queries and Support</h3>
-                        <div class="contact-info-item">
-                            <i class="fas fa-location-arrow"></i>
-                            <h4>Company Location</h4>
-                            <p>SMKN 4 Tangerang</p>
-                        </div>
-                        <div class="contact-info-item">
-                            <i class="fas fa-envelope"></i>
-                            <h4>Write to us at</h4>
-                            <p>fadlihifziansyah154@gmail.com</p>
-                        </div>
-                        <div class="contact-info-item">
-                            <i class="fas fa-phone"></i>
-                            <h4>Call us on</h4>
-                            <p>0878-2730-2255</p>
-                        </div>
-                    </div>
+                <div class="text-center">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.5768925963066!2d106.63556391455468!3d-6.187333395520691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f929162547c7%3A0xbbf35137362e584d!2sSMK%20Negeri%204%20Kota%20Tangerang!5e0!3m2!1sid!2sid!4v1677921080826!5m2!1sid!2sid"
+                        width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
-                <div class="col-lg-8 col-md-7">
-                    <div class="contact-form">
-                        <form>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Your Name" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Your Email" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class=" form-group">
-                                        <input type="text" placeholder="Your Phone" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class=" form-group">
-                                        <input type="text" placeholder="Subject" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class=" form-group">
-                                        <textarea placeholder="Your Message" class="form-control"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <button type="submit" class="btn btn-2">Send Message</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                </form>
             </div>
         </div>
         </div>
         </div>
     </section>
-    <!-- Contact Section End -->
+    <!-- Map Section End -->
 
     <!-- Footer Start -->
     <footer class="footer">
@@ -521,7 +457,7 @@
                             <ul>
                                 <li><a href="#hero">home</a></li>
                                 <li><a href="#tentang">tentang</a></li>
-                                <li><a href="#contact">contact</a></li>
+                                <li><a href="#map">map</a></li>
                             </ul>
                         </div>
                     </div>
