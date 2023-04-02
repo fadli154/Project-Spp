@@ -79,10 +79,13 @@
                                 class="fas fa-sign-in-alt ms-2"></i></a>
                     </div>
                 @else
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="/dashboard" class="btn btn-1" type="button"> Dahboard <i
-                                class="fas fa-sign-in-alt ms-2"></i></a>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start me-2 -2">
+                        <a href="/dashboard" class="btn btn-1" type="button"> Dahboard</a>
                     </div>
+                    <form action="/logout" method="post" class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        @csrf
+                        <button type="submit" class="btn btn-logout">Log out <i class="fas fa-sign-out-alt"></i></button>
+                    </form>
                 @endguest
             </div>
         </div>
@@ -192,28 +195,30 @@
                             pendataan pembayaran SPP, dan mengurangi penggunaan kertas yang dimana pohon adalah GO GREEN
                             bagi kehidupan manusia. </p>
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="about-item style-1">
-                                    <i class="fas fa-user-graduate"></i>
-                                    <span>Siswa</span>
+                            <div class="main">
+                                <div class="up">
+                                    <button class="card1 card-level"
+                                        style="--i:rgb(243, 192, 179);--j: rgb(172, 4, 4);">
+                                        <i class="fa fa-user-graduate"></i>
+                                        <span class="text-level">Siswa</span>
+                                    </button>
+                                    <button class="card2 card-level"
+                                        style="--i:rgb(104, 193, 228);--j:rgb(73, 76, 248);">
+                                        <i class="fa fa-user-tie"></i>
+                                        <span class="text-level">Petugas</span>
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="about-item style-2">
-                                    <i class="fas fa-user-tie"></i>
-                                    <span>Users</span>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="about-item style-3">
-                                    <i class="fas fa-credit-card"></i>
-                                    <span>Tagihan</span>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="about-item style-4">
-                                    <i class="fas fa-wallet"></i>
-                                    <span>Pembayaran</span>
+                                <div class="down">
+                                    <button class="card3 card-level"
+                                        style="--i:rgb(150, 240, 32);--j: rgb(212, 206, 123);">
+                                        <i class="fa fa-credit-card"></i>
+                                        <span class="text-level">Tagihan</span>
+                                    </button>
+                                    <button class="card4 card-level"
+                                        style="--i:rgb(32, 240, 178);--j: rgb(28, 182, 28);">
+                                        <i class="fa fa-wallet"></i>
+                                        <span class="text-level">Pembayaran</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
