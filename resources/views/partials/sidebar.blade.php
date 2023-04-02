@@ -12,11 +12,14 @@
             </li>
 
             @can('wali')
-                <li class="{{ $active === 'Anak' ? 'active' : '' }}">
+                <li class="{{ $active === 'Profile' ? 'active' : '' }}">
+                    <a href="/profile" class="nav-link"><i class="fas fa-user"></i><span>Profile</span></a>
+                </li>
+                <li class="{{ $active === 'siswa' ? 'active' : '' }}">
                     <a href="/anak" class="nav-link"><i class="fas fa-user-graduate"></i><span>Data Siswa</span></a>
                 </li>
                 <li class="{{ $active === 'Tagihan' ? 'active' : '' }}">
-                    <a href="/tagihan-wali" class="nav-link"><i class="fas fa-credit-card"></i><span>Data Tagihan</span></a>
+                    <a href="/tagihan-wali" class="nav-link"><i class="fas fa-credit-card"></i><span>Tagihan</span></a>
                 </li>
             @endcan
 
