@@ -35,21 +35,22 @@ class SiswaController extends Controller
             })->when(!is_null($status), function ($query) use ($status) {
                 return $query->where('status', $status);
             })->latest()->paginate(8);
-            $waliList = DB::table('siswa')->join('users', 'siswa.wali_id', '=', 'users.id')->select('users.*', 'users.name', 'users.id')->paginate(6);
-            $kelasList = DB::table('siswa')->join('kelas', 'siswa.kelas_id', '=', 'kelas.kelas_id')->select('kelas.*', 'kelas.angkatan', 'kelas.kelas')->paginate(6);
+            $waliList = Siswa::with('user')->get();
+            $kelasList = Siswa::with('kelas')->get();
         } else if (strlen($katakunci)) {
-            $siswaList = Siswa::where('nisn', 'like', "%$katakunci%")
+            $siswaList = Siswa::with('kelas')->where('nisn', 'like', "%$katakunci%")
                 ->orWhere('nik', 'like', "%$katakunci%")
                 ->orWhere('nama', 'like', "%$katakunci%")
                 ->orWhere('kelas_id', 'like', "%$katakunci%")
-                ->orWhere('spp_id', 'like', "%$katakunci%")
                 ->orWhere('jk', 'like', "%$katakunci%")
                 ->orWhere('tempat_lahir', 'like', "%$katakunci%")
                 ->paginate(6);
+            $waliList = Siswa::with('user')->get();
+            $kelasList = Siswa::with('kelas')->get();
         } else {
             $siswaList = siswa::paginate(6);
-            $waliList = DB::table('siswa')->join('users', 'siswa.wali_id', '=', 'users.id')->select('users.*', 'users.name', 'users.id')->paginate(6);
-            $kelasList = DB::table('siswa')->join('kelas', 'siswa.kelas_id', '=', 'kelas.kelas_id')->select('kelas.*', 'kelas.angkatan', 'kelas.kelas')->paginate(6);
+            $waliList = Siswa::with('user')->get();
+            $kelasList = Siswa::with('kelas')->get();
         }
 
         return view('/manajemen_siswa.siswa_data', [
@@ -137,7 +138,6 @@ class SiswaController extends Controller
             return view('/manajemen_siswa.siswa_detail', [
                 'title' => 'Detail',
                 'active' => 'siswa',
-                'active' => 'Anak',
                 'active1' => 'siswa',
                 'detailData' => $detailData,
                 'waliList' => $waliList,
@@ -189,6 +189,7 @@ class SiswaController extends Controller
             'nama' => 'required|max:60',
             'wali_id' => '',
             'jk' => 'required',
+            'status' => 'required',
             'tempat_lahir' => 'required|max:60',
             'kelas_id' => 'required',
             'foto' => 'image|file|max:1024',
@@ -212,9 +213,15 @@ class SiswaController extends Controller
      * @param  \App\Models\siswa  $siswa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(siswa $siswa)
+    public function destroy($id, Request $request)
     {
-        //
+        if ($request->oldImage) {
+            Storage::delete($request->oldImage);
+        }
+
+        Siswa::where('nisn', $id)->delete();
+        Alert::success('Success', 'Berhasil Menghapus Data Siswa !!');
+        return redirect('/siswa');
     }
 
     public function getScoutKey(siswa $siswa)
