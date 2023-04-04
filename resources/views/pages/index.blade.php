@@ -21,6 +21,9 @@
     <!-- bootstrap css -->
     <link rel="stylesheet" href="{{ asset('assets/modules/starterpage/css/bootstrap.min.css') }}">
 
+    {{-- aos animation --}}
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     {{-- google font --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -102,13 +105,13 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-5 text-center order-lg-last">
-                    <div class="hero-img">
+                    <div class="hero-img" data-aos="fade-up-left" data-aos-duration="2000">
                         <img src="{{ asset('assets/modules/starterpage/images/hero-img.png') }}" alt="hero image">
                     </div>
                 </div>
                 <div class="col-md-7 order-lg-first">
-                    <div class="hero-text">
-                        <img class="d-none d-lg-block" src="{{ asset('img/logo 10.png') }}" height="80"
+                    <div class="hero-text" data-aos="fade-up" data-aos-duration="3000">
+                        <img class="d-none d-lg-block " src="{{ asset('img/logo 10.png') }}" height="80"
                             alt="">
                         <h1 class="lilita">Aplikasi Pembayaran SPP</h1>
                         <p class="text-capitalize sora">Lihat riwayat pembayaran dan lakukan pembayaran SPP Anda pada
@@ -161,7 +164,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
-                    <div class="section-title">
+                    <div class="section-title" data-aos="zoom-in" data-aos-duration="2000">
                         <h2>Tentang <span>Kami</span></h2>
                     </div>
                 </div>
@@ -175,7 +178,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-md-5 d-flex align-items-center justify-content-center">
-                    <div class="about-img">
+                    <div class="about-img" data-aos="fade-right" data-aos-duration="2000">
                         <img src="{{ asset('assets/modules/starterpage/images/about.png') }}" alt="fun facts">
                     </div>
                 </div>
@@ -236,21 +239,21 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-md-6">
-                        <div class="level-item">
+                        <div class="level-item" data-aos="fade-up" data-aos-duration="1000">
                             <i class="fas fa-user-tie"></i>
                             <h3>Administrator</h3>
                             <p>Memiliki semua fitur dalam aplikasi</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                        <div class="level-item">
+                        <div class="level-item" data-aos="fade-up" data-aos-duration="1000">
                             <i class="fas fa-user-plus"></i>
                             <h3>Petugas</h3>
                             <p>Memiliki sedikit fitur dalam aplikasi</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                        <div class="level-item">
+                        <div class="level-item" data-aos="fade-up" data-aos-duration="1000">
                             <i class="fas fa-user-check"></i>
                             <h3>Wali Murid</h3>
                             <p>Sebagai wali dari siswa</p>
@@ -482,6 +485,12 @@
         </section>
     </footer>
     <!-- Footer End -->
+
+    {{-- aos script --}}
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 
     <!-- jquery js -->
     <script src="{{ asset('assets/modules/starterpage/js/jquery.min.js') }}"></script>

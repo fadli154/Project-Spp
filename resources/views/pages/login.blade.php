@@ -74,9 +74,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="simple-footer">
-                        Copyright © XI RPL
+                        <div class="ocean">
+                            <div class="wave"></div>
+                            <div class="wave"></div>
+                            <div class="wave"></div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1325,4 +1325,12 @@ Responsive
     .hero-img {
         padding: 20px 0;
     }
+
+    .about-img img {
+        display: none;
+    }
+
+    .about-text {
+        text-align: center;
+    }
 }
