@@ -11,6 +11,7 @@ use App\Models\Tagihan;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use App\Models\TagihanDetails;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class TagihanController extends Controller
@@ -67,7 +68,8 @@ class TagihanController extends Controller
      */
     public function store(Request $request)
     {
-        $validateData = $request->validate([
+        // melakukan validasi tagihan
+        $request->validate([
             'biaya_id.*' => 'required',
             'kelas_id' => 'required',
             'tanggal_tagihan' => 'required|date',
@@ -75,9 +77,11 @@ class TagihanController extends Controller
             'keterangan' => 'nullable',
         ]);
 
+        // masukkan semua biaya yang ingin di tagih
         $biayaIdArray = $request['biaya_id'];
 
-        $siswa = Siswa::with('tagihan')->where('kelas_id', $request['kelas_id'])->get();
+        // ambil semua data siswa yang aktif dan sesuai dengan kelas yang ingin di tagih
+        $siswa = Siswa::with('tagihan')->where('kelas_id', $request['kelas_id'])->where('status', '1')->get();
         if (count($siswa) == 0) {
             Alert::error('Error', 'Data Siswa Tidak ada !!');
             return redirect('/tagihan');
@@ -104,7 +108,7 @@ class TagihanController extends Controller
             $tanggalTagihan = Carbon::parse($request['tanggal_tagihan']);
             // $bulanTagihan = $tanggalTagihan->format('m');
             // $tahunTagihan = $tanggalTagihan->format('Y');
-            $cekTagihan = TagihanDetails::with('tagihan')->where('biaya_id', $biayaIdArray)
+            $cekTagihan = TagihanDetails::has('tagihan')->whereIn('biaya_id', $biayaIdArray)
                 ->first();
             $cekSiswa = Tagihan::has('siswa')->where('nisn', $itemSiswa->nisn)->first();
             // $cekKelas = Tagihan::has('kelas')->where('kelas_id', $request['kelas_id'])->first();

@@ -49,10 +49,10 @@
                                             <input type="hidden" name="oldImage" value="{{ $data->foto }}">
                                             @if ($data->foto)
                                                 <img src="{{ asset('storage/' . $data->foto) }}"
-                                                    class="img-kelas img-fluid mt-3 d-block ml-4">
+                                                    class="img-kelas img-preview img-fluid mt-3 d-block ml-4">
                                             @else
                                                 <img src="{{ asset('img/kelas.webp') }}"
-                                                    class="img-kelas img-fluid mt-3 d-block ml-4">
+                                                    class="img-kelas img-preview img-fluid mt-3 d-block ml-4">
                                             @endif
                                         </div>
 
@@ -190,7 +190,6 @@
                                             <input type="hidden" name="oldImage" value="{{ $data->foto }}">
                                         </div>
                                         <input type="file" class="custom-file-input ">
-                                        <img class="img-preview img-fluid mt-2 col-sm-2">
                                     </div>
                                     <span class="text-danger">
                                         @error('foto')

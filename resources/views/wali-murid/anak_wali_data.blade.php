@@ -67,7 +67,7 @@
                                             <div class="card-header-action mr-2">
                                                 <a title="Lihat Detail" data-collapse="#mycard-collapse-{{ $data->nisn }}"
                                                     class="btn btn-icon btn-info" href="#"><i
-                                                        class="fas fa-plus"></i></a>
+                                                        class="fas fa-arrow-down"></i></a>
                                             </div>
                                             <div class="dropdown d-inline">
                                                 <button class="btn btn-primary" type="button" id="dropdownMenuButton2"
