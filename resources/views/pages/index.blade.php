@@ -137,7 +137,7 @@
         <div class="container d-flex justify-content-center">
             <ul>
                 <a href="/facebook.com">
-                    <li style="--i:#4a2de9;--j:#5171ff;">
+                    <li style="--i:#2808dd;--j:#4461e2;">
                         <span class="icon"><i class="bi bi-facebook"></i></span>
                         <span class="text-icon">facebook</span>
                     </li>
