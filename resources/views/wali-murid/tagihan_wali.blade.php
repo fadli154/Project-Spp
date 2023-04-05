@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <!-- FORM PENCARIAN -->
                         <div class="">
-                            <form class="" action="/tagihan" method="get">
+                            <form class="" action="/tagihan-wali" method="get">
                                 <div class="input-group input-group mb-3 float-right" style="width: 350px;">
                                     <input type="search" name="katakunci" class="form-control float-right"
                                         placeholder="Masukkan Kata Kunci" value="{{ Request::get('katakunci') }}"
