@@ -13,8 +13,8 @@
                     {{-- Breadcrumb --}}
                     <div class="col-md-5 col-sm-4 text-center items-center mt-2 ">
                         <div class="breadcrumb-item d-inline active capitalize"><a href="/dashboard">Dashboard</a></div>
-                        <div class="breadcrumb-item d-inline active capitalize"><a href="/wali-kelas">Wali Kelas</a></div>
-                        <div class="breadcrumb-item d-inline capitalize">Profile Wali Kelas</div>
+                        <div class="breadcrumb-item d-inline active capitalize"><a href="/wali-kelas">Pegawai</a></div>
+                        <div class="breadcrumb-item d-inline capitalize">Profile Pegawai</div>
                     </div>
                     {{-- Akhir Breadcrumb --}}
                 </div>
@@ -34,15 +34,15 @@
                                         </a>
                                     </div>
                                     <div class="col">
-                                        <h4 class="text-primary capitalize">Profile Wali Kelas</h4>
+                                        <h4 class="text-primary capitalize">Profile Pegawai</h4>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4 d-flex justify-content-end">
                                 <a href="/wali-kelas/{{ $data->nip_wali_kelas }}/edit" class="text-white">
                                     <button type="button" class="btn btn-primary" data-toggle="tooltip"
-                                        data-placement="top" title="Edit Data Wali Kelas"
-                                        data-original-title="Edit Data Wali Kelas">
+                                        data-placement="top" title="Edit Data Pegawai"
+                                        data-original-title="Edit Data Pegawai">
                                         <i class="bi bi-pencil btn-tambah-data"></i>
                                     </button>
                                 </a>
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="capitalize" for="nama_wali_kelas">Nama Wali Kelas :
+                                            <label class="capitalize" for="nama_wali_kelas">Nama Pegawai :
                                             </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
@@ -96,7 +96,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label class="capitalize" for="nip_wali_kelas">NIP Wali Kelas : </label>
+                                            <label class="capitalize" for="nip_wali_kelas">NIP Pegawai : </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">

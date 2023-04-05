@@ -13,7 +13,7 @@
                     {{-- Breadcrumb --}}
                     <div class="col-md-3 col-sm-4 text-center items-center mt-2 ">
                         <div class="breadcrumb-item d-inline active"><a href="/dashboard">Dashboard</a></div>
-                        <div class="breadcrumb-item d-inline active">List Wali Kelas</div>
+                        <div class="breadcrumb-item d-inline active">List Pegawai</div>
                     </div>
                     {{-- Akhir Breadcrumb --}}
                 </div>
@@ -129,7 +129,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="col-lg-11 col-sm">
-                            <h4 class="text-primary capitalize">List Wali Kelas</h4>
+                            <h4 class="text-primary capitalize">List Pegawai</h4>
                         </div>
                         <div class="col-lg-1 col-sm d-flex justify-content-end">
                             {{-- Button Tambah Data --}}

@@ -13,7 +13,7 @@
                     {{-- Breadcrumb --}}
                     <div class="col-md-4 col-sm-4 text-center items-center mt-2 ">
                         <div class="breadcrumb-item d-inline active"><a href="/dashboard">Dashboard</a></div>
-                        <div class="breadcrumb-item d-inline active"><a href="/wali-kelas">Wali Kelas</a></div>
+                        <div class="breadcrumb-item d-inline active"><a href="/wali-kelas">Pegawai</a></div>
                         <div class="breadcrumb-item d-inline">Edit Data</div>
                     </div>
                     {{-- Akhir Breadcrumb --}}
@@ -34,7 +34,7 @@
                                         </a>
                                     </div>
                                     <div class="col-">
-                                        <h4 class="text-primary">Edit Data Wali Kelas</h4>
+                                        <h4 class="text-primary">Edit Data Pegawai</h4>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="nama_wali_kelas">Nama Wali Kelas : </label>
+                                                    <label for="nama_wali_kelas">Nama Pegawai : </label>
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text bg-secondary">
@@ -79,7 +79,7 @@
                                                         </div>
                                                         <input type="text"
                                                             class="form-control @error('nama_wali_kelas') is-invalid @enderror"
-                                                            placeholder="Masukkan Nama Wali Kelas"
+                                                            placeholder="Masukkan Nama Pegawai"
                                                             value="{{ $data->nama_wali_kelas }}" id="nama_wali_kelas"
                                                             name="nama_wali_kelas">
                                                     </div>
@@ -90,7 +90,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="nip_wali_kelas">NIP Wali Kelas : </label>
+                                                    <label for="nip_wali_kelas">NIP Pegawai : </label>
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text bg-secondary">
@@ -99,7 +99,7 @@
                                                         </div>
                                                         <input type="text"
                                                             class="form-control @error('nip_wali_kelas') is-invalid @enderror"
-                                                            placeholder="Masukkan NIP Wali Kelas"
+                                                            placeholder="Masukkan NIP Pegawai"
                                                             value="{{ $data->nip_wali_kelas }}" id="nip_wali_kelas"
                                                             name="nip_wali_kelas">
                                                     </div>
