@@ -21,7 +21,7 @@ class PembayaranController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('administrator');
+        $this->authorize('entri-pembayaran');
         $katakunci = $request->katakunci;
         if (strlen($katakunci)) {
             $pembayaranList = Pembayaran::where('nama_biaya', 'like', "%$katakunci%")
@@ -50,7 +50,7 @@ class PembayaranController extends Controller
      */
     public function create()
     {
-        $this->authorize('administrator');
+        $this->authorize('entri-pembayaran');
         $siswaList = tagihan::with('siswa')->get();
 
         return view('/pembayaran.pembayaran.pembayaran_create', [
@@ -69,7 +69,7 @@ class PembayaranController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('administrator');
+        $this->authorize('entri-pembayaran');
         if ($request['nisn'] != null) {
             $tagihan = Tagihan::where('nisn', $request['nisn'])->get();
             $request['tagihan_id'] =  $tagihan[0]->id;
@@ -144,7 +144,7 @@ class PembayaranController extends Controller
      */
     public function edit($id)
     {
-        $this->authorize('administrator');
+        $this->authorize('entri-pembayaran');
         $editData = Pembayaran::where('id', $id)->get();
         $userData = User::get();
 
@@ -166,7 +166,7 @@ class PembayaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('administrator');
+        $this->authorize('entri-pembayaran');
         $request['jumlah_dibayar'] =
             currencyIDRToNumeric($request->jumlah_dibayar);
 
@@ -212,7 +212,7 @@ class PembayaranController extends Controller
      */
     public function destroy($id, Request $request)
     {
-        $this->authorize('administrator');
+        $this->authorize('entri-pembayaran');
         if ($request->oldImage) {
             Storage::delete($request->oldImage);
         }
