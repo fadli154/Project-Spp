@@ -15,18 +15,18 @@
                     <img alt="image {{ auth()->user()->username }}" src="{{ asset('img/avatar/avatar-1.png') }}"
                         class="rounded-circle mr-1 ">
                 @endif
-                <div class="d-sm-none d-lg-inline-block capitalize">Hi, {{ auth()->user()->name }}</div>
+                <div class="d-sm-none d-lg-inline-block capitalize">{{ auth()->user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-title">Logged in 5 min ago</div>
-                <a href="features-profile.html" class="dropdown-item has-icon">
-                    <i class="far fa-user"></i> Profile
+                <div class="dropdown-title">halo, {{ auth()->user()->username }}</div>
+                <a href="/" class="dropdown-item has-icon">
+                    <i class="fas fa-home"></i> Beranda
                 </a>
-                <a href="features-activities.html" class="dropdown-item has-icon">
-                    <i class="fas fa-bolt"></i> Activities
+                <a href="/profile" class="dropdown-item has-icon">
+                    <i class="fas fa-user"></i> Profile
                 </a>
-                <a href="features-settings.html" class="dropdown-item has-icon">
-                    <i class="fas fa-cog"></i> Settings
+                <a href="/change-password" class="dropdown-item has-icon">
+                    <i class="fas fa-key"></i> Ubah Password
                 </a>
                 <div class="dropdown-divider"></div>
                 <form action="/logout" method="post">
