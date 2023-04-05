@@ -407,7 +407,7 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            @can('administrator')
+                                            @can('entri-pembayaran')
                                                 <div class="col-5">
                                                     <div class="card" style="border: 2px solid rgb(240, 240, 240)">
                                                         <div class="card-header">
@@ -616,7 +616,7 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                            @can('administrator')
+                                            @can('entri-pembayaran')
                                                 <div class="col-5">
                                                     <div class="card" style="border: 2px solid rgb(240, 240, 240)">
                                                         <div class="card-header">
