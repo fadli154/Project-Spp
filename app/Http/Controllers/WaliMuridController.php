@@ -70,7 +70,7 @@ class WaliMuridController extends Controller
         ]);
 
         if ($request->file('foto')) {
-            $validateData['foto'] = $request->file('foto')->store('foto-wali-murid');
+            $validateData['foto'] = $request->file('foto')->store('foto-wali');
         }
 
         $validateData['password'] = Hash::make($validateData['password']);
@@ -134,11 +134,11 @@ class WaliMuridController extends Controller
     {
         $validateData = $request->validate([
             'name' => 'required|max:60|min:1',
-            'username' => 'required|max:40|min:4',
+            'username' => 'required|max:40|min:4|unique:users,username,' . $id . ',id',
             'id' => 'unique:users,id,' . $id . ',id',
             'level' => 'required',
-            'email' => 'required|email:dns',
-            'no_telp' => 'required|max:13|min:10',
+            'email' => 'required|email:dns|unique:users,email,' . $id . ',id',
+            'no_telp' => 'required|max:13|min:10|unique:users,no_telp,' . $id . ',id',
             'foto' => 'image|file|max:1024',
         ]);
 
@@ -146,7 +146,7 @@ class WaliMuridController extends Controller
             if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
-            $validateData['foto'] = $request->file('foto')->store('foto-wali-murid');
+            $validateData['foto'] = $request->file('foto')->store('foto-wali');
         }
 
         User::where('id', $id)->update($validateData);
