@@ -40,5 +40,9 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('petugas', function (User $user) {
             return $user->level === 'petugas';
         });
+
+        Gate::define('entri-pembayaran', function (User $user) {
+            return $user->level === 'administrator' || $user->level === 'petugas';
+        });
     }
 }
