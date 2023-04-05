@@ -54,14 +54,14 @@
                                         @foreach ($siswaList as $data)
                                             <option value="{{ $data->nisn }}" class="capitalize"
                                                 {{ old('nisn') == $data->nisn ? 'selected' : '' }}>
-                                                {{ $data->nama }} | {{ $data->nisn }} | Tagihan :
-                                                @if ($data->tagihan == null)
+                                                {{ $data->siswa->nama }} | {{ $data->nisn }} | Tagihan :
+                                                @if ($data->sisa_tagihan == null)
                                                     Rp. 0
                                                 @else
-                                                    @if ($data->tagihan->sisa_tagihan < 0)
+                                                    @if ($data->sisa_tagihan < 0)
                                                         Rp. 0
                                                     @else
-                                                        {{ currency_IDR($data->tagihan->sisa_tagihan) }}
+                                                        {{ currency_IDR($data->sisa_tagihan) }}
                                                     @endif
                                                 @endif
                                             </option>

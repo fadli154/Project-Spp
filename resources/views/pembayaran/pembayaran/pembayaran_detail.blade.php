@@ -30,9 +30,15 @@
                             <div class="col-8">
                                 <div class="row">
                                     <div class="col-1">
-                                        <a href="/pembayaran" title="Kembali">
-                                            <i class="bi bi-arrow-left"></i>
-                                        </a>
+                                        @if (auth()->user()->level == 'wali')
+                                            <a href="/riwayat-pembayaran" title="Kembali">
+                                                <i class="bi bi-arrow-left"></i>
+                                            </a>
+                                        @else
+                                            <a href="/pembayaran" title="Kembali">
+                                                <i class="bi bi-arrow-left"></i>
+                                            </a>
+                                        @endif
                                     </div>
                                     <div class="col">
                                         <h4 class="text-primary capitalize">Detail Pembayaran</h4>

@@ -127,7 +127,10 @@
                                                             <button type="submit"
                                                                 class="confirm dropdown-item has-icon text-danger">
                                                                 <input type="hidden" name="oldImage"
-                                                                    value="{{ $data->foto }}"><i
+                                                                    value="{{ $data->bukti_bayar }}">
+                                                                <input type="hidden" name="tagihan_id"
+                                                                    value="{{ $data->tagihan_id }}">
+                                                                <i
                                                                     class="far bi-trash-fill mt-2"></i><small>Hapus</small></button>
                                                         </form>
                                                     </div>

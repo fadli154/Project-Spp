@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Kelas;
+use App\Models\Siswa;
 use App\Models\Tagihan;
 use App\Models\Pembayaran;
-use App\Models\Siswa;
-use App\Models\User;
+use App\Models\TagihanDetails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PembayaranController extends Controller
@@ -19,6 +21,7 @@ class PembayaranController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('administrator');
         $katakunci = $request->katakunci;
         if (strlen($katakunci)) {
             $pembayaranList = Pembayaran::where('nama_biaya', 'like', "%$katakunci%")
@@ -47,7 +50,8 @@ class PembayaranController extends Controller
      */
     public function create()
     {
-        $siswaList = Siswa::with('tagihan')->get();
+        $this->authorize('administrator');
+        $siswaList = tagihan::with('siswa')->get();
 
         return view('/pembayaran.pembayaran.pembayaran_create', [
             'title' => 'Tambah Data',
@@ -65,6 +69,7 @@ class PembayaranController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('administrator');
         if ($request['nisn'] != null) {
             $tagihan = Tagihan::where('nisn', $request['nisn'])->get();
             $request['tagihan_id'] =  $tagihan[0]->id;
@@ -117,16 +122,18 @@ class PembayaranController extends Controller
      */
     public function show($id)
     {
-        $detailData = Pembayaran::where('id', $id)->get();
-        $userList = User::get();
+        if (auth()->check()) {
+            $detailData = Pembayaran::where('id', $id)->get();
+            $userList = User::get();
 
-        return view('/pembayaran.pembayaran.pembayaran_detail', [
-            'title' => 'Detail',
-            'active' => 'pembayaran',
-            'active1' => 'pembayaran',
-            'detailData' => $detailData,
-            'userList' => $userList,
-        ]);
+            return view('/pembayaran.pembayaran.pembayaran_detail', [
+                'title' => 'Detail',
+                'active' => 'pembayaran',
+                'active1' => 'pembayaran',
+                'detailData' => $detailData,
+                'userList' => $userList,
+            ]);
+        };
     }
 
     /**
@@ -137,7 +144,17 @@ class PembayaranController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->authorize('administrator');
+        $editData = Pembayaran::where('id', $id)->get();
+        $userData = User::get();
+
+        return view('pembayaran.pembayaran.pembayaran_edit', [
+            'title' => 'edit',
+            'active' => 'pembayaran',
+            'active1' => 'pembayaran',
+            'editData' => $editData,
+            'userData' => $userData,
+        ]);
     }
 
     /**
@@ -149,7 +166,42 @@ class PembayaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->authorize('administrator');
+        $request['jumlah_dibayar'] =
+            currencyIDRToNumeric($request->jumlah_dibayar);
+
+        $validateData = $request->validate([
+            'tagihan_id' => 'required',
+            'jumlah_dibayar' => 'required',
+            'tanggal_bayar' => 'required|date',
+            'status_konfirmasi' => 'required',
+            'bukti_bayar' => 'image|file|max:1024',
+            'user_id' => 'required',
+        ]);
+
+        if ($request->file('bukti_bayar')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validateData['bukti_bayar'] = $request->file('bukti_bayar')->store('bukti-pembayaran');
+        }
+
+        $TagihanDetails = TagihanDetails::where('tagihan_id', $request['tagihan_id'])->get();
+        // dd($TagihanDetails->sum('nominal_biaya'));
+
+        $tagihan = Tagihan::findOrFail($validateData['tagihan_id']);
+
+        if ($TagihanDetails->sum('nominal_biaya') <= intval($validateData['jumlah_dibayar'])) {
+            Tagihan::where('id', $validateData['tagihan_id'])->update(array('status' => 'lunas', 'sisa_tagihan' => 0));
+        } else if (intval($validateData['jumlah_dibayar']) == 0) {
+            Tagihan::where('id', $validateData['tagihan_id'])->update(array('status' => 'baru', 'sisa_tagihan' => $TagihanDetails->sum('nominal_biaya')));
+        } else {
+            Tagihan::where('id', $validateData['tagihan_id'])->update(array('status' => 'angsur', 'sisa_tagihan' => $TagihanDetails->sum('nominal_biaya') - intval($validateData['jumlah_dibayar'])));
+        }
+
+        Pembayaran::where('id', $id)->update($validateData);
+        Alert::success('Success', 'Berhasil Mengubah Data Pembayaran !!');
+        return redirect('/pembayaran');
     }
 
     /**
@@ -158,8 +210,19 @@ class PembayaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        $this->authorize('administrator');
+        if ($request->oldImage) {
+            Storage::delete($request->oldImage);
+        }
+
+        $TagihanDetails = TagihanDetails::where('tagihan_id', $request['tagihan_id'])->get();
+
+        Tagihan::where('id', $request['tagihan_id'])->update(array('status' => 'baru', 'sisa_tagihan' => $TagihanDetails->sum('nominal_biaya')));
+
+        Pembayaran::where('id', $id)->delete();
+        Alert::success('Success', 'Berhasil Menghapus Data Pembayaran !!');
+        return redirect('/pembayaran');
     }
 }
