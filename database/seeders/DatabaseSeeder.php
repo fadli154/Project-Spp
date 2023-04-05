@@ -33,6 +33,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
+            'name' => 'petuguas saya',
+            'username' => 'petugas',
+            'level' => 'petugas',
+            'password' => bcrypt('password'),
+            'email' => 'petugas154@gmail.com',
+            'no_telp' => '08782730677',
+        ]);
+
+        User::create([
             'name' => 'wali Murid',
             'username' => 'wali',
             'level' => 'wali',
