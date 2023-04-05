@@ -149,7 +149,7 @@
                     </li>
                 </a>
                 <a href="">
-                    <li style="--i:#e44acf;--j:#a72ab8;">
+                    <li style="--i:#DD2A7B;--j:#a72ab8;">
                         <span class="icon"><i class="bi bi-instagram"></i></span>
                         <span class="text-icon">instagram</span>
                     </li>
