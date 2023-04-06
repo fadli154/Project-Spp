@@ -199,6 +199,14 @@
     cursor: pointer;
 }
 
+#togglePassword2 {
+    cursor: pointer;
+}
+
+#togglePassword3 {
+    cursor: pointer;
+}
+
 /* waves */
 .ocean {
     height: 80px; /* change the height of the waves here */

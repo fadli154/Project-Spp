@@ -214,7 +214,7 @@
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
-                                                        <i class="bi bi-key-fill"></i>
+                                                        <i class="bi bi-eye-slash" id="togglePassword2"></i>
                                                     </div>
                                                 </div>
                                                 <input type="password"
@@ -236,7 +236,7 @@
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text bg-secondary">
-                                                        <i class="bi bi-key"></i>
+                                                        <i class="bi bi-eye-slash" id="togglePassword3"></i>
                                                     </div>
                                                 </div>
                                                 <input type="password"
@@ -284,6 +284,30 @@
             // toggle the type attribute
             const type = password.getAttribute("type") === "password" ? "text" : "password";
             password.setAttribute("type", type);
+
+            // toggle the icon
+            this.classList.toggle("bi-eye");
+        });
+
+        const togglePassword2 = document.querySelector("#togglePassword2");
+        const password2 = document.querySelector("#password_baru");
+
+        togglePassword2.addEventListener("click", function() {
+            // toggle the type attribute
+            const type = password2.getAttribute("type") === "password" ? "text" : "password";
+            password2.setAttribute("type", type);
+
+            // toggle the icon
+            this.classList.toggle("bi-eye");
+        });
+
+        const togglePassword3 = document.querySelector("#togglePassword3");
+        const password3 = document.querySelector("#password_repeat");
+
+        togglePassword3.addEventListener("click", function() {
+            // toggle the type attribute
+            const type = password3.getAttribute("type") === "password" ? "text" : "password";
+            password3.setAttribute("type", type);
 
             // toggle the icon
             this.classList.toggle("bi-eye");
