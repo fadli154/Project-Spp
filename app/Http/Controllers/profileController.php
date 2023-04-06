@@ -36,6 +36,10 @@ class profileController extends Controller
 
     public function processChangePassword(Request $request)
     {
+        if ($request->password_lama == null) {
+            Alert::error('Gagal Mengubah Profile', 'Masukkan Password Lama Terlebih Dahulu !!');
+            return back();
+        }
         // cek password lama
         $cek = Hash::check($request->password_lama, auth()->user()->password);
         // kalau password tidak sama maka akan di kembalikan

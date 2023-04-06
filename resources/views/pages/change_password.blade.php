@@ -160,7 +160,7 @@
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
                                                             <div class="input-group-text bg-secondary">
-                                                                <i class="bi bi-lock-fill"></i>
+                                                                <i class="bi bi-eye-slash" id="togglePassword"></i>
                                                             </div>
                                                         </div>
                                                         <input type="password"
@@ -276,5 +276,18 @@
                 </div>
             </div>
     </section>
+    <script>
+        const togglePassword = document.querySelector("#togglePassword");
+        const password = document.querySelector("#password_lama");
+
+        togglePassword.addEventListener("click", function() {
+            // toggle the type attribute
+            const type = password.getAttribute("type") === "password" ? "text" : "password";
+            password.setAttribute("type", type);
+
+            // toggle the icon
+            this.classList.toggle("bi-eye");
+        });
+    </script>
     @endforeach
 @endsection
