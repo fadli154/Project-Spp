@@ -46,7 +46,7 @@
                                 href="/pembayaran/create">Transaksi Pembayaran </a>
                         </li>
                         <li class=""><a class="nav-link ml-2 {{ $active === 'pembayaran' ? 'text-info' : '' }}"
-                                href="/pembayaran">Data Pembayaran </a>
+                                href="/pembayaran">Riwayat Pembayaran </a>
                         </li>
                         <li class=""><a class="nav-link ml-2 {{ $active === 'biaya' ? 'text-info' : '' }}"
                                 href="/biaya">Jenis Pembayaran </a>
