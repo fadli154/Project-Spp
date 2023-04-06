@@ -37,6 +37,9 @@
             @endcan
 
             @can('petugas')
+                <li class="{{ $active === 'siswa' ? 'active' : '' }}">
+                    <a href="/siswa" class="nav-link"><i class="fas fa-user-graduate"></i><span>Data Siswa</span></a>
+                </li>
                 <li class="dropdown {{ $active1 === 'pembayaran' ? 'active' : '' }}">
                     <a href="#" class="nav-link has-dropdown"><i class="fas fa-credit-card "></i>
                         <span>Pembayaran</span></a>

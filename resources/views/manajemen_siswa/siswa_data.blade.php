@@ -106,14 +106,16 @@
                             <h4 class="text-primary capitalize">List Siswa</h4>
                         </div>
                         <div class="col-lg-1 col-sm d-flex justify-content-end">
-                            {{-- Button Tambah Data --}}
-                            <a href="/siswa/create" class="text-white">
-                                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
-                                    title="Tambah Data" data-original-title="Tambah Data">
-                                    <i class="fa fa-plus-circle btn-tambah-data"></i>
-                                </button>
-                            </a>
-                            {{-- Akhir Button Tambah Data --}}
+                            @can('administrator')
+                                {{-- Button Tambah Data --}}
+                                <a href="/siswa/create" class="text-white">
+                                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                                        title="Tambah Data" data-original-title="Tambah Data">
+                                        <i class="fa fa-plus-circle btn-tambah-data"></i>
+                                    </button>
+                                </a>
+                                {{-- Akhir Button Tambah Data --}}
+                            @endcan
                         </div>
                     </div>
 
@@ -149,7 +151,7 @@
                                                 <a title="Lihat Detail"
                                                     data-collapse="#mycard-collapse-{{ $data->nisn }}"
                                                     class="btn btn-icon btn-info" href="#"><i
-                                                        class="fas fa-plus"></i></a>
+                                                        class="fas fa-arrow-down"></i></a>
                                             </div>
                                             <div class="dropdown d-inline">
                                                 <button class="btn btn-primary" type="button" id="dropdownMenuButton2"
@@ -161,19 +163,21 @@
                                                     <a class="dropdown-item has-icon text-info"
                                                         href="/siswa/{{ $data->nisn }}"><i class="far bi-eye"></i>
                                                         Detail</a>
-                                                    <a class="dropdown-item has-icon text-warning"
-                                                        href="/siswa/{{ $data->nisn }}/edit"><i
-                                                            class="far bi-pencil-square"></i>
-                                                        Edit</a>
-                                                    <form action="/siswa/{{ $data->nisn }}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit"
-                                                            class="confirm dropdown-item has-icon text-danger">
-                                                            <input type="hidden" name="oldImage"
-                                                                value="{{ $data->foto }}"><i
-                                                                class="far bi-trash-fill mt-2"></i><small>Hapus</small></button>
-                                                    </form>
+                                                    @can('administrator')
+                                                        <a class="dropdown-item has-icon text-warning"
+                                                            href="/siswa/{{ $data->nisn }}/edit"><i
+                                                                class="far bi-pencil-square"></i>
+                                                            Edit</a>
+                                                        <form action="/siswa/{{ $data->nisn }}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="confirm dropdown-item has-icon text-danger">
+                                                                <input type="hidden" name="oldImage"
+                                                                    value="{{ $data->foto }}"><i
+                                                                    class="far bi-trash-fill mt-2"></i><small>Hapus</small></button>
+                                                        </form>
+                                                    @endcan
                                                 </div>
                                             </div>
                                         </div>
