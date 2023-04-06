@@ -23,7 +23,7 @@ class SiswaController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('administrator');
+        $this->authorize('entri-pembayaran');
 
         $katakunci = $request->katakunci;
         $jenis_kelamin = $request->jk;
@@ -215,6 +215,8 @@ class SiswaController extends Controller
      */
     public function destroy($id, Request $request)
     {
+        $this->authorize('administrator');
+
         if ($request->oldImage) {
             Storage::delete($request->oldImage);
         }
