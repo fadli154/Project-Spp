@@ -47,7 +47,7 @@ class loginController extends Controller
         }
 
         Alert::error('', 'Gagal Untuk Log in !!');
-        return back()->with('error', 'Login Failed');
+        return back();
     }
 
     public function logout(Request $request)
