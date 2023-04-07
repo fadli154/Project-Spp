@@ -62,13 +62,13 @@
                                             <div class="d-flex justify-content-center mt-2 ">
                                                 <img src="{{ asset('storage/' . $data->foto) }}"
                                                     alt="foto {{ $data->name }}"
-                                                    class="img-preview foto-user img-fluid mt-2 d-block ">
+                                                    class="img-preview foto-user img-fluid foto-user-detail mb-2 d-block ">
                                             </div>
                                         @else
                                             <div class="d-flex justify-content-center mt-2 ">
                                                 <img src="{{ asset('img/avatar/avatar-1.png') }}"
                                                     alt="foto {{ $data->name }}"
-                                                    class="img-preview foto-user img-fluid mt-2 d-block ">
+                                                    class="img-preview foto-user img-fluid foto-user-detail mb-2 d-block ">
                                             </div>
                                         @endif
                                     </div>
@@ -254,8 +254,7 @@
                                     <div class="col-12 d-flex justify-content-end">
                                         <div class="mr-2">
                                             <a href="/profile" class="btn btn-warning pe-2 mb-1"><i
-                                                    class="bi bi-arrow-90deg-left fs-6 mr-1"></i> <span
-                                                    class="bi-text">Kembali</span>
+                                                    class="bi bi-arrow-90deg-left fs-6 mr-1"></i>
                                             </a>
                                         </div>
                                         <div class="mr-2">
