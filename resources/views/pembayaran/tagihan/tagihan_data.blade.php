@@ -7,7 +7,7 @@
                 <div class="row d-flex">
                     {{-- judul Page --}}
                     <div class="col-md-9 col-sm-8">
-                        <h4 class="text-dark">Manajemen Pembayaran</h4>
+                        <h4 class="text-dark judul-halaman">Manajemen Pembayaran</h4>
                     </div>
                     {{-- Akhir judul Page --}}
                     {{-- Breadcrumb --}}
@@ -41,9 +41,9 @@
 
                     <div class="card-body">
                         <!-- FORM PENCARIAN -->
-                        <div class="">
+                        <div class="col-12 Search-form">
                             <form class="" action="/tagihan" method="get">
-                                <div class="input-group input-group mb-3 float-right" style="width: 350px;">
+                                <div class="input-group input-group mb-3 float-right">
                                     <input type="search" name="katakunci" class="form-control float-right"
                                         placeholder="Masukkan Kata Kunci" value="{{ Request::get('katakunci') }}"
                                         aria-label="Search">

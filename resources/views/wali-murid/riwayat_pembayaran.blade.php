@@ -7,7 +7,7 @@
                 <div class="row d-flex">
                     {{-- judul Page --}}
                     <div class="col-md-8 col-sm-8">
-                        <h4 class="text-dark">Manajemen Pembayaran</h4>
+                        <h4 class="text-dark judul-halaman">Manajemen Pembayaran</h4>
                     </div>
                     {{-- Akhir judul Page --}}
                     {{-- Breadcrumb --}}
