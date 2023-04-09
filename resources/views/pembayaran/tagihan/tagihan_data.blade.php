@@ -73,66 +73,74 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($dataList as $data)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td class="capitalize"><a class="text-dark" href="/siswa/{{ $data->nisn }}"
-                                                    title="klik Untuk Detailnya">
-                                                    {{ $data->nisn }} | {{ $data->siswa->nama }}</a></td>
-                                            <td>{{ $data->tanggal_tagihan->translatedFormat('d-F-Y') }}</td>
-                                            <td class="capitalize">
-                                                {{ currency_IDR($data->tagihanDetails->sum('nominal_biaya')) }}</td>
-                                            @if ($data->status == 'lunas')
-                                                <td class="text-center">
-                                                    <div class="badge badge-success "><i class="bi bi-patch-check-fill">
-                                                            Lunas</i>
-                                                </td>
-                                            @elseif ($data->status == 'angsur')
-                                                <td class="text-center">
-                                                    <div class="badge badge-warning "><i
-                                                            class="bi bi-patch-exclamation-fill"> Angsur</i>
-                                                    </div>
-                                                </td>
-                                            @else
-                                                <td class="text-center">
-                                                    <div class="badge badge-primary "><i class="bi bi-patch-minus-fill">
-                                                            Baru</i>
-                                                    </div>
-                                                </td>
-                                            @endif
-                                            <td class="capitalize">
-                                                @if ($data->user_id == $data->user->id)
-                                                    {{ $data->user->name }} | {{ $data->user->level }}
+                                    @if ($dataList->count() > 0)
+                                        @foreach ($dataList as $data)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td class="capitalize"><a class="text-dark"
+                                                        href="/siswa/{{ $data->nisn }}" title="klik Untuk Detailnya">
+                                                        {{ $data->nisn }} | {{ $data->siswa->nama }}</a></td>
+                                                <td>{{ $data->tanggal_tagihan->translatedFormat('d-F-Y') }}</td>
+                                                <td class="capitalize">
+                                                    {{ currency_IDR($data->tagihanDetails->sum('nominal_biaya')) }}</td>
+                                                @if ($data->status == 'lunas')
+                                                    <td class="text-center">
+                                                        <div class="badge badge-success "><i class="bi bi-patch-check-fill">
+                                                                Lunas</i>
+                                                    </td>
+                                                @elseif ($data->status == 'angsur')
+                                                    <td class="text-center">
+                                                        <div class="badge badge-warning "><i
+                                                                class="bi bi-patch-exclamation-fill"> Angsur</i>
+                                                        </div>
+                                                    </td>
+                                                @else
+                                                    <td class="text-center">
+                                                        <div class="badge badge-primary "><i class="bi bi-patch-minus-fill">
+                                                                Baru</i>
+                                                        </div>
+                                                    </td>
                                                 @endif
-                                            <td>
-                                                {{-- Tombol Action --}}
-                                                <div class="dropdown d-inline">
+                                                <td class="capitalize">
+                                                    @if ($data->user_id == $data->user->id)
+                                                        {{ $data->user->name }} | {{ $data->user->level }}
+                                                    @endif
+                                                <td>
+                                                    {{-- Tombol Action --}}
                                                     <div class="dropdown d-inline">
-                                                        <button class="btn btn-primary dropdown-toggle" type="button"
-                                                            id="dropdownMenuButton2" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false" title="Tombol Aksi">
-                                                            <i class="bi bi-three-dots-vertical btn-tambah-data"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu ">
-                                                            <a class="dropdown-item has-icon text-info"
-                                                                href="/tagihan/{{ $data->nisn }}"><i
-                                                                    class="far bi-eye"></i>
-                                                                Detail</a>
-                                                            <form action="/tagihan1/{{ $data->id }}" method="get">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit"
-                                                                    class="confirm dropdown-item has-icon text-danger">
-                                                                    <input type="hidden" name="oldImage"
-                                                                        value="{{ $data->foto }}"><i
-                                                                        class="far bi-trash-fill mt-2"></i><small>Hapus</small></button>
-                                                            </form>
+                                                        <div class="dropdown d-inline">
+                                                            <button class="btn btn-primary dropdown-toggle" type="button"
+                                                                id="dropdownMenuButton2" data-toggle="dropdown"
+                                                                aria-haspopup="true" aria-expanded="false"
+                                                                title="Tombol Aksi">
+                                                                <i class="bi bi-three-dots-vertical btn-tambah-data"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu ">
+                                                                <a class="dropdown-item has-icon text-info"
+                                                                    href="/tagihan/{{ $data->nisn }}"><i
+                                                                        class="far bi-eye"></i>
+                                                                    Detail</a>
+                                                                <form action="/tagihan1/{{ $data->id }}"
+                                                                    method="get">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit"
+                                                                        class="confirm dropdown-item has-icon text-danger">
+                                                                        <input type="hidden" name="oldImage"
+                                                                            value="{{ $data->foto }}"><i
+                                                                            class="far bi-trash-fill mt-2"></i><small>Hapus</small></button>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                {{-- Tombol Action --}}
-                                            </td>
-                                    @endforeach
+                                                    {{-- Tombol Action --}}
+                                                </td>
+                                        @endforeach
+                                    @else
+                                        <td colspan="7" class="text-center bg-secondary">Belum ada Data
+                                            Tagihan
+                                        </td>
+                                    @endif
                                 </tbody>
                             </table>
                             {{-- panigation --}}

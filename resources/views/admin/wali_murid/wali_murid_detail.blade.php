@@ -179,27 +179,33 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($siswaData as $item)
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td class="capitalize"><a href="/siswa/{{ $item->nisn }}"
-                                                                class="text-dark" title="Klik Untuk Detail">
-                                                                {{ $item->nama }}</a>
-                                                        </td>
-                                                        <td>{{ $item->nisn }}</td>
-                                                        <td>
-                                                            <form action="/wali-siswa/{{ $item->nisn }}"
-                                                                method="post">
-                                                                @csrf
-                                                                @method('put')
-                                                                <button type="submit"
-                                                                    class="confirm btn btn-danger has-icon ">
-                                                                    <i
-                                                                        class="far bi-trash-fill mt-2 mr-2"></i>Hapus</button>
-                                                            </form>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                                @if ($siswaData->count() > 0)
+                                                    @foreach ($siswaData as $item)
+                                                        <tr>
+                                                            <td>{{ $loop->iteration }}</td>
+                                                            <td class="capitalize"><a href="/siswa/{{ $item->nisn }}"
+                                                                    class="text-dark" title="Klik Untuk Detail">
+                                                                    {{ $item->nama }}</a>
+                                                            </td>
+                                                            <td>{{ $item->nisn }}</td>
+                                                            <td>
+                                                                <form action="/wali-siswa/{{ $item->nisn }}"
+                                                                    method="post">
+                                                                    @csrf
+                                                                    @method('put')
+                                                                    <button type="submit"
+                                                                        class="confirm btn btn-danger has-icon ">
+                                                                        <i
+                                                                            class="far bi-trash-fill mt-2 mr-2"></i>Hapus</button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @else
+                                                    <td colspan="7" class="text-center bg-success">Belum ada Data
+                                                        Anak
+                                                    </td>
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>

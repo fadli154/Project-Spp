@@ -23,15 +23,9 @@ class PembayaranController extends Controller
     {
         $this->authorize('entri-pembayaran');
         $katakunci = $request->katakunci;
-        if (strlen($katakunci)) {
-            $pembayaranList = Pembayaran::where('nama_biaya', 'like', "%$katakunci%")
-                ->orWhere('nominal', 'like', "%$katakunci%")
-                ->latest()->paginate(3);
-        } else {
-            $pembayaranList = Pembayaran::with('tagihan')->latest()->paginate(6);
-            $tagihanList = Tagihan::with('siswa')->groupBy('nisn')->get();
-            $kelasList = Kelas::get();
-        }
+        $pembayaranList = Pembayaran::with('tagihan')->latest()->paginate(6);
+        $tagihanList = Tagihan::with('siswa')->groupBy('nisn')->get();
+        $kelasList = Kelas::get();
 
         return view('/pembayaran.pembayaran.pembayaran_data', [
             'title' => 'pembayaran',

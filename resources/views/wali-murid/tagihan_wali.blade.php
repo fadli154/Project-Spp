@@ -30,25 +30,6 @@
                     </div>
 
                     <div class="card-body">
-                        <!-- FORM PENCARIAN -->
-                        <div class="col-12 Search-form">
-                            <form class="" action="/tagihan-wali" method="get">
-                                <div class="input-group input-group mb-3 float-right">
-                                    <input type="search" name="katakunci" class="form-control float-right"
-                                        placeholder="Masukkan Kata Kunci" value="{{ Request::get('katakunci') }}"
-                                        aria-label="Search">
-                                    <div class="input-group-append mr-1">
-                                        <button type="submit" title="Cari" class="btn btn-light"><i
-                                                class="fas fa-search"></i></button>
-                                    </div>
-                                    <div class="input-group-append ">
-                                        <a href="" title="Refresh" class="btn btn-light"><i
-                                                class="fas fa-circle-notch"></i></a>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        {{-- Akhir Form Pencarian --}}
                         <div class="table-responsive">
                             <table class="table table-bordered table-md">
                                 <thead>
@@ -63,56 +44,62 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($dataList as $data)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td class="capitalize"><a class="text-dark" href="/siswa/{{ $data->nisn }}"
-                                                    title="klik Untuk Detailnya">
-                                                    {{ $data->nisn }} | {{ $data->siswa->nama }}</a></td>
-                                            <td>{{ $data->tanggal_tagihan->translatedFormat('d-F-Y') }}</td>
-                                            <td class="capitalize">
-                                                {{ currency_IDR($data->tagihanDetails->sum('nominal_biaya')) }}</td>
-                                            @if ($data->status == 'lunas')
-                                                <td class="text-center">
-                                                    <div class="badge badge-success "><i class="bi bi-patch-check-fill">
-                                                            Lunas</i>
-                                                </td>
-                                            @elseif ($data->status == 'angsur')
-                                                <td class="text-center">
-                                                    <div class="badge badge-warning "><i
-                                                            class="bi bi-patch-exclamation-fill"> Angsur</i>
-                                                    </div>
-                                                </td>
-                                            @else
-                                                <td class="text-center">
-                                                    <div class="badge badge-primary "><i class="bi bi-patch-minus-fill">
-                                                            Baru</i>
-                                                    </div>
-                                                </td>
-                                            @endif
-                                            <td class="capitalize">
-                                                @if ($data->user_id == $data->user->id)
-                                                    {{ $data->user->name }} | {{ $data->user->level }}
+                                    @if ($dataList->count() > 0)
+                                        @foreach ($dataList as $data)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td class="capitalize"><a class="text-dark"
+                                                        href="/siswa/{{ $data->nisn }}" title="klik Untuk Detailnya">
+                                                        {{ $data->nisn }} | {{ $data->siswa->nama }}</a></td>
+                                                <td>{{ $data->tanggal_tagihan->translatedFormat('d-F-Y') }}</td>
+                                                <td class="capitalize">
+                                                    {{ currency_IDR($data->tagihanDetails->sum('nominal_biaya')) }}</td>
+                                                @if ($data->status == 'lunas')
+                                                    <td class="text-center">
+                                                        <div class="badge badge-success "><i class="bi bi-patch-check-fill">
+                                                                Lunas</i>
+                                                    </td>
+                                                @elseif ($data->status == 'angsur')
+                                                    <td class="text-center">
+                                                        <div class="badge badge-warning "><i
+                                                                class="bi bi-patch-exclamation-fill"> Angsur</i>
+                                                        </div>
+                                                    </td>
+                                                @else
+                                                    <td class="text-center">
+                                                        <div class="badge badge-primary "><i class="bi bi-patch-minus-fill">
+                                                                Baru</i>
+                                                        </div>
+                                                    </td>
                                                 @endif
-                                            <td>
-                                                {{-- Tombol Action --}}
-                                                <div class="dropdown d-inline">
+                                                <td class="capitalize">
+                                                    @if ($data->user_id == $data->user->id)
+                                                        {{ $data->user->name }} | {{ $data->user->level }}
+                                                    @endif
+                                                <td>
+                                                    {{-- Tombol Action --}}
                                                     <div class="dropdown d-inline">
-                                                        <button class="btn btn-primary dropdown-toggle" type="button"
-                                                            id="dropdownMenuButton2" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false" title="Tombol Aksi">
-                                                            <i class="bi bi-three-dots-vertical btn-tambah-data"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu ">
-                                                            <a class="dropdown-item has-icon text-info"
-                                                                href="/siswa/{{ $data->nisn }}"><i class="far bi-eye"></i>
-                                                                Detail</a>
+                                                        <div class="dropdown d-inline">
+                                                            <button class="btn btn-primary dropdown-toggle" type="button"
+                                                                id="dropdownMenuButton2" data-toggle="dropdown"
+                                                                aria-haspopup="true" aria-expanded="false"
+                                                                title="Tombol Aksi">
+                                                                <i class="bi bi-three-dots-vertical btn-tambah-data"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu ">
+                                                                <a class="dropdown-item has-icon text-info"
+                                                                    href="/siswa/{{ $data->nisn }}"><i
+                                                                        class="far bi-eye"></i>
+                                                                    Detail</a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                {{-- Tombol Action --}}
-                                            </td>
-                                    @endforeach
+                                                    {{-- Tombol Action --}}
+                                                </td>
+                                        @endforeach
+                                    @else
+                                        <td colspan="7" class="text-center bg-secondary">Belum Memiliki Tagihan</td>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

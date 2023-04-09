@@ -110,53 +110,60 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($tagihanList as $data)
-                                                @foreach ($dataAnak as $item)
-                                                    @if ($data->nisn == $item->nisn)
-                                                        <tr>
-                                                            <td class="capitalize"><a class="text-dark"
-                                                                    href="/siswa/{{ $data->nisn }}"
-                                                                    title="klik Untuk Detailnya">
-                                                                    {{ $data->nisn }} | {{ $data->siswa->nama }}</a></td>
-                                                            @foreach ($kelasList as $itemKelas)
-                                                                @if ($data->kelas_id == $itemKelas->kelas_id)
-                                                                    <td>{{ $itemKelas->kelas }}</td>
+                                            @if ($tagihanList != null)
+                                                @foreach ($tagihanList as $data)
+                                                    @foreach ($dataAnak as $item)
+                                                        @if ($data->nisn == $item->nisn)
+                                                            <tr>
+                                                                <td class="capitalize"><a class="text-dark"
+                                                                        href="/siswa/{{ $data->nisn }}"
+                                                                        title="klik Untuk Detailnya">
+                                                                        {{ $data->nisn }} | {{ $data->siswa->nama }}</a></td>
+                                                                @foreach ($kelasList as $itemKelas)
+                                                                    @if ($data->kelas_id == $itemKelas->kelas_id)
+                                                                        <td>{{ $itemKelas->kelas }}</td>
+                                                                    @endif
+                                                                @endforeach
+                                                                <td>{{ $data->tanggal_tagihan->translatedFormat('d-F-Y') }}
+                                                                </td>
+                                                                <td class="capitalize">
+                                                                    {{ currency_IDR($data->tagihanDetails->sum('nominal_biaya')) }}
+                                                                </td>
+                                                                @if ($data->status == 'lunas')
+                                                                    <td class="text-center">
+                                                                        <div class="badge badge-success "><i
+                                                                                class="bi bi-patch-check-fill">
+                                                                                Lunas</i>
+                                                                    </td>
+                                                                @elseif ($data->status == 'angsur')
+                                                                    <td class="text-center">
+                                                                        <div class="badge badge-warning "><i
+                                                                                class="bi bi-patch-exclamation-fill">
+                                                                                Angsur</i>
+                                                                        </div>
+                                                                    </td>
+                                                                @else
+                                                                    <td class="text-center">
+                                                                        <div class="badge badge-primary "><i
+                                                                                class="bi bi-patch-minus-fill">
+                                                                                Baru</i>
+                                                                        </div>
+                                                                    </td>
                                                                 @endif
-                                                            @endforeach
-                                                            <td>{{ $data->tanggal_tagihan->translatedFormat('d-F-Y') }}</td>
-                                                            <td class="capitalize">
-                                                                {{ currency_IDR($data->tagihanDetails->sum('nominal_biaya')) }}
-                                                            </td>
-                                                            @if ($data->status == 'lunas')
-                                                                <td class="text-center">
-                                                                    <div class="badge badge-success "><i
-                                                                            class="bi bi-patch-check-fill">
-                                                                            Lunas</i>
+                                                                <td class="capitalize">
+                                                                    @if ($data->user_id == $data->user->id)
+                                                                        {{ $data->user->name }} | {{ $data->user->level }}
+                                                                    @endif
                                                                 </td>
-                                                            @elseif ($data->status == 'angsur')
-                                                                <td class="text-center">
-                                                                    <div class="badge badge-warning "><i
-                                                                            class="bi bi-patch-exclamation-fill">
-                                                                            Angsur</i>
-                                                                    </div>
-                                                                </td>
-                                                            @else
-                                                                <td class="text-center">
-                                                                    <div class="badge badge-primary "><i
-                                                                            class="bi bi-patch-minus-fill">
-                                                                            Baru</i>
-                                                                    </div>
-                                                                </td>
-                                                            @endif
-                                                            <td class="capitalize">
-                                                                @if ($data->user_id == $data->user->id)
-                                                                    {{ $data->user->name }} | {{ $data->user->level }}
-                                                                @endif
-                                                            </td>
-                                                        </tr>
-                                                    @endif
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
                                                 @endforeach
-                                            @endforeach
+                                            @else
+                                                <td colspan="7" class="text-center bg-secondary">Belum ada
+                                                    Tagihan
+                                                </td>
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -289,39 +296,46 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($dataList as $data)
-                                                <tr>
-                                                    @foreach ($tagihanList as $item)
-                                                        @if ($data->tagihan->nisn == $item->siswa->nisn)
-                                                            <td class="capitalize"><a class="text-dark"
-                                                                    href="/siswa/{{ $data->tagihan->nisn }}"
-                                                                    title="klik Untuk Detailnya">{{ $item->siswa->nama }} |
-                                                                    {{ $data->tagihan->nisn }}</a></td>
+                                            @if ($dataList->count() > 0)
+                                                @foreach ($dataList as $data)
+                                                    <tr>
+                                                        @foreach ($tagihanList as $item)
+                                                            @if ($data->tagihan->nisn == $item->siswa->nisn)
+                                                                <td class="capitalize"><a class="text-dark"
+                                                                        href="/siswa/{{ $data->tagihan->nisn }}"
+                                                                        title="klik Untuk Detailnya">{{ $item->siswa->nama }}
+                                                                        |
+                                                                        {{ $data->tagihan->nisn }}</a></td>
+                                                            @endif
+                                                        @endforeach
+                                                        @foreach ($kelasList as $itemKelas)
+                                                            @if ($data->tagihan->kelas_id == $itemKelas->kelas_id)
+                                                                <td>{{ $itemKelas->kelas }}</td>
+                                                            @endif
+                                                        @endforeach
+                                                        <td>{{ currency_IDR($data->jumlah_dibayar) }}</td>
+                                                        <td>{{ $data->updated_at->translatedFormat('d-F-Y | g:i:s') }}</td>
+                                                        @if ($data->status_konfirmasi == 'sudah')
+                                                            <td class="text-center">
+                                                                <div class="badge badge-success "><i
+                                                                        class="bi bi-hand-thumbs-up-fill">
+                                                                    </i>
+                                                                </div>
+                                                            </td>
+                                                        @else
+                                                            <td class="text-center">
+                                                                <div class="badge badge-danger "><i
+                                                                        class="bi bi-hand-thumbs-down-fill"></i>
+                                                                </div>
+                                                            </td>
                                                         @endif
-                                                    @endforeach
-                                                    @foreach ($kelasList as $itemKelas)
-                                                        @if ($data->tagihan->kelas_id == $itemKelas->kelas_id)
-                                                            <td>{{ $itemKelas->kelas }}</td>
-                                                        @endif
-                                                    @endforeach
-                                                    <td>{{ currency_IDR($data->jumlah_dibayar) }}</td>
-                                                    <td>{{ $data->updated_at->translatedFormat('d-F-Y | g:i:s') }}</td>
-                                                    @if ($data->status_konfirmasi == 'sudah')
-                                                        <td class="text-center">
-                                                            <div class="badge badge-success "><i
-                                                                    class="bi bi-hand-thumbs-up-fill">
-                                                                </i>
-                                                            </div>
                                                         </td>
-                                                    @else
-                                                        <td class="text-center">
-                                                            <div class="badge badge-danger "><i
-                                                                    class="bi bi-hand-thumbs-down-fill"></i>
-                                                            </div>
-                                                        </td>
-                                                    @endif
-                                                    </td>
-                                            @endforeach
+                                                @endforeach
+                                            @else
+                                                <td colspan="7" class="text-center bg-secondary">Belum ada Yang Melakukan
+                                                    Pembayaran
+                                                </td>
+                                            @endif
                                         </tbody>
                                     </table>
                                     {{-- panigation --}}
@@ -430,45 +444,53 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($tagihanData as $data)
-                                                <tr>
-                                                    <td class="capitalize"><a class="text-dark"
-                                                            href="/siswa/{{ $data->nisn }}" title="klik Untuk Detailnya">
-                                                            {{ $data->nisn }} | {{ $data->siswa->nama }}</a></td>
-                                                    @foreach ($kelasList as $itemKelas)
-                                                        @if ($data->kelas_id == $itemKelas->kelas_id)
-                                                            <td>{{ $itemKelas->kelas }}</td>
+                                            @if ($tagihanData->count() > 0)
+                                                @foreach ($tagihanData as $data)
+                                                    <tr>
+                                                        <td class="capitalize"><a class="text-dark"
+                                                                href="/siswa/{{ $data->nisn }}"
+                                                                title="klik Untuk Detailnya">
+                                                                {{ $data->nisn }} | {{ $data->siswa->nama }}</a></td>
+                                                        @foreach ($kelasList as $itemKelas)
+                                                            @if ($data->kelas_id == $itemKelas->kelas_id)
+                                                                <td>{{ $itemKelas->kelas }}</td>
+                                                            @endif
+                                                        @endforeach
+                                                        <td>{{ $data->tanggal_tagihan->translatedFormat('d-F-Y') }}</td>
+                                                        <td class="capitalize">
+                                                            {{ currency_IDR($data->tagihanDetails->sum('nominal_biaya')) }}
+                                                        </td>
+                                                        @if ($data->status == 'lunas')
+                                                            <td class="text-center">
+                                                                <div class="badge badge-success "><i
+                                                                        class="bi bi-patch-check-fill">
+                                                                        Lunas</i>
+                                                            </td>
+                                                        @elseif ($data->status == 'angsur')
+                                                            <td class="text-center">
+                                                                <div class="badge badge-warning "><i
+                                                                        class="bi bi-patch-exclamation-fill">
+                                                                        Angsur</i>
+                                                                </div>
+                                                            </td>
+                                                        @else
+                                                            <td class="text-center">
+                                                                <div class="badge badge-primary "><i
+                                                                        class="bi bi-patch-minus-fill">
+                                                                        Baru</i>
+                                                                </div>
+                                                            </td>
                                                         @endif
-                                                    @endforeach
-                                                    <td>{{ $data->tanggal_tagihan->translatedFormat('d-F-Y') }}</td>
-                                                    <td class="capitalize">
-                                                        {{ currency_IDR($data->tagihanDetails->sum('nominal_biaya')) }}</td>
-                                                    @if ($data->status == 'lunas')
-                                                        <td class="text-center">
-                                                            <div class="badge badge-success "><i
-                                                                    class="bi bi-patch-check-fill">
-                                                                    Lunas</i>
-                                                        </td>
-                                                    @elseif ($data->status == 'angsur')
-                                                        <td class="text-center">
-                                                            <div class="badge badge-warning "><i
-                                                                    class="bi bi-patch-exclamation-fill">
-                                                                    Angsur</i>
-                                                            </div>
-                                                        </td>
-                                                    @else
-                                                        <td class="text-center">
-                                                            <div class="badge badge-primary "><i
-                                                                    class="bi bi-patch-minus-fill">
-                                                                    Baru</i>
-                                                            </div>
-                                                        </td>
-                                                    @endif
-                                                    <td class="capitalize">
-                                                        @if ($data->user_id == $data->user->id)
-                                                            {{ $data->user->name }} | {{ $data->user->level }}
-                                                        @endif
-                                            @endforeach
+                                                        <td class="capitalize">
+                                                            @if ($data->user_id == $data->user->id)
+                                                                {{ $data->user->name }} | {{ $data->user->level }}
+                                                            @endif
+                                                @endforeach
+                                            @else
+                                                <td colspan="7" class="text-center bg-secondary">Belum ada
+                                                    Tagihan
+                                                </td>
+                                            @endif
                                         </tbody>
                                     </table>
                                     {{-- panigation --}}

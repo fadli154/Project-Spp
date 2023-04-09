@@ -340,61 +340,67 @@
                                                                 <th>Aksi</th>
                                                             </tr>
                                                         </thead>
-                                                        @foreach ($tagihanList as $item)
-                                                            @foreach ($tagihanDetailList as $data)
-                                                                @if ($item->id == $data->tagihan_id)
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>{{ $loop->iteration }}</td>
-                                                                            <td class="capitalize">
-                                                                                {{ $data->nama_biaya }}</td>
-                                                                            <td class="text-center">
-                                                                                {{ currency_IDR($data->nominal_biaya) }}
-                                                                            </td>
-                                                                            <td>
-                                                                                <form
-                                                                                    action="/tagihan/{{ $item->nisn }}"
-                                                                                    method="post">
-                                                                                    @csrf
-                                                                                    @method('DELETE')
-                                                                                    <input type="hidden"
-                                                                                        name="id_details"
-                                                                                        value="{{ $data->id }}">
-                                                                                    <button type="submit"
-                                                                                        class="confirm btn btn-danger has-icon ">
-                                                                                        <i
-                                                                                            class="far bi-trash-fill mt-2 mr-2"></i>Hapus</button>
-                                                                                </form>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                @endif
+                                                        @if ($tagihanList->count() > 0)
+                                                            @foreach ($tagihanList as $item)
+                                                                @foreach ($tagihanDetailList as $data)
+                                                                    @if ($item->id == $data->tagihan_id)
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>{{ $loop->iteration }}</td>
+                                                                                <td class="capitalize">
+                                                                                    {{ $data->nama_biaya }}</td>
+                                                                                <td class="text-center">
+                                                                                    {{ currency_IDR($data->nominal_biaya) }}
+                                                                                </td>
+                                                                                <td>
+                                                                                    <form
+                                                                                        action="/tagihan/{{ $item->nisn }}"
+                                                                                        method="post">
+                                                                                        @csrf
+                                                                                        @method('DELETE')
+                                                                                        <input type="hidden"
+                                                                                            name="id_details"
+                                                                                            value="{{ $data->id }}">
+                                                                                        <button type="submit"
+                                                                                            class="confirm btn btn-danger has-icon ">
+                                                                                            <i
+                                                                                                class="far bi-trash-fill mt-2 mr-2"></i>Hapus</button>
+                                                                                    </form>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    @endif
+                                                                @endforeach
+                                                                <tfoot>
+                                                                    <tr>
+                                                                        <td colspan="2"
+                                                                            class="uppercase text-dark font-weight-bold text-center">
+                                                                            Total
+                                                                            Tagihan
+                                                                        </td>
+                                                                        <td colspan="2"
+                                                                            class="uppercase text-dark font-weight-bold text-center">
+                                                                            {{ currency_IDR($item->tagihanDetails->sum('nominal_biaya')) }}
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"
+                                                                            class="uppercase text-dark font-weight-bold text-center">
+                                                                            Sisa
+                                                                            Tagihan
+                                                                        </td>
+                                                                        <td colspan="2"
+                                                                            class="uppercase text-dark font-weight-bold text-center">
+                                                                            {{ currency_IDR($item->sisa_tagihan) }}
+                                                                        </td>
+                                                                    </tr>
+                                                                </tfoot>
                                                             @endforeach
-                                                            <tfoot>
-                                                                <tr>
-                                                                    <td colspan="2"
-                                                                        class="uppercase text-dark font-weight-bold text-center">
-                                                                        Total
-                                                                        Tagihan
-                                                                    </td>
-                                                                    <td colspan="2"
-                                                                        class="uppercase text-dark font-weight-bold text-center">
-                                                                        {{ currency_IDR($item->tagihanDetails->sum('nominal_biaya')) }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="2"
-                                                                        class="uppercase text-dark font-weight-bold text-center">
-                                                                        Sisa
-                                                                        Tagihan
-                                                                    </td>
-                                                                    <td colspan="2"
-                                                                        class="uppercase text-dark font-weight-bold text-center">
-                                                                        {{ currency_IDR($item->sisa_tagihan) }}
-                                                                    </td>
-                                                                </tr>
-                                                            </tfoot>
-                                                        @endforeach
+                                                        @else
+                                                            <td colspan="7" class="text-center bg-success">Belum ada
+                                                                Tagihan
+                                                            </td>
+                                                        @endif
                                                     </table>
                                                     @if ($data->keterangan == null)
                                                         <strong>
@@ -518,101 +524,110 @@
                                                                 <th>Jumlah Dibayar</th>
                                                             </tr>
                                                         </thead>
-                                                        @foreach ($tagihanList as $item)
-                                                            @foreach ($pembayaranList as $data)
-                                                                @if ($item->id == $data->tagihan_id)
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td class="text-center">
-                                                                                <a href="/kwitansi-pembayaran/{{ $data->id }}"
-                                                                                    target="blank" class="text-white">
-                                                                                    <button type="button"
-                                                                                        class="btn btn-primary"
-                                                                                        data-toggle="tooltip"
-                                                                                        data-placement="top"
-                                                                                        title="Kwitansi Pembayaran"
-                                                                                        data-original-title="Kwitansi Pembayaran">
-                                                                                        <i
-                                                                                            class="bi bi-printer-fill btn-tambah-data"></i>
-                                                                                    </button>
-                                                                                </a>
-                                                                            </td>
-                                                                            <td class="capitalize">
-                                                                                {{ $data->created_at->format('d-M-Y | g:i:s') }}
-                                                                            </td>
-                                                                            <td class="text-center">
-                                                                                {{ currency_IDR($data->jumlah_dibayar) }}
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                @endif
-                                                            @endforeach
-                                                            <tfoot>
-                                                                <tr>
-                                                                    <td colspan="2"
-                                                                        class="uppercase text-dark font-weight-bold text-center">
-                                                                        Sisa
-                                                                        Tagihan
-                                                                    </td>
-                                                                    @if ($data->jumlah_dibayar != null)
-                                                                        <td
-                                                                            class="uppercase text-dark font-weight-bold d-flex justify-content-center">
-                                                                            {{ currency_IDR($item->sisa_tagihan) }}
-                                                                        </td>
-                                                                    @else
-                                                                        <td
-                                                                            class="uppercase text-dark font-weight-bold d-flex justify-content-center">
-                                                                            {{ currency_IDR($item->tagihanDetails->sum('nominal_biaya')) }}
-                                                                        </td>
+                                                        @if ($tagihanList->count() > 0)
+                                                            @foreach ($tagihanList as $item)
+                                                                @foreach ($pembayaranList as $data)
+                                                                    @if ($item->id == $data->tagihan_id)
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="text-center">
+                                                                                    <a href="/kwitansi-pembayaran/{{ $data->id }}"
+                                                                                        target="blank" class="text-white">
+                                                                                        <button type="button"
+                                                                                            class="btn btn-primary"
+                                                                                            data-toggle="tooltip"
+                                                                                            data-placement="top"
+                                                                                            title="Kwitansi Pembayaran"
+                                                                                            data-original-title="Kwitansi Pembayaran">
+                                                                                            <i
+                                                                                                class="bi bi-printer-fill btn-tambah-data"></i>
+                                                                                        </button>
+                                                                                    </a>
+                                                                                </td>
+                                                                                <td class="capitalize">
+                                                                                    {{ $data->created_at->format('d-M-Y | g:i:s') }}
+                                                                                </td>
+                                                                                <td class="text-center">
+                                                                                    {{ currency_IDR($data->jumlah_dibayar) }}
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
                                                                     @endif
-                                                                </tr>
+                                                                @endforeach
+                                                                <tfoot>
+                                                                    <tr>
+                                                                        <td colspan="2"
+                                                                            class="uppercase text-dark font-weight-bold text-center">
+                                                                            Sisa
+                                                                            Tagihan
+                                                                        </td>
+                                                                        @if ($data->jumlah_dibayar != null)
+                                                                            <td
+                                                                                class="uppercase text-dark font-weight-bold d-flex justify-content-center">
+                                                                                {{ currency_IDR($item->sisa_tagihan) }}
+                                                                            </td>
+                                                                        @else
+                                                                            <td
+                                                                                class="uppercase text-dark font-weight-bold d-flex justify-content-center">
+                                                                                {{ currency_IDR($item->tagihanDetails->sum('nominal_biaya')) }}
+                                                                            </td>
+                                                                        @endif
+                                                                    </tr>
 
-                                                                <tr>
-                                                                    <td colspan="2"
-                                                                        class="uppercase text-dark font-weight-bold text-center">
-                                                                        Status
-                                                                        Tagihan
-                                                                    </td>
-                                                                    @if ($item->status == 'lunas')
+                                                                    <tr>
                                                                         <td colspan="2"
-                                                                            class="d-flex justify-content-center">
-                                                                            <button type="submit"
-                                                                                class="btn btn-success capitalize justify-content-end"
-                                                                                data-toggle="tooltip" data-placement="top"
-                                                                                title="Status Tagihan"
-                                                                                data-original-title="Status Tagihan">
-                                                                                <i class="bi bi-patch-check-fill">
-                                                                                    {{ $item->status }}</i>
-                                                                            </button>
+                                                                            class="uppercase text-dark font-weight-bold text-center">
+                                                                            Status
+                                                                            Tagihan
                                                                         </td>
-                                                                    @elseif ($item->status == 'angsur')
-                                                                        <td colspan="2"
-                                                                            class="d-flex justify-content-center">
-                                                                            <button type="submit"
-                                                                                class="btn btn-warning capitalize justify-content-end"
-                                                                                data-toggle="tooltip" data-placement="top"
-                                                                                title="Status Tagihan"
-                                                                                data-original-title="Status Tagihan"><i
-                                                                                    class="bi bi-patch-exclamation-fill">
-                                                                                    {{ $item->status }}</i>
-                                                                            </button>
-                                                                        </td>
-                                                                    @else
-                                                                        <td colspan="2"
-                                                                            class="d-flex justify-content-center">
-                                                                            <button type="submit"
-                                                                                class="btn btn-primary capitalize justify-content-end"
-                                                                                data-toggle="tooltip" data-placement="top"
-                                                                                title="Status Tagihan"
-                                                                                data-original-title="Status Tagihan">
-                                                                                <i class="bi bi-patch-minus-fill">
-                                                                                    Baru</i>
-                                                                            </button>
-                                                                        </td>
-                                                                    @endif
-                                                                </tr>
-                                                            </tfoot>
-                                                        @endforeach
+                                                                        @if ($item->status == 'lunas')
+                                                                            <td colspan="2"
+                                                                                class="d-flex justify-content-center">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-success capitalize justify-content-end"
+                                                                                    data-toggle="tooltip"
+                                                                                    data-placement="top"
+                                                                                    title="Status Tagihan"
+                                                                                    data-original-title="Status Tagihan">
+                                                                                    <i class="bi bi-patch-check-fill">
+                                                                                        {{ $item->status }}</i>
+                                                                                </button>
+                                                                            </td>
+                                                                        @elseif ($item->status == 'angsur')
+                                                                            <td colspan="2"
+                                                                                class="d-flex justify-content-center">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-warning capitalize justify-content-end"
+                                                                                    data-toggle="tooltip"
+                                                                                    data-placement="top"
+                                                                                    title="Status Tagihan"
+                                                                                    data-original-title="Status Tagihan"><i
+                                                                                        class="bi bi-patch-exclamation-fill">
+                                                                                        {{ $item->status }}</i>
+                                                                                </button>
+                                                                            </td>
+                                                                        @else
+                                                                            <td colspan="2"
+                                                                                class="d-flex justify-content-center">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary capitalize justify-content-end"
+                                                                                    data-toggle="tooltip"
+                                                                                    data-placement="top"
+                                                                                    title="Status Tagihan"
+                                                                                    data-original-title="Status Tagihan">
+                                                                                    <i class="bi bi-patch-minus-fill">
+                                                                                        Baru</i>
+                                                                                </button>
+                                                                            </td>
+                                                                        @endif
+                                                                    </tr>
+                                                                </tfoot>
+                                                            @endforeach
+                                                        @else
+                                                            <td colspan="7" class="text-center bg-success">Belum ada
+                                                                Pembayaran
+                                                            </td>
+                                                        @endif
                                                     </table>
                                                 </div>
                                             </div>

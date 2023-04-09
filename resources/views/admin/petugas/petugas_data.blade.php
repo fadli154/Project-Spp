@@ -71,44 +71,51 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $data)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td class="capitalize"><a class="text-dark" href="/petugas/{{ $data->id }}"
-                                                    title="klik Untuk Detailnya">
-                                                    {{ $data->name }}</a></td>
-                                            <td>{{ $data->email }}</td>
-                                            <td class="capitalize">{{ $data->level }}</td>
-                                            <td>
-                                                {{-- Tombol Action --}}
-                                                <div class="dropdown d-inline">
-                                                    <button class="btn btn-primary dropdown-toggle" type="button"
-                                                        id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false" title="Tombol Aksi">
-                                                        <i class="bi bi-three-dots-vertical btn-tambah-data"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu ">
-                                                        <a class="dropdown-item has-icon text-info"
-                                                            href="/petugas/{{ $data->id }}"><i class="far bi-eye"></i>
-                                                            Detail</a>
-                                                        <a class="dropdown-item has-icon text-warning"
-                                                            href="/petugas/{{ $data->id }}/edit"><i
-                                                                class="far bi-pencil-square"></i>
-                                                            Edit</a>
-                                                        <form action="/petugas/{{ $data->id }}" method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                class="confirm dropdown-item has-icon text-danger">
-                                                                <input type="hidden" name="oldImage"
-                                                                    value="{{ $data->foto }}"><i
-                                                                    class="far bi-trash-fill mt-2"></i><small>Hapus</small></button>
-                                                        </form>
+                                    @if ($users->count() > 0)
+                                        @foreach ($users as $data)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td class="capitalize"><a class="text-dark"
+                                                        href="/petugas/{{ $data->id }}" title="klik Untuk Detailnya">
+                                                        {{ $data->name }}</a></td>
+                                                <td>{{ $data->email }}</td>
+                                                <td class="capitalize">{{ $data->level }}</td>
+                                                <td>
+                                                    {{-- Tombol Action --}}
+                                                    <div class="dropdown d-inline">
+                                                        <button class="btn btn-primary dropdown-toggle" type="button"
+                                                            id="dropdownMenuButton2" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false" title="Tombol Aksi">
+                                                            <i class="bi bi-three-dots-vertical btn-tambah-data"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu ">
+                                                            <a class="dropdown-item has-icon text-info"
+                                                                href="/petugas/{{ $data->id }}"><i
+                                                                    class="far bi-eye"></i>
+                                                                Detail</a>
+                                                            <a class="dropdown-item has-icon text-warning"
+                                                                href="/petugas/{{ $data->id }}/edit"><i
+                                                                    class="far bi-pencil-square"></i>
+                                                                Edit</a>
+                                                            <form action="/petugas/{{ $data->id }}" method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="confirm dropdown-item has-icon text-danger">
+                                                                    <input type="hidden" name="oldImage"
+                                                                        value="{{ $data->foto }}"><i
+                                                                        class="far bi-trash-fill mt-2"></i><small>Hapus</small></button>
+                                                            </form>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                {{-- Tombol Action --}}
-                                            </td>
-                                    @endforeach
+                                                    {{-- Tombol Action --}}
+                                                </td>
+                                        @endforeach
+                                    @else
+                                        <td colspan="7" class="text-center bg-secondary">Belum ada Data
+                                            Petugas
+                                        </td>
+                                    @endif
                                 </tbody>
                             </table>
                             {{-- panigation --}}

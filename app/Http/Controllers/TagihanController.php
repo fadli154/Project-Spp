@@ -25,8 +25,9 @@ class TagihanController extends Controller
     {
         $katakunci = $request->katakunci;
         if (strlen($katakunci)) {
-            $tagihanList = Tagihan::where('nama_biaya', 'like', "%$katakunci%")
-                ->orWhere('nominal', 'like', "%$katakunci%")
+            $tagihanList = Tagihan::where('status', 'like', "%$katakunci%")
+                ->orWhere('nisn', 'like', "%$katakunci%")
+                ->orWhere('kelas_id', 'like', "%$katakunci%")
                 ->latest()->paginate(3);
         } else {
             $tagihanList = Tagihan::latest()->paginate(6);

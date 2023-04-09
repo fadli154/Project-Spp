@@ -61,94 +61,102 @@
                             </div>
                             {{-- Akhir Form Pencarian --}}
 
-                            {{-- Data List --}}
-                            @foreach ($dataList as $data)
-                                <div class="col-lg-4 ">
-                                    <div class="card">
-                                        <div class="card-header" style="background-color:  rgb(189, 189, 216)  ">
-                                            <h4 class="uppercase">{{ $data->kelas }} {{ $data->angkatan }}</h4>
-                                            <div class="card-header-action mr-2">
-                                                <a title="Lihat Detail"
-                                                    data-collapse="#mycard-collapse-{{ $data->nip_wali_kelas }}"
-                                                    class="btn btn-icon btn-info" href="#"><i
-                                                        class="fas fa-plus"></i></a>
-                                            </div>
-                                            <div class="dropdown d-inline">
-                                                <button class="btn btn-primary" type="button" id="dropdownMenuButton2"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                    title="Tombol Aksi">
-                                                    <i class="bi bi-three-dots-vertical btn-tambah-data"></i>
-                                                </button>
-                                                <div class="dropdown-menu ">
-                                                    <a class="dropdown-item has-icon text-info"
-                                                        href="/kelas/{{ $data->kelas_id }}"><i class="far bi-eye"></i>
-                                                        Detail</a>
-                                                    <a class="dropdown-item has-icon text-warning"
-                                                        href="/kelas/{{ $data->kelas_id }}/edit"><i
-                                                            class="far bi-pencil-square"></i>
-                                                        Edit</a>
-                                                    <form action="/kelas/{{ $data->kelas_id }}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit"
-                                                            class="confirm dropdown-item has-icon text-danger">
-                                                            <input type="hidden" name="oldImage"
-                                                                value="{{ $data->foto }}"><i
-                                                                class="far bi-trash-fill mt-2"></i><small>Hapus</small></button>
-                                                    </form>
+                            @if ($dataList->count() > 0)
+                                {{-- Data List --}}
+                                @foreach ($dataList as $data)
+                                    <div class="col-lg-4 ">
+                                        <div class="card">
+                                            <div class="card-header" style="background-color:  rgb(189, 189, 216)  ">
+                                                <h4 class="uppercase">{{ $data->kelas }} {{ $data->angkatan }}</h4>
+                                                <div class="card-header-action mr-2">
+                                                    <a title="Lihat Detail"
+                                                        data-collapse="#mycard-collapse-{{ $data->nip_wali_kelas }}"
+                                                        class="btn btn-icon btn-info" href="#"><i
+                                                            class="fas fa-plus"></i></a>
+                                                </div>
+                                                <div class="dropdown d-inline">
+                                                    <button class="btn btn-primary" type="button" id="dropdownMenuButton2"
+                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                        title="Tombol Aksi">
+                                                        <i class="bi bi-three-dots-vertical btn-tambah-data"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu ">
+                                                        <a class="dropdown-item has-icon text-info"
+                                                            href="/kelas/{{ $data->kelas_id }}"><i class="far bi-eye"></i>
+                                                            Detail</a>
+                                                        <a class="dropdown-item has-icon text-warning"
+                                                            href="/kelas/{{ $data->kelas_id }}/edit"><i
+                                                                class="far bi-pencil-square"></i>
+                                                            Edit</a>
+                                                        <form action="/kelas/{{ $data->kelas_id }}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="confirm dropdown-item has-icon text-danger">
+                                                                <input type="hidden" name="oldImage"
+                                                                    value="{{ $data->foto }}"><i
+                                                                    class="far bi-trash-fill mt-2"></i><small>Hapus</small></button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="collapse" id="mycard-collapse-{{ $data->nip_wali_kelas }}"
-                                            style="background-color : rgb(214, 200, 226) ;">
-                                            @if ($data->foto)
-                                                <a href="/kelas/{{ $data->kelas_id }}" title="klik melihat Detail Kelas">
-                                                    <img src="{{ asset('storage/' . $data->foto) }}"
-                                                        alt="foto {{ $data->nama_wali_kelas }}"
-                                                        class="img-preview-kelas card-img-top">
-                                                </a>
-                                            @else
-                                                <a href="/kelas/{{ $data->kelas_id }}" title="klik melihat Detail Kelas">
-                                                    <img src="{{ asset('img/kelas.webp') }}"
-                                                        alt="foto {{ $data->nama_wali_kelas }}"
-                                                        class="img-preview-kelas card-img-top">
-                                                </a>
-                                            @endif
-                                            <div class="card-body">
-                                                <h5 class="card-title uppercase text-center">{{ $data->kelas }}
-                                                    {{ $data->angkatan }}</h5>
-                                                <strong>Kompetensi Keahlian (Jurusan) :</strong>
-                                                <span class="uppercase d-block mb-1">
-                                                    @foreach ($konsentrasiList as $item)
-                                                        @if ($item->id_kk === $data->id_kk)
-                                                            <span><a href="/konsentrasi-keahlian/{{ $item->id_kk }}"
-                                                                    title="Klik untuk detail"
-                                                                    class="text-dark">{{ $item->konsentrasi_keahlian }}</a></span>
-                                                        @break
+                                            <div class="collapse" id="mycard-collapse-{{ $data->nip_wali_kelas }}"
+                                                style="background-color : rgb(214, 200, 226) ;">
+                                                @if ($data->foto)
+                                                    <a href="/kelas/{{ $data->kelas_id }}"
+                                                        title="klik melihat Detail Kelas">
+                                                        <img src="{{ asset('storage/' . $data->foto) }}"
+                                                            alt="foto {{ $data->nama_wali_kelas }}"
+                                                            class="img-preview-kelas card-img-top">
+                                                    </a>
+                                                @else
+                                                    <a href="/kelas/{{ $data->kelas_id }}"
+                                                        title="klik melihat Detail Kelas">
+                                                        <img src="{{ asset('img/kelas.webp') }}"
+                                                            alt="foto {{ $data->nama_wali_kelas }}"
+                                                            class="img-preview-kelas card-img-top">
+                                                    </a>
+                                                @endif
+                                                <div class="card-body">
+                                                    <h5 class="card-title uppercase text-center">{{ $data->kelas }}
+                                                        {{ $data->angkatan }}</h5>
+                                                    <strong>Kompetensi Keahlian (Jurusan) :</strong>
+                                                    <span class="uppercase d-block mb-1">
+                                                        @foreach ($konsentrasiList as $item)
+                                                            @if ($item->id_kk === $data->id_kk)
+                                                                <span><a href="/konsentrasi-keahlian/{{ $item->id_kk }}"
+                                                                        title="Klik untuk detail"
+                                                                        class="text-dark">{{ $item->konsentrasi_keahlian }}</a></span>
+                                                            @break
 
-                                                    @elseif ($data->id_kk == '')
-                                                        Belum Mengisi Kompetensi Keahlian
-                                                    @endif
-                                                @endforeach
-                                            </span>
-                                            @foreach ($waliKelasList as $item)
-                                                @if ($item->nip_wali_kelas == $data->nip_wali_kelas)
-                                                    <strong>Wali Kelas :</strong>
-                                                    <span><a href="/wali-kelas/{{ $item->nip_wali_kelas }}"
-                                                            title="Klik untuk detail"
-                                                            class="text-dark">{{ $item->nama_wali_kelas }}</a></span>
-                                                @elseif ($data->nip_wali_kelas == '')
-                                                    <strong>Wali Kelas :</strong>
-                                                    <span> Belum Memiliki Wali Kelas</span>
-                                                @break
-                                            @endif
-                                        @endforeach
-                                        <a href="" class="stretched-link"></a>
+                                                        @elseif ($data->id_kk == '')
+                                                            Belum Mengisi Kompetensi Keahlian
+                                                        @endif
+                                                    @endforeach
+                                                </span>
+                                                @foreach ($waliKelasList as $item)
+                                                    @if ($item->nip_wali_kelas == $data->nip_wali_kelas)
+                                                        <strong>Wali Kelas :</strong>
+                                                        <span><a href="/wali-kelas/{{ $item->nip_wali_kelas }}"
+                                                                title="Klik untuk detail"
+                                                                class="text-dark">{{ $item->nama_wali_kelas }}</a></span>
+                                                    @elseif ($data->nip_wali_kelas == '')
+                                                        <strong>Wali Kelas :</strong>
+                                                        <span> Belum Memiliki Wali Kelas</span>
+                                                    @break
+                                                @endif
+                                            @endforeach
+                                            <a href="" class="stretched-link"></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        @endforeach
+                    @else
+                        <div class="img-center">
+                            <img src="{{ asset('img/No data-rafiki.png') }}" width="500px">
                         </div>
-                    @endforeach
+                    @endif
                 </div>
                 {{-- Akhir Data List --}}
 

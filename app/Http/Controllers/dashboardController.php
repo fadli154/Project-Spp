@@ -64,6 +64,7 @@ class dashboardController extends Controller
             $kelasList = Kelas::get();
             $totalTagihan = null;
             $totalPembayaran = null;
+            $tagihanAnak = null;
             if ($dataAnak) {
                 foreach ($dataAnak as $item) {
                     $tagihanAnak = Tagihan::where('nisn', $item->nisn)->get();

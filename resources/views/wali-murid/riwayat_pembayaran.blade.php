@@ -44,63 +44,69 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($dataList as $data)
-                                        @foreach ($tagihanList as $item)
-                                            @if ($item->id == $data->tagihan_id)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    @foreach ($tagihanList as $item)
-                                                        @if ($data->tagihan->nisn == $item->siswa->nisn)
-                                                            <td class="capitalize"><a class="text-dark"
-                                                                    href="/siswa/{{ $data->tagihan->nisn }}"
-                                                                    title="klik Untuk Detailnya">{{ $item->siswa->nama }} |
-                                                                    {{ $data->tagihan->nisn }}</a></td>
+                                    @if ($dataList->count() > 0)
+                                        @foreach ($dataList as $data)
+                                            @foreach ($tagihanList as $item)
+                                                @if ($item->id == $data->tagihan_id)
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        @foreach ($tagihanList as $item)
+                                                            @if ($data->tagihan->nisn == $item->siswa->nisn)
+                                                                <td class="capitalize"><a class="text-dark"
+                                                                        href="/siswa/{{ $data->tagihan->nisn }}"
+                                                                        title="klik Untuk Detailnya">{{ $item->siswa->nama }}
+                                                                        |
+                                                                        {{ $data->tagihan->nisn }}</a></td>
+                                                            @endif
+                                                        @endforeach
+                                                        @foreach ($kelasList as $itemKelas)
+                                                            @if ($data->tagihan->kelas_id == $itemKelas->kelas_id)
+                                                                <td>{{ $itemKelas->kelas }}</td>
+                                                            @endif
+                                                        @endforeach
+                                                        <td>{{ currency_IDR($data->jumlah_dibayar) }}</td>
+                                                        <td>{{ $data->updated_at->translatedFormat('d-F-Y | g:i:s') }}</td>
+                                                        @if ($data->status_konfirmasi == 'sudah')
+                                                            <td class="text-center">
+                                                                <div class="badge badge-success "><i
+                                                                        class="bi bi-hand-thumbs-up-fill">
+                                                                        Sudah</i>
+                                                                </div>
+                                                            </td>
+                                                        @else
+                                                            <td class="text-center">
+                                                                <div class="badge badge-danger "><i
+                                                                        class="bi bi-hand-thumbs-down">Belum</i>
+                                                                </div>
+                                                            </td>
                                                         @endif
-                                                    @endforeach
-                                                    @foreach ($kelasList as $itemKelas)
-                                                        @if ($data->tagihan->kelas_id == $itemKelas->kelas_id)
-                                                            <td>{{ $itemKelas->kelas }}</td>
-                                                        @endif
-                                                    @endforeach
-                                                    <td>{{ currency_IDR($data->jumlah_dibayar) }}</td>
-                                                    <td>{{ $data->updated_at->translatedFormat('d-F-Y | g:i:s') }}</td>
-                                                    @if ($data->status_konfirmasi == 'sudah')
-                                                        <td class="text-center">
-                                                            <div class="badge badge-success "><i
-                                                                    class="bi bi-hand-thumbs-up-fill">
-                                                                    Sudah</i>
+                                                        {{-- Tombol Action --}}
+                                                        <td>
+                                                            <div class="dropdown d-inline">
+                                                                <button class="btn btn-primary dropdown-toggle"
+                                                                    type="button" id="dropdownMenuButton2"
+                                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false" title="Tombol Aksi">
+                                                                    <i
+                                                                        class="bi bi-three-dots-vertical btn-tambah-data"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu ">
+                                                                    <a class="dropdown-item has-icon text-info"
+                                                                        href="/pembayaran/{{ $data->id }}"><i
+                                                                            class="far bi-eye"></i>
+                                                                        Detail</a>
+                                                                </div>
                                                             </div>
                                                         </td>
-                                                    @else
-                                                        <td class="text-center">
-                                                            <div class="badge badge-danger "><i
-                                                                    class="bi bi-hand-thumbs-down">Belum</i>
-                                                            </div>
+                                                        {{-- Tombol Action --}}
                                                         </td>
-                                                    @endif
-                                                    {{-- Tombol Action --}}
-                                                    <td>
-                                                        <div class="dropdown d-inline">
-                                                            <button class="btn btn-primary dropdown-toggle" type="button"
-                                                                id="dropdownMenuButton2" data-toggle="dropdown"
-                                                                aria-haspopup="true" aria-expanded="false"
-                                                                title="Tombol Aksi">
-                                                                <i class="bi bi-three-dots-vertical btn-tambah-data"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu ">
-                                                                <a class="dropdown-item has-icon text-info"
-                                                                    href="/pembayaran/{{ $data->id }}"><i
-                                                                        class="far bi-eye"></i>
-                                                                    Detail</a>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    {{-- Tombol Action --}}
-                                                    </td>
-                                                </tr>
-                                            @endif
+                                                    </tr>
+                                                @endif
+                                            @endforeach
                                         @endforeach
-                                    @endforeach
+                                    @else
+                                        <td colspan="7" class="text-center bg-secondary">Belum Melakukan Pembayaran</td>
+                                    @endif
                                 </tbody>
                             </table>
                             {{-- panigation --}}
