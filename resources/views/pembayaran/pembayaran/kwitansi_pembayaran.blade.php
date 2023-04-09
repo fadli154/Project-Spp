@@ -80,7 +80,7 @@
                     <thead>
                         <tr>
                             <th>Tanggal Pembayaran</th>
-                            <th>Jumlah Pembayara</th>
+                            <th>Jumlah Pembayaran</th>
                         </tr>
                     </thead>
                     <tbody>
