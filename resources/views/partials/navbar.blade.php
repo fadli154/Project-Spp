@@ -18,7 +18,7 @@
                 <div class="d-sm-none d-lg-inline-block capitalize">{{ auth()->user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-title">halo, {{ auth()->user()->username }}</div>
+                <div class="dropdown-title">halo, {{ auth()->user()->name }}</div>
                 <a href="/" class="dropdown-item has-icon">
                     <i class="fas fa-home"></i> Beranda
                 </a>
