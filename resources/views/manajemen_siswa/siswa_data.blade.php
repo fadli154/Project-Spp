@@ -115,6 +115,13 @@
                                     </button>
                                 </a>
                                 {{-- Akhir Button Tambah Data --}}
+
+                                {{-- export to excel --}}
+                                <a href="/siswa-export" target="_blank" class="btn btn-success btn-icon ml-2" title=""
+                                    data-toggle="tooltip" data-placement="top" data-original-title="Export Excel">
+                                    <i class="fas fa-file-excel  px-2  "></i>
+                                </a>
+                                {{-- Akhir export to excel --}}
                             @endcan
                         </div>
                     </div>
