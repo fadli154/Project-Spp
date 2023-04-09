@@ -12,10 +12,18 @@
                     {{-- Akhir judul Page --}}
                     {{-- Breadcrumb --}}
                     <div class="col-md-5 col-sm-4 text-center items-center mt-2 ">
-                        <div class="breadcrumb-item d-inline active capitalize"><a href="/dashboard">Dashboard</a></div>
-                        <div class="breadcrumb-item d-inline active capitalize"><a href="/pembayaran">List Pembayaran</a>
-                        </div>
-                        <div class="breadcrumb-item d-inline capitalize">Detail Pembayaran</div>
+                        @if (auth()->user()->level == 'administrator' || (auth()->user()->level = 'petugas'))
+                            <div class="breadcrumb-item d-inline active capitalize"><a href="/dashboard">Dashboard</a></div>
+                            <div class="breadcrumb-item d-inline active capitalize"><a href="/pembayaran">List Pembayaran</a>
+                            </div>
+                            <div class="breadcrumb-item d-inline capitalize">Detail Pembayaran</div>
+                        @else
+                            <div class="breadcrumb-item d-inline active capitalize"><a href="/dashboard">Dashboard</a></div>
+                            <div class="breadcrumb-item d-inline active capitalize"><a href="/riwayat-pembayaran">List
+                                    Pembayaran</a>
+                            </div>
+                            <div class="breadcrumb-item d-inline capitalize">Detail Pembayaran</div>
+                        @endif
                     </div>
                     {{-- Akhir Breadcrumb --}}
                 </div>
