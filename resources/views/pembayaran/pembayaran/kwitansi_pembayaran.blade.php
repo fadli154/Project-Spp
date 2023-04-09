@@ -7,13 +7,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 10px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table td,
+        table th {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        table th {
+            font-weight: bold;
+            background-color: #f2f2f2;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="card card-kwitansi text-center col-8 p-3">
-        <div class="card-header row">
-            <div class="col-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-4 text-center">
                 <img src="{{ asset('img/Logo smkn 4.png') }}" width="100px" alt="">
             </div>
             <div class="col text-center">
@@ -22,16 +70,17 @@
                 <span>JL. Veteran No.1A Babakan Kota Tangerang</span>
             </div>
         </div>
+        <hr>
         @foreach ($pembayaranList as $item)
-            <small class="d-block d-flex justify-content-lg-start mt-2 text-dark">Pembayaran ID :
+            <small class="d-block d-flex justify-content-lg-start mt-2">Pembayaran ID :
                 #SMKN4TNG-{{ $item->id }}</small>
             <div class="card-body">
-                <h3 class="card-title uppercase text-dark text-bold d-block ">Kwitansi Pembayaran</h3>
-                <table class="table table-striped mt-3">
+                <h3 class="card-title uppercase text-dark text-bold d-block text-center ">Kwitansi Pembayaran</h3>
+                <table>
                     <thead>
                         <tr>
-                            <th scope="col">TANGGAL PEMBAYARAN</th>
-                            <th scope="col">JUMLAH PEMBAYARAN</th>
+                            <th>Tanggal Pembayaran</th>
+                            <th>Jumlah Pembayara</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,7 +90,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="card-footer text-body-secondary">
+                <div class="">
                     <i class="d-block d-flex justify-content-lg-start text-dark ">Terbilang :
                         {{ ucwords(terbilang($item->jumlah_dibayar)) }}</i>
                     <span class="d-block d-flex justify-content-lg-start mt-2 mb-4 text-dark ">Tangerang,
@@ -54,6 +103,9 @@
                         @endif
                     @endforeach
                 </div>
+                <footer class="mt-4 d-block d-flex justify-content-lg-end">
+                    <p>Terima kasih atas pembayaran Anda.</p>
+                </footer>
             </div>
         @endforeach
     </div>
