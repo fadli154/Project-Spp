@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
-use App\Http\Controllers\{AdminController, AnakController, loginController, PetugasController, dashboardController, KonsentrasiController, SiswaController, WaliKelasController, WaliMuridController, KelasController, BiayaController, dashboardWaliController, KwitansiPembayaranController, TagihanController, WaliSiswaController, PembayaranController, profileController};
+use App\Http\Controllers\{AdminController, AnakController, loginController, PetugasController, dashboardController, KonsentrasiController, SiswaController, WaliKelasController, WaliMuridController, KelasController, BiayaController, dashboardWaliController, KwitansiPembayaranController, TagihanController, WaliSiswaController, PembayaranController, profileController, ExportController, LaporanController};
 
 Route::get('/', function () {
     return view('pages.index', [
@@ -33,7 +33,11 @@ Route::resource('/tagihan', TagihanController::class)->middleware('petugas');
 Route::resource('/wali-siswa', WaliSiswaController::class)->except('index', 'create', 'show', 'destroy', 'edit')->middleware('admin');
 Route::resource('/pembayaran', PembayaranController::class)->middleware('auth');
 Route::resource('/kwitansi-pembayaran', KwitansiPembayaranController::class)->except('index', 'create', 'store', 'update', 'destroy', 'edit')->middleware('petugas');
+Route::get('laporan-pembayaran', [LaporanController::class, 'laporanPembayaran'])->middleware('admin');
 Route::get('tagihan1/{id}', [TagihanController::class, 'hapus'])->middleware('admin');
+// export to excel
+Route::get('/siswa-export', [ExportController::class, 'siswaExport'])->name('siswa-export')->middleware('admin');
+Route::post('/pembayaran-export', [LaporanController::class, 'pembayaranExport'])->name('pembayaran-export')->middleware('admin');
 
 // Router Wali
 Route::get('/anak', [AnakController::class, 'index'])->middleware('wali');

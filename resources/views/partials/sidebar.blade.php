@@ -115,6 +115,10 @@
                         </li>
                     </ul>
                 </li>
+                <li class="{{ $active === 'laporan-pembayaran' ? 'active' : '' }}">
+                    <a href="/laporan-pembayaran" class="nav-link"><i class="fas fa-file"></i><span>Laporan
+                            Pembayaran</span></a>
+                </li>
             @endcan
 
             <li class="{{ $active === 'change-password' ? 'active' : '' }}">
