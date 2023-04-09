@@ -519,9 +519,11 @@
                                                         class="table table-bordered table-success table-striped table-md">
                                                         <thead>
                                                             <tr>
-                                                                <th class="text-center">Kwitansi</th>
-                                                                <th>Tanggal Pembayaran</th>
-                                                                <th>Jumlah Dibayar</th>
+                                                                @can('entri-pembayaran')
+                                                                    <th class="text-center">Kwitansi</th>
+                                                                @endcan
+                                                                <th class="text-center">Tanggal Pembayaran</th>
+                                                                <th class="text-center">Jumlah Dibayar</th>
                                                             </tr>
                                                         </thead>
                                                         @if ($tagihanList->count() > 0)
@@ -530,21 +532,23 @@
                                                                     @if ($item->id == $data->tagihan_id)
                                                                         <tbody>
                                                                             <tr>
-                                                                                <td class="text-center">
-                                                                                    <a href="/kwitansi-pembayaran/{{ $data->id }}"
-                                                                                        target="blank" class="text-white">
-                                                                                        <button type="button"
-                                                                                            class="btn btn-primary"
-                                                                                            data-toggle="tooltip"
-                                                                                            data-placement="top"
-                                                                                            title="Kwitansi Pembayaran"
-                                                                                            data-original-title="Kwitansi Pembayaran">
-                                                                                            <i
-                                                                                                class="bi bi-printer-fill btn-tambah-data"></i>
-                                                                                        </button>
-                                                                                    </a>
-                                                                                </td>
-                                                                                <td class="capitalize">
+                                                                                @can('entri-pembayaran')
+                                                                                    <td class="text-center">
+                                                                                        <a href="/kwitansi-pembayaran/{{ $data->id }}"
+                                                                                            target="blank" class="text-white">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-primary"
+                                                                                                data-toggle="tooltip"
+                                                                                                data-placement="top"
+                                                                                                title="Kwitansi Pembayaran"
+                                                                                                data-original-title="Kwitansi Pembayaran">
+                                                                                                <i
+                                                                                                    class="bi bi-printer-fill btn-tambah-data"></i>
+                                                                                            </button>
+                                                                                        </a>
+                                                                                    </td>
+                                                                                @endcan
+                                                                                <td class="capitalize text-center">
                                                                                     {{ $data->created_at->format('d-M-Y | g:i:s') }}
                                                                                 </td>
                                                                                 <td class="text-center">
@@ -556,11 +560,20 @@
                                                                 @endforeach
                                                                 <tfoot>
                                                                     <tr>
-                                                                        <td colspan="2"
-                                                                            class="uppercase text-dark font-weight-bold text-center">
-                                                                            Sisa
-                                                                            Tagihan
-                                                                        </td>
+                                                                        @can('entri-pembayaran')
+                                                                            <td colspan="2"
+                                                                                class="uppercase text-dark font-weight-bold text-center">
+                                                                                Sisa
+                                                                                Tagihan
+                                                                            </td>
+                                                                        @endcan
+                                                                        @can('wali')
+                                                                            <td
+                                                                                class="uppercase text-dark font-weight-bold text-center">
+                                                                                Sisa
+                                                                                Tagihan
+                                                                            </td>
+                                                                        @endcan
                                                                         @if ($data->jumlah_dibayar != null)
                                                                             <td
                                                                                 class="uppercase text-dark font-weight-bold d-flex justify-content-center">
@@ -575,11 +588,20 @@
                                                                     </tr>
 
                                                                     <tr>
-                                                                        <td colspan="2"
-                                                                            class="uppercase text-dark font-weight-bold text-center">
-                                                                            Status
-                                                                            Tagihan
-                                                                        </td>
+                                                                        @can('entri-pembayaran')
+                                                                            <td colspan="2"
+                                                                                class="uppercase text-dark font-weight-bold text-center">
+                                                                                Status
+                                                                                Tagihan
+                                                                            </td>
+                                                                        @endcan
+                                                                        @can('wali')
+                                                                            <td
+                                                                                class="uppercase text-dark font-weight-bold text-center">
+                                                                                Status
+                                                                                Tagihan
+                                                                            </td>
+                                                                        @endcan
                                                                         @if ($item->status == 'lunas')
                                                                             <td colspan="2"
                                                                                 class="d-flex justify-content-center">
