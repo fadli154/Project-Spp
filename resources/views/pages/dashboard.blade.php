@@ -53,7 +53,7 @@
                             </div>
                             <div class="card-wrap">
                                 <div class="card-header">
-                                    <h4>Total Tagihan</h4>
+                                    <h4>Sisa Tagihan</h4>
                                 </div>
                                 <div class="card-body">
                                     @if ($totalTagihan != null)
